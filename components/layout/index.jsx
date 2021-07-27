@@ -13,9 +13,7 @@ const Layaout = ({ children }) => {
       <Header/>
       <div className = { styles.main }>
           <Sider/>
-          
           { children}
-        
       </div>
     </>
    );
