@@ -1,6 +1,8 @@
 import React from 'react';
 // material ui
 import { Grid } from '@material-ui/core';
+//styles
+import styles from '../../styles/layout.module.scss';
 // components
 import Header from './Header';
 import Sider from './Sider';
@@ -9,14 +11,12 @@ const Layaout = ({ children }) => {
   return ( 
     <>
       <Header/>
-      <Grid container>
-        <Grid item xs ={ 4 }>
+      <div className = { styles.main }>
           <Sider/>
-        </Grid>
-        <Grid item xs ={ 8 }>
+          
           { children}
-        </Grid>
-      </Grid>
+        
+      </div>
     </>
    );
 }

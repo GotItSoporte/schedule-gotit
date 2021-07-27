@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { Grid } from '@material-ui/core';
 // styles
 import styles from '../../styles/layout.module.scss';
+//components
+import ProjectList from '../ProjectList';
 
 const Header = () => {
   return (  
@@ -15,6 +17,9 @@ const Header = () => {
           <Link href = '/'>
             <h1>Got It</h1>
           </Link>
+        </Grid>
+        <Grid className = { styles.header__list }  item xs= {6}> 
+          <ProjectList/>
         </Grid>
         <Grid item xs= {6}> </Grid>
       </Grid>

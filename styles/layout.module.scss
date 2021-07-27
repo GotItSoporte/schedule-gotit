@@ -4,4 +4,26 @@
   height: 5em;
   background-color: aquamarine;
   padding: 0rem 2rem 1rem 2rem;
+  &__list{
+    @include desktop{
+      display: none;
+    }
+  }
+}
+
+.main{
+  display: flex;
+}
+
+.sider{
+ 
+  @include smartphone-xs{
+    display: none;
+  }
+  @include desktop{
+    display: flex;
+  }
+  background-color: aquamarine;
+  width: 20em;
+  height: 80vh;
 }
