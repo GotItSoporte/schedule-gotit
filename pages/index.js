@@ -1,11 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+//import Head from 'next/head'
+//import Image from 'next/image'
+import styles from '../styles/Home.module.scss'
 import Layout from '../components/layout'
 export default function Home() {
   return(
-    <Layout>
-      <div><h2>Index</h2></div>
-    </Layout>
+    <h1>Home</h1>
   )
 }
