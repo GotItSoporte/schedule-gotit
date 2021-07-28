@@ -1,4 +1,5 @@
 import ProjectsWrapper from '../context/states/projects.state';
+import TasksWrapper from '../context/states/tasks.state';
 import '../styles/globals.scss'
 
 function MyApp({ Component, pageProps }) {
@@ -8,7 +9,9 @@ function MyApp({ Component, pageProps }) {
   }
   return (
     <ProjectsWrapper >
-      <Component {...pageProps} />
+      <TasksWrapper>
+        <Component {...pageProps} />
+      </TasksWrapper>
     </ProjectsWrapper>
   )
 }

@@ -5,5 +5,5 @@ const getProjects = async ( offset, slice ) => {
 }
 
 export {
-  getProjects
+  getProjects,
 }
