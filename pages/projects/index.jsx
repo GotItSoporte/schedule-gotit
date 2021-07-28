@@ -4,7 +4,12 @@ import Layout from '../../components/layout'
 // contexts
 import useProjects from '../../context/hooks/useProjects';
 // http
-import { getProjects } from '../../config/axios/projects'
+import { getProjects } from '../../config/axios/projects';
+// material ui
+import { Grid } from '@material-ui/core';
+// styles 
+import styles from '../../styles/projects.module.scss';
+
 // initial props
 export async function getServerSideProps(context) {
   const projects = await getProjects()
@@ -31,7 +36,14 @@ const Proyects = ({projects}) => {
 
   return(
     <Layout>
-      <div><h2>Proyects</h2></div>
+      <Grid container className= { styles.page } >
+        <Grid className = { styles.page__project__title} item xs= { 12 }> 
+          <h1 >Project Name</h1>
+        </Grid>
+        <Grid >
+
+        </Grid>
+      </Grid>
     </Layout>
   );
 }

@@ -1,0 +1,12 @@
+@import './variables.scss';
+
+.page{
+  background-color: $color-back-ground ;
+  display: flex;
+  justify-content: center;
+  color: $color-font;
+  &__project__title{
+    display: flex;
+    justify-content: center;
+  }
+}

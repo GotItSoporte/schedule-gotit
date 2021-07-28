@@ -11,8 +11,8 @@ import ProjectList from '../ProjectList';
 const Sider = () => {
   return ( 
     <div className = { styles.sider } >
+      <h2 className= { styles.sider__title}>Proyectos </h2>
       <ProjectList />
-
     </div>
   );
 }
