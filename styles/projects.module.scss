@@ -2,11 +2,22 @@
 
 .page{
   background-color: $color-back-ground ;
-  display: flex;
-  justify-content: center;
   color: $color-font;
   &__project__title{
     display: flex;
     justify-content: center;
+  }
+  &__project__description{
+    display: flex;
+    justify-content: center;
+  }
+  &__project__info{
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__project__lista{
+    flex-direction: column;
+    justify-content: center;
+    
   }
 }

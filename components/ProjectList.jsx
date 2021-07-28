@@ -32,7 +32,7 @@ const Project = ({project})  =>{
   }
   return  (
     <div className= { styles.sider__item }>
-      <h4> { name } { project._id } </h4>
+      <h4> { name }</h4>
       <button 
         className= { styles.sider__item__button }
         onClick = { () => seetCurrentProject( project._id ) }
