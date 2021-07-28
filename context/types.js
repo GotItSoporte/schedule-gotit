@@ -1,0 +1,3 @@
+export const PROJECTS_SET             = 'PROJECTS_SET';
+export const PROJECTS_CURRENT_PROJECT = 'PROJECTS_CURRENT_PROJECT';
+export const PROJECTS_ERROR           = 'PROJECTS_ERROR';

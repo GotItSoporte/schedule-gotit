@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // components
 import Layout from '../../components/layout'
+// contexts
+import useProjects from '../../context/hooks/useProjects';
 // http
 import { getProjects } from '../../config/axios/projects'
 // initial props
 export async function getServerSideProps(context) {
-  
   const projects = await getProjects()
   if( !projects ){ 
     return{
@@ -20,7 +21,14 @@ export async function getServerSideProps(context) {
 }
 // Page
 const Proyects = ({projects}) => {
-  console.log( projects )
+
+  const projectsState = useProjects();
+  const { setProjectsList } = projectsState;
+  useEffect( async() => {
+    await setProjectsList( projects )
+    
+  }, [])
+
   return(
     <Layout>
       <div><h2>Proyects</h2></div>
