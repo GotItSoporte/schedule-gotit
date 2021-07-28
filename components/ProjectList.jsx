@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 // contexts
 import useProjects from '../context/hooks/useProjects';
+import useTasks from '../context/hooks/useTasks';
 //styles
 import styles from '../styles/layout.module.scss';
 
 const ProjectList = ({ children }) => {
+  // contexts 
   const projectsState = useProjects();
-  const { projectsList } = projectsState;
+  const { projectsList, setCurrentProject } = projectsState;
+  const tasksState = useTasks();
+  const { getTasksProject } = tasksState;
   useEffect(() => {
-     console.log('desde lista :', projectsList[1]?.name )
   }, [ projectsList ])
   
   return ( 
@@ -18,6 +21,8 @@ const ProjectList = ({ children }) => {
           <Project 
             key = { project._id }
             project = { project }
+            setCurrentProject = { setCurrentProject }
+            getTasksProject = { getTasksProject }
           />
       </>
       )}
@@ -25,17 +30,18 @@ const ProjectList = ({ children }) => {
   );
 }
 
-const Project = ({project})  =>{
+const Project = ({ project, setCurrentProject, getTasksProject })  =>{
   let name =project.name.length > 18 ? `${project.name.substring( 0, 20 )}...`: project.name;
-  const seetCurrentProject =  id =>{
-    console.log( `set project ${ id }` ) 
+  const setProject =  id =>{
+    //setCurrentProject( project )
+    getTasksProject( id );
   }
   return  (
     <div className= { styles.sider__item }>
       <h4> { name }</h4>
       <button 
         className= { styles.sider__item__button }
-        onClick = { () => seetCurrentProject( project._id ) }
+        onClick = { () => setProject( project._id ) }
       > ver </button>
     </div>
   )

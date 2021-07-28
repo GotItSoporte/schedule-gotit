@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../../components/layout'
 // contexts
 import useProjects from '../../context/hooks/useProjects';
+import useTasks from '../../context/hooks/useTasks';
 // http
 import { getProjects } from '../../config/axios/projects';
 // material ui
 import { Grid } from '@material-ui/core';
 // components 
-import TasksList from '../../components/tasks/TasksLists';
+import TasksList from '../../components/tasks/TasksList';
 // styles 
 import styles from '../../styles/projects.module.scss';
 
@@ -28,13 +29,15 @@ export async function getServerSideProps(context) {
 }
 // Page
 const Proyects = ({projects}) => {
-
+  // Cntexts
   const projectsState = useProjects();
   const { setProjectsList } = projectsState;
+
+  const tasksState = useTasks();
+  const { tasksList } = tasksState;
   useEffect( async() => {
     await setProjectsList( projects )
-    
-  }, [])
+  }, [tasksList])
 
   return(
     <Layout>
@@ -53,8 +56,7 @@ const Proyects = ({projects}) => {
           <p>info :</p>
         </Grid>
         <Grid item xs = { 12} className = { styles.page__project__lista } >
-          <p> Lista de Tareas</p>
-          <TasksList></TasksList>
+          <TasksList tasksList = {tasksList}/>
         </Grid>
       </Grid>
     </Layout>

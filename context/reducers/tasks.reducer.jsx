@@ -9,6 +9,7 @@ const tasksReducer = ( state, action ) => {
   const { type, payload } = action;
   switch ( type ) {
     case TASKS_GET_TASKS:
+      console.log('reducer', payload)
       return({
         ...state,
         tasksList : payload,
