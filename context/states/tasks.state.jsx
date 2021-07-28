@@ -21,7 +21,6 @@ const TasksWrapper =({ children }) =>{
     console.log( id );
       try {
         const result = await getTasksProjectApi(id);
-        console.log( {result} );
         return dispatch( {
           type: TASKS_GET_TASKS,
           payload: result
