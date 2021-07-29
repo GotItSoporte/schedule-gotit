@@ -3,6 +3,7 @@
 .page{
   background-color: $color-back-ground ;
   color: $color-font;
+  margin: 0 0 0 !important;
   &__project__title{
     display: flex;
     justify-content: center;

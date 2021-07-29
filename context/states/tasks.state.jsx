@@ -18,7 +18,6 @@ const TasksWrapper =({ children }) =>{
   // ********* get tasks from project *********
   // ******************************************
   const getTasksProject = async ( id ) => {
-    console.log( id );
       try {
         const result = await getTasksProjectApi(id);
         return dispatch( {

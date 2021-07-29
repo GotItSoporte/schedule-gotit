@@ -44,20 +44,21 @@ const Projects = ({projects}) => {
     <Layout>
       <Grid container spacing = { 4 } className= { styles.page } >
         <Grid className = { styles.page__project__title} item xs= { 12 }> 
-          <h1 >Project Name : { currentProject.name } </h1>
+          <h1 >Project Name : { currentProject?.name  } </h1>
         </Grid>
+        
         <Grid item xs = { 8 } className = { styles.page__project__description }  >
           <p>
-            { currentProject.description || 'Este Proyecto no tiene descripcion' }
+            { currentProject?.description || 'Este Proyecto no tiene descripcion' }
           </p>
         </Grid>
         <Grid item xs = { 4 } className = { styles.page__project__info } >
-          <p>Horas Totales : { currentProject.hoursTotal }</p>
-          <p>Horas Restantes : { currentProject.hoursLeft }</p>
-          <p>Fecha de inicio : { currentProject.startDate }</p>
-          <p> # de Tareas : { currentProject.tasks.length }</p>
+          <p>Horas Totales : { currentProject?.hoursTotal }</p>
+          <p>Horas Restantes : { currentProject?.hoursLeft }</p>
+          <p>Fecha de inicio : { currentProject?.startDate }</p>
+          <p> # de Tareas : { currentProject?.tasks.length }</p>
         </Grid>
-        <Grid item xs = { 12} className = { styles.page__project__lista } >
+        <Grid item xs = { 12 } className = { styles.page__project__lista } >
           <TasksList tasksList = {tasksList}/>
         </Grid>
       </Grid>
