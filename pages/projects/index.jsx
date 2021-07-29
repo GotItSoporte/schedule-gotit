@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
 const Projects = ({projects}) => {
   // Cntexts
   const projectsState = useProjects();
-  const { setProjectsList } = projectsState;
+  const { setProjectsList, currentProject } = projectsState;
 
   const tasksState = useTasks();
   const { tasksList } = tasksState;
@@ -44,17 +44,18 @@ const Projects = ({projects}) => {
     <Layout>
       <Grid container spacing = { 4 } className= { styles.page } >
         <Grid className = { styles.page__project__title} item xs= { 12 }> 
-          <h1 >Project Name</h1>
+          <h1 >Project Name : { currentProject.name } </h1>
         </Grid>
         <Grid item xs = { 8 } className = { styles.page__project__description }  >
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi eveniet at possimus recusandae est error hic repellat aliquam voluptate. Aliquam sint necessitatibus nulla! Eos facere placeat nemo, consequatur voluptate iste?  
+            { currentProject.description || 'Este Proyecto no tiene descripcion' }
           </p>
         </Grid>
         <Grid item xs = { 4 } className = { styles.page__project__info } >
-          <p>info :</p>
-          <p>info :</p>
-          <p>info :</p>
+          <p>Horas Totales : { currentProject.hoursTotal }</p>
+          <p>Horas Restantes : { currentProject.hoursLeft }</p>
+          <p>Fecha de inicio : { currentProject.startDate }</p>
+          <p> # de Tareas : { currentProject.tasks.length }</p>
         </Grid>
         <Grid item xs = { 12} className = { styles.page__project__lista } >
           <TasksList tasksList = {tasksList}/>

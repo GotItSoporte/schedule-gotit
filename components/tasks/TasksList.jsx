@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 const TasksList = ({ tasksList }) => {
   useEffect(() => {
-    console.log( 'tasklist ',tasksList )
   }, [tasksList]);
   return ( 
     <div>
@@ -18,7 +17,6 @@ const TasksList = ({ tasksList }) => {
 }
  
 const Task = ({ task }) => {
-  console.log('DESDE TAREA', task)
   const { name, hours, startDate } = task
   return(
     <div>
