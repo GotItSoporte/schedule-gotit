@@ -15,6 +15,7 @@ import styles from '../../styles/projects.module.scss';
 
 // initial props
 export async function getServerSideProps(context) {
+ 
   const projects = await getProjects()
   if( !projects ){ 
     return{
@@ -28,7 +29,7 @@ export async function getServerSideProps(context) {
   }
 }
 // Page
-const Proyects = ({projects}) => {
+const Projects = ({projects}) => {
   // Cntexts
   const projectsState = useProjects();
   const { setProjectsList } = projectsState;
@@ -63,5 +64,5 @@ const Proyects = ({projects}) => {
   );
 }
  
-export default Proyects;
+export default Projects;
 

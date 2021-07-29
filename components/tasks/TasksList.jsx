@@ -8,12 +8,10 @@ const TasksList = ({ tasksList }) => {
     <div>
       <h3> Lista de Tareas { tasksList?.length }</h3>
       { tasksList?.map( task => 
-        <div>
-        <p>ggg</p>
-        <p>{ task.name }</p>
-        <p>{ task.hours }</p>
-        <p>{ task.startDate }</p>
-    </div>
+        <Task
+          key = { task._id }
+          task = { task }
+        />
       ) }
     </div>
    );
@@ -24,10 +22,9 @@ const Task = ({ task }) => {
   const { name, hours, startDate } = task
   return(
     <div>
-        <p>ggg</p>
-        <p>{ name }</p>
-        <p>{ hours }</p>
-        <p>{ startDate }</p>
+        <p>Tarea : { name }</p>
+        <p> horas :{ hours }</p>
+        <p> fecha :{ startDate }</p>
     </div>
   );
 }

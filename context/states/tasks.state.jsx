@@ -35,7 +35,7 @@ const TasksWrapper =({ children }) =>{
   }
   return(
     <TaskContext.Provider value = { { 
-        tasksList    : state.projectsList,
+        tasksList    : state.tasksList,
         currentTask    : state.currentTask,
 
         getTasksProject : getTasksProject
