@@ -2,27 +2,28 @@ import React from 'react';
 //import Image from 'next/image'
 // next
 import Link from 'next/link';
+import Image from 'next/image';
 //material ui 
 import { Grid } from '@material-ui/core';
-// styles
-import styles from '../../styles/layout.module.scss';
 //components
 import ProjectList from '../ProjectList';
+// styles
+import styles from '../../styles/header.module.scss';
+// images
+import logo from '../../public/Gotit Horizontal.png'
 
 const Header = () => {
   return (  
-    <header className = { styles.header}>
-      <Grid container>
-        <Grid item xs= {6}> 
-          <Link href = '/'>
-            <h1>Got It</h1>
-          </Link>
-        </Grid>
-        <Grid className = { styles.header__list }  item xs= {6}> 
-          <ProjectList/>
-        </Grid>
-        <Grid item xs= {6}> </Grid>
-      </Grid>
+    <header className = { styles.header }>
+            <div id={ styles.logo }>
+                <Image id= { styles.Logo_GotIt  } src={ logo } />
+            </div>
+            <div id= { styles.Container }>
+                <ul id={styles.menu}>
+                  <li><a href="#">Cerrar Sesión</a></li>
+                  <li><a href="#">Proyectos</a></li>
+                </ul>
+            </div>
     </header>
   );
 }
