@@ -3,7 +3,22 @@ export const PROJECTS_GET_TASKS           = 'PROJECTS_GET_TASKS';
 export const PROJECTS_SET_CURRENT_PROJECT = 'PROJECTS_SET_CURRENT_PROJECT';
 export const PROJECTS_ERROR               = 'PROJECTS_ERROR';
 
+// tasks
 export const TASKS_GET_TASK           = 'TASKS_GET_TASK';
 export const TASKS_GET_TASKS          = 'TASKS_GET_TASKS';
 export const TASKS_SET_CURRENT_TASK   = 'TASKS_SET_CURRENT_TASK';
 export const TASKS_ERROR              = 'TASKS_ERROR';
+
+// user /Auth
+export const  USER_SIGN_UP         = '  USER_GET_TASKS';
+export const  USER_SIGN_UP_SUCCESS = '  USER_GET_TASKS';
+export const  USER_SIGN_UP_ERROR   = '  USER_GET_TASKS';
+
+export const  USER_LOGIN           = '  USER_GET_TASKS';
+export const  USER_LOGIN_SUCESS    = '  USER_GET_TASKS';
+export const  USER_LOGIN_ERROR     = '  USER_GET_TASKS';
+
+
+export const  USER_AUTH          = 'USER_AUTH';
+export const  USER_GET_PROJECTS  = 'USER_GET_PROJECTS';
+export const  USER_ERROR         = 'USER_ERROR';
