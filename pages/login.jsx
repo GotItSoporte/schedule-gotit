@@ -6,15 +6,20 @@ import styles from '../styles/forms.module.scss'
 // form validation
 import { Formik, Form, Field } from 'formik';
  import * as Yup from 'yup';
+// context 
+import useUser from '../context/hooks/useUser';
 
  const loginSchema = Yup.object().shape({
-   user: Yup.string()
+   userName: Yup.string()
      .required('Required'),
    password: Yup.string()
      .min(5, 'La contraseña debe ser de 6 o mas caracteres!'),
  });
 
 const Login = () => {
+  // User context
+  const userState = useUser();
+  const { userLogin } = userState; 
   const login =( values )=>{
     console.log(  'login...'  );
     console.log(  values  );
@@ -26,13 +31,13 @@ const Login = () => {
           <h1>Login</h1>
           <Formik
            initialValues={{
-            user: '',
+            userName: '',
             password: '',
            }}
            validationSchema={loginSchema}
            onSubmit={values => {
              // same shape as initial values
-             login(values);
+             userLogin(values);
            }}
           >
             {({ errors, touched }) => (
@@ -40,12 +45,12 @@ const Login = () => {
                 <Field 
                   className= {styles.LoginId}
                   type="text" 
-                  name="user" 
+                  name="userName" 
                   placeholder="Usuario" 
                   required="required"  
                 />
-                {errors.user && touched.usr ? (
-                <div>{errors.user}</div>
+                {errors.userName && touched.userName ? (
+                <div>{errors.userName}</div>
                 ) : null}
 
                 <Field 

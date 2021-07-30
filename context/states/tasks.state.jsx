@@ -8,7 +8,9 @@ import {
 import { useReducer } from 'react';
 // api calls
 import { getTasksProject as getTasksProjectApi} from '../../config/axios/tasks';
+//context
 import TaskContext , { initialstate } from '../tasks.context';
+//reducer
 import tasksReducer from '../reducers/tasks.reducer';
 
 const TasksWrapper =({ children }) =>{
@@ -36,7 +38,6 @@ const TasksWrapper =({ children }) =>{
     <TaskContext.Provider value = { { 
         tasksList    : state.tasksList,
         currentTask    : state.currentTask,
-
         getTasksProject : getTasksProject
     }}>
       { children }

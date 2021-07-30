@@ -11,9 +11,21 @@ import {
 } from '../types';
 
 const userReducer = ( state, action ) =>{
+  console.log( action )
   const { type, payload } = action;
   switch ( type ) {
-  
+    case USER_LOGIN:
+      return({
+        ...state,
+        loading : payload.loading
+      });
+    case USER_LOGIN_SUCESS:
+      localStorage.setItem('got-it-token', payload.token);
+      return({
+        ...state,
+        loading : payload.loading,
+        token : payload.token
+      });
     default:
       return state;
   }

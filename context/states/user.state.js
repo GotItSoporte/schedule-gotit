@@ -11,10 +11,8 @@ import {
 } from '../types';
 // react
 import { useReducer } from 'react';
-// sustom hook
-import useUser from '../hooks/useUser';
 // api calls
-import { getTasksProject as getTasksProjectApi} from '../../config/axios/tasks';
+import { scheduleApi } from '../../config/axios';
 //context
 import UserContext , { initialstate } from '../user.context';
 // reducer 
@@ -22,11 +20,45 @@ import userReducer from '../reducers/user.reducer';
 
 const UserWrapper = ({ children }) =>{
   const [ state, dispatch ] = useReducer( userReducer, initialstate );
+  // *****************************************
+  // **************  User Login  *************
+  // *****************************************
+  const userLogin = async ( data ) =>{
+    try {
+      dispatch({
+        type : USER_LOGIN,
+        payload: {
+          loading:true,
+        }
+      });
+      result = await scheduleApi.post('/users/login', data ).data;
+      return dispatch({
+        type : USER_LOGIN_SUCESS,
+        payload: {
+          loading:false,
+          token : result.token
+        }
+      });
+    } catch (error) {
+      console.log(' DESDE LOGIN ', error.response)
+      return dispatch({
+        type : USER_LOGIN_ERROR,
+        payload: {
+          loading:false,
+          authError:true,
+          //message : error,
+        }
+      });
+    }
+  }
   return( 
     <UserContext.Provider value = {{
-      state = state,
+      state : state,
+      userLogin : userLogin
     }}>
       {children}
     </UserContext.Provider>
   );
 }
+
+export default UserWrapper;

@@ -10,13 +10,13 @@ export const TASKS_SET_CURRENT_TASK   = 'TASKS_SET_CURRENT_TASK';
 export const TASKS_ERROR              = 'TASKS_ERROR';
 
 // user /Auth
-export const  USER_SIGN_UP         = '  USER_GET_TASKS';
-export const  USER_SIGN_UP_SUCCESS = '  USER_GET_TASKS';
-export const  USER_SIGN_UP_ERROR   = '  USER_GET_TASKS';
+export const  USER_SIGN_UP         = '  USER_SIGN_UP';
+export const  USER_SIGN_UP_SUCCESS = '  USER_SIGN_UP_SUCCESS';
+export const  USER_SIGN_UP_ERROR   = '  USER_SIGN_UP_ERROR';
 
-export const  USER_LOGIN           = '  USER_GET_TASKS';
-export const  USER_LOGIN_SUCESS    = '  USER_GET_TASKS';
-export const  USER_LOGIN_ERROR     = '  USER_GET_TASKS';
+export const  USER_LOGIN           = '  USER_LOGIN';
+export const  USER_LOGIN_SUCESS    = '  USER_LOGIN_SUCESS';
+export const  USER_LOGIN_ERROR     = '  USER_LOGIN_ERROR';
 
 
 export const  USER_AUTH          = 'USER_AUTH';
