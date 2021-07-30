@@ -1,3 +1,4 @@
+@import './variables.scss';
 .login {
 	position: absolute;
 	top: 50%;
@@ -23,7 +24,7 @@
 	&:focus {
 		box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2);
 	}
-}
+} 
 .btn {
 	border: none;
 	font-family: 'Open Sans', Arial, sans-serif;
@@ -34,14 +35,14 @@
 	border-radius: 4px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-	background-color: #0D9AFF;
+	background-color: $primary;
 	color: #eee;
 	font-weight: bold;
 	margin-bottom: 2em;
 	text-transform: uppercase;
 	width: 100%;
 	&:hover {
-		background-color: #0479cc;
+		background-color: $primary;
 	}
 }
 .Form {
@@ -50,7 +51,7 @@
 	left: 25%;
 	width: 50%;
 	h1 {
-		color: #F2622A;
+		color: $secondary;
 		letter-spacing: 1px;
 		text-align: center;
 	}
