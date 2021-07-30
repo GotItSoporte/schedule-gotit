@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import TasksProjects from '../tasks.context';
+import TasksContext from '../tasks.context';
 
-const hook = () => useContext( TasksProjects );
+const hook = () => useContext( TasksContext );
 export default hook; 
