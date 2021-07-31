@@ -5,6 +5,7 @@ import Layout from '../../components/layout'
 import useProjects from '../../context/hooks/useProjects';
 import useTasks from '../../context/hooks/useTasks';
 // http
+import { scheduleApi } from '../../config/axios';
 import { getProjects } from '../../config/axios/projects';
 // material ui
 import { Grid } from '@material-ui/core';
@@ -15,13 +16,16 @@ import styles from '../../styles/projects.module.scss';
 
 // initial props
 export async function getServerSideProps(context) {
+
+   const projects = await getProjects()
+   //const projects = await scheduleApi.get('/projects').data.projects;
+   if( !projects ){ 
+     return{
+       notFound: true,
+     } 
+   }
  
-  const projects = await getProjects()
-  if( !projects ){ 
-    return{
-      notFound: true,
-    } 
-  }
+   //const projects = [error];
   return {
     props: {
       projects

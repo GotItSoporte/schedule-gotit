@@ -33,6 +33,7 @@ const ProjectList = ({ children }) => {
 const Project = ({ project, setCurrentProject, getTasksProject })  =>{
   let name =project.name.length > 18 ? `${project.name.substring( 0, 20 )}...`: project.name;
   const setProject =  id =>{
+    console.log({ project : id})
     setCurrentProject( project )
     getTasksProject( id );
   }

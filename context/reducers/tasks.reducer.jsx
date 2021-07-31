@@ -12,7 +12,12 @@ const tasksReducer = ( state, action ) => {
       return({
         ...state,
         tasksList : payload,
-      })
+      });
+    case TASKS_ERROR:
+    return ({
+      ...state,
+      error : payload
+    })
     default:
       return state;
   }

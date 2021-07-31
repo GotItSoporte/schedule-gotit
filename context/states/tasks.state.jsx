@@ -7,7 +7,7 @@ import {
 // react hook
 import { useReducer } from 'react';
 // api calls
-import { getTasksProject as getTasksProjectApi} from '../../config/axios/tasks';
+import { scheduleApi } from '../../config/axios';
 //context
 import TaskContext , { initialstate } from '../tasks.context';
 //reducer
@@ -20,17 +20,20 @@ const TasksWrapper =({ children }) =>{
   // ********* get tasks from project *********
   // ******************************************
   const getTasksProject = async ( id ) => {
-      try {
-        const result = await getTasksProjectApi(id);
+    try {
+        console.log('on getTasksProject' );
+        //call the api
+        const result = await scheduleApi.get(`/projects/${ id }/tasks`);
+        console.log('on getTasksProject', result );
         return dispatch( {
           type: TASKS_GET_TASKS,
-          payload: result
+          payload: result.data.tasks
         } );
       } catch (error) {
-        console.log( error );
+        console.log( {error : error.response.data } );
         return dispatch({
           type: TASKS_ERROR,
-          payload: error
+          payload: error.response.data
         });
       }
   }
