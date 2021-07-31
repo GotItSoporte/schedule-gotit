@@ -7,12 +7,14 @@ import {
   USER_LOGIN_ERROR,   
   USER_AUTH,   
   USER_GET_PROJECTS,  
-  USER_ERROR,   
+  USER_ERROR, 
+  USER_LOGOUT  
 } from '../types';
 // react
 import { useReducer } from 'react';
 // api calls
 import { scheduleApi } from '../../config/axios';
+import  setTokenAuth from '../../config/axios/auth';
 //context
 import UserContext , { initialstate } from '../user.context';
 // reducer 
@@ -32,7 +34,6 @@ const UserWrapper = ({ children }) =>{
         }
       });
       const result = await scheduleApi.post('/users/login', data );
-      console.log(' DESDE LOGIN ', result.data)
       return dispatch({
         type : USER_LOGIN_SUCESS,
         payload: {
@@ -53,10 +54,51 @@ const UserWrapper = ({ children }) =>{
       });
     }
   }
+
+  // *****************************************
+  // **************  User Auth  *************
+  // *****************************************
+  const isAuth = async()=>{
+    // get token from localstorage
+    const token = localStorage.getItem('got-it-token');
+    // set token as Athorization header
+    setTokenAuth( token );
+    try {
+      const resul = await scheduleApi.get('/users/auth');
+      return dispatch({
+        action : USER_AUTH, 
+        payload: {
+          isAuth : result.data.auth,
+          message : result.data.message
+        }
+      });
+    } catch (error) {
+      return dispatch({
+        type : USER_LOGIN_ERROR,
+        payload: {
+          loading:false,
+          authError:true,
+          message : error.response.data.message,
+        }
+      })
+    }
+  } 
+
+  // *****************************************
+  // **************  Log out  ****************
+  // *****************************************
+  const logout = async()=>{
+    dispatch({
+      type : USER_LOGOUT
+    });
+  }
+
   return( 
     <UserContext.Provider value = {{
       state : state,
-      userLogin : userLogin
+      userLogin : userLogin,
+      isAuth : isAuth,
+      logout : logout
     }}>
       {children}
     </UserContext.Provider>

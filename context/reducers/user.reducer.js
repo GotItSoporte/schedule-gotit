@@ -7,11 +7,11 @@ import {
   USER_LOGIN_ERROR,   
   USER_AUTH,   
   USER_GET_PROJECTS,  
-  USER_ERROR,   
+  USER_ERROR, 
+  USER_LOGOUT,  
 } from '../types';
 
 const userReducer = ( state, action ) =>{
-  console.log( action )
   const { type, payload } = action;
   switch ( type ) {
     case USER_LOGIN:
@@ -29,6 +29,14 @@ const userReducer = ( state, action ) =>{
         message,
         isAuth 
       });
+    case USER_LOGOUT: 
+    localStorage.setItem('got-it-token', null);
+      return({
+        ...state,
+        token : null,
+        message : null ,
+        isAuth : null
+      })
     default:
       return state;
   }
