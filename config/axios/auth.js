@@ -2,9 +2,9 @@ import { scheduleApi } from './';
 
 const setTokenAuth = token => {
   if( token ) {
-    clienteAxios.defaults.headers.common[ 'Authorization' ] = `${ token }`;
+    scheduleApi.defaults.headers.common[ 'Authorization' ] = `${ token }`;
   }else{
-    delete clienteAxios.defaults.headers.common[ 'Authorization' ];
+    delete scheduleApi.defaults.headers.common[ 'Authorization' ];
   }
 }
 

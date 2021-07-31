@@ -58,15 +58,15 @@ const UserWrapper = ({ children }) =>{
   // *****************************************
   // **************  User Auth  *************
   // *****************************************
-  const isAuth = async()=>{
+  const isAuthenticated = async()=>{
     // get token from localstorage
     const token = localStorage.getItem('got-it-token');
     // set token as Athorization header
     setTokenAuth( token );
     try {
-      const resul = await scheduleApi.get('/users/auth');
+      const result = await scheduleApi.get('/users/auth');
       return dispatch({
-        action : USER_AUTH, 
+        type : USER_AUTH, 
         payload: {
           isAuth : result.data.auth,
           message : result.data.message
@@ -78,7 +78,7 @@ const UserWrapper = ({ children }) =>{
         payload: {
           loading:false,
           authError:true,
-          message : error.response.data.message,
+          message : error.response,
         }
       })
     }
@@ -97,7 +97,7 @@ const UserWrapper = ({ children }) =>{
     <UserContext.Provider value = {{
       state : state,
       userLogin : userLogin,
-      isAuth : isAuth,
+      isAuthenticated : isAuthenticated,
       logout : logout
     }}>
       {children}

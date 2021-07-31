@@ -15,10 +15,24 @@ import { Grid } from '@material-ui/core';
 export default function Home() {
   // userContext
   const userState = useUser();
-  const { state } = userState; 
+  const { state, isAuthenticated } = userState; 
   
   // userContext
   const router = useRouter();
+
+  // useEffect
+  useEffect( ()=>{
+    if( !state.isAuth ){
+      authentication();
+    }
+  }, [ ])
+
+  const authentication = async () => {
+    await isAuthenticated();
+    if( !state.isAuth ){
+      router.push( '/login' )
+    }
+  }
   return(
     <Grid>
       <Header/>

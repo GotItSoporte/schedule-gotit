@@ -29,6 +29,12 @@ const userReducer = ( state, action ) =>{
         message,
         isAuth 
       });
+    case USER_AUTH:
+      return ({
+        ...state,
+        isAuth : payload.isAuth,
+        message : payload.message
+      }) 
     case USER_LOGOUT: 
     localStorage.setItem('got-it-token', null);
       return({

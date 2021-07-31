@@ -17,11 +17,12 @@ import logo from '../../public/Gotit Horizontal.png'
 const Header = () => {
   // User context 
   const userContext = useUser();
-  const { state, logout } = userContext;
+  const { state, isAuthenticated ,logout } = userContext;
   // next routing 
   const router = useRouter();
   // useEffect
   useEffect( ()=>{
+    //isAuthenticated();
     if( !state.isAuth ){
       router.push( '/login' )
     }
