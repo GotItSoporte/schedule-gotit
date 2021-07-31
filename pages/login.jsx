@@ -28,7 +28,6 @@ const Login = () => {
     if( state.isAuth ){
       router.push( '/' );
     }
-    console.log( state )
   }, [ state ])
   return ( 
     <>
