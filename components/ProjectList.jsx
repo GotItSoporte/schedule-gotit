@@ -1,31 +1,54 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 // contexts
 import useProjects from '../context/hooks/useProjects';
 import useTasks from '../context/hooks/useTasks';
 //styles
-import styles from '../styles/layout.module.scss';
+import styles from '../styles/pages.module.scss';
 
-const ProjectList = ({ children }) => {
+const ProjectList = () => {
   // contexts 
   const projectsState = useProjects();
   const { projectsList, setCurrentProject } = projectsState;
   const tasksState = useTasks();
   const { getTasksProject } = tasksState;
   useEffect(() => {
+    console.log( 'list', projectsList )
   }, [ projectsList ])
   
   return ( 
     <>
-      {projectsList.map( (project , index)=> 
-      <>
-          <Project 
-            key = { project._id }
-            project = { project }
-            setCurrentProject = { setCurrentProject }
-            getTasksProject = { getTasksProject }
-          />
-      </>
-      )}
+      <section className = { styles.section }>
+        <h1>TUS PROYECTOS</h1>
+        <div className={ styles.tbl_header }>
+            <table >
+              <thead>
+                  <tr>
+                      <th>NOMBRE</th>
+                      <th>HORAS RESTANTES</th>
+                      <th></th>
+                  </tr>
+              </thead>
+            </table>
+        </div>
+        <div className={ styles.tbl_content }>
+            <table >
+              <tbody>
+                {projectsList.map( (project , index)=> 
+                <>
+                    <Project 
+                      key = { project._id }
+                      project = { project }
+                      setCurrentProject = { setCurrentProject }
+                      getTasksProject = { getTasksProject }
+                    />
+                </>
+                )}
+               
+              </tbody>
+            </table>
+        </div>
+        </section>
     </>
   );
 }
@@ -38,13 +61,14 @@ const Project = ({ project, setCurrentProject, getTasksProject })  =>{
     getTasksProject( id );
   }
   return  (
-    <div className= { styles.sider__item }>
-      <h4> { name }</h4>
-      <button 
-        className= { styles.sider__item__button }
-        onClick = { () => setProject( project._id ) }
-      > ver </button>
-    </div>
+    <tr>
+        <td> { name }</td>
+        <td>{ project.hoursTotal }</td>
+        <td><Link href= { `project/${project._id}` } >
+          <a>Ver mas</a>
+        </Link></td>
+    </tr>    
+  
   )
 }
 

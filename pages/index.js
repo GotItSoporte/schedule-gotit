@@ -2,26 +2,55 @@ import { useEffect } from 'react';
 // routing
 import { useRouter } from 'next/router'; 
 // context 
+import useProjects from '../context/hooks/useProjects';
 import useUser from '../context/hooks/useUser';
-//import Head from 'next/head'
-//import Image from 'next/image'
 //components 
 import Header from '../components/layout/Header';
-import styles from '../styles/Home.module.scss';
 import Layout from '../components/layout';
+import ProjectList from '../components/ProjectList';
+// api
+import { scheduleApi } from '../config/axios';
 // material ui
 import { Grid } from '@material-ui/core';
+// styles
+import styles from '../styles/pages.module.scss';
 
-export default function Home() {
+
+// initial props
+export async function getServerSideProps(context) {
+
+  const result = await scheduleApi.get('/projects');
+
+  if( !result ){ 
+    return{
+      notFound: true,
+    } 
+  }
+
+  //const projects = [error];
+ return {
+   props: {
+     projects : result.data.projects
+   }, // will be passed to the page component as props
+ }
+}
+
+// page
+export default function Home({ projects }) {
   // userContext
   const userState = useUser();
   const { state, isAuthenticated } = userState; 
   
+  // Projects Contexts
+  const projectContext = useProjects();
+  const { setProjectsList, currentProject } = projectContext;
+
   // userContext
   const router = useRouter();
 
   // useEffect
   useEffect( ()=>{
+    setProjectsList( projects )
     if( !state.isAuth ){
       authentication();
     }
@@ -36,7 +65,7 @@ export default function Home() {
   return(
     <Grid>
       <Header/>
-      <h1>Home</h1>
+       <ProjectList/>
     </Grid>
   )
 }
