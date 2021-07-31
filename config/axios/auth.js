@@ -1,15 +1,6 @@
 import { scheduleApi } from './';
 
-const login = async ( body ) => {
-  try {
-    result = await scheduleApi.post('/users/login', body ).data;
-    return result;
-  } catch (error) {
-    return error
-  }
-}
-
-const tokenAuth = token => {
+const setTokenAuth = token => {
   if( token ) {
     clienteAxios.defaults.headers.common[ 'Authorization' ] = `${ token }`;
   }else{
@@ -17,6 +8,4 @@ const tokenAuth = token => {
   }
 }
 
-export {
-  login,
-}
+export default setTokenAuth;
