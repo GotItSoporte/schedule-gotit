@@ -31,22 +31,24 @@ const UserWrapper = ({ children }) =>{
           loading:true,
         }
       });
-      result = await scheduleApi.post('/users/login', data ).data;
+      const result = await scheduleApi.post('/users/login', data );
+      console.log(' DESDE LOGIN ', result.data)
       return dispatch({
         type : USER_LOGIN_SUCESS,
         payload: {
           loading:false,
-          token : result.token
+          token : result.data.accessToken,
+          message : result.data.message,
+          isAuth : true
         }
       });
     } catch (error) {
-      console.log(' DESDE LOGIN ', error.response)
       return dispatch({
         type : USER_LOGIN_ERROR,
         payload: {
           loading:false,
           authError:true,
-          //message : error,
+          message : error.response.data.message,
         }
       });
     }

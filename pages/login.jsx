@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+// routing
+import { useRouter } from 'next/router';
 // componets
 import Header from '../components/layout/Header';
 //styles
@@ -19,11 +21,15 @@ import useUser from '../context/hooks/useUser';
 const Login = () => {
   // User context
   const userState = useUser();
-  const { userLogin } = userState; 
-  const login =( values )=>{
-    console.log(  'login...'  );
-    console.log(  values  );
-  }
+  const { userLogin, state } = userState; 
+  // next Router
+  const router = useRouter();
+  useEffect(() => {
+    if( state.isAuth ){
+      router.push( '/' );
+    }
+    console.log( state )
+  }, [ state ])
   return ( 
     <>
       <Header/>

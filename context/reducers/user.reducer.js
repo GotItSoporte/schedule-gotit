@@ -21,10 +21,13 @@ const userReducer = ( state, action ) =>{
       });
     case USER_LOGIN_SUCESS:
       localStorage.setItem('got-it-token', payload.token);
+      const { loading, token, message, isAuth } = payload
       return({
         ...state,
-        loading : payload.loading,
-        token : payload.token
+        loading,
+        token,
+        message,
+        isAuth 
       });
     default:
       return state;

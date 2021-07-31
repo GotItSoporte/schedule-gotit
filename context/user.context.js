@@ -1,8 +1,9 @@
 import {createContext} from 'react';
 
-const initialstate = {
+export const initialstate = {
   user : null,
-  token : null,
-  isAdmin: false
+  token :  typeof window !== 'undefined'? localStorage .getItem( 'got-it-token' ) : null,
+  isAdmin: false,
+  isAuth : false
 }
 export default createContext( initialstate );
