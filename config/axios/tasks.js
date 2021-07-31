@@ -2,9 +2,9 @@ import { scheduleApi } from './';
 
 const getTasksProject =async ( projectID ) =>{
   try {
-    return await (await scheduleApi.get(`/projects/${ projectID }/tasks`)).data.tasks;
+    return await scheduleApi.get(`/projects/${ projectID }/tasks`).data.tasks;
   } catch (error) {
-    return {error, isError : true}
+    return {error : error.response.data, isError : true}
   }
 }
 
