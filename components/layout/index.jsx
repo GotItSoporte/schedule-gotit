@@ -9,14 +9,12 @@ import Sider from './Sider';
 
 const Layaout = ({ children }) => {
   return ( 
-    <div className = { styles.layout }>
+    <>
       <Header/>
-      <div className = { styles.main }>
-          <Sider/>
-          { children }
-      </div>
-    </div>
-   );
+      { children }
+    </>
+
+  );
 }
  
 export default Layaout;

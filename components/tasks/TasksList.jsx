@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
-
+// contexts
+import useTasks from '../../context/hooks/useTasks';
 // styles
 import styles from '../../styles/pages.module.scss';
 
-const TasksList = ({ tasksList }) => {
+const TasksList = () => {
+ // Projects Tasklist
+ const tasksContext = useTasks();
+ const { state : tasksState, setTasksList } = tasksContext;
+ const { tasksList } = tasksState
   useEffect(() => {
+    console.log( tasksList )
   }, [tasksList]);
   return ( 
      
@@ -25,12 +31,12 @@ const TasksList = ({ tasksList }) => {
      <div className ={ styles.tbl_content }>
          <table >
          <tbody>
-             <tr>
-                 <td>nombre requerimiento</td>
-                 <td>tiempo de tarea</td>
-                 <td>Activo/Pendiente/Cerrado</td>
-                 <td><a href="#">Ver Más</a></td>
-             </tr>
+             { tasksList.map( task => 
+                (<Task
+                  key= { task._id }
+                  task ={ task }
+                />)
+             ) }
          </tbody>
          </table>
      </div>
@@ -43,8 +49,8 @@ const Task = ({ task }) => {
   const { name, hours, startDate } = task
   return(
     <tr>
-      <td>nombre requerimiento</td>
-      <td>tiempo de tarea</td>
+      <td>{name}</td>
+      <td>{hours}</td>
       <td>Activo/Pendiente/Cerrado</td>
       <td><a href="#">Ver Más</a></td>
     </tr>

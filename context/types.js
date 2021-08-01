@@ -4,8 +4,9 @@ export const PROJECTS_SET_CURRENT_PROJECT = 'PROJECTS_SET_CURRENT_PROJECT';
 export const PROJECTS_ERROR               = 'PROJECTS_ERROR';
 
 // tasks
-export const TASKS_GET_TASK           = 'TASKS_GET_TASK';
+export const TASKS_SET_TASK           = 'TASKS_SET_TASK';
 export const TASKS_GET_TASKS          = 'TASKS_GET_TASKS';
+export const TASKS_SET_TASKS          = 'TASKS_SET_TASKS';
 export const TASKS_SET_CURRENT_TASK   = 'TASKS_SET_CURRENT_TASK';
 export const TASKS_ERROR              = 'TASKS_ERROR';
 

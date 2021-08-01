@@ -1,6 +1,6 @@
 import {
-  TASKS_GET_TASK,
   TASKS_GET_TASKS,
+  TASKS_SET_TASKS,
   TASKS_SET_CURRENT_TASK,
   TASKS_ERROR
 } from '../types';
@@ -37,11 +37,30 @@ const TasksWrapper =({ children }) =>{
         });
       }
   }
+  // ******************************************
+  // ********* Set Tasks to state **********
+  // ******************************************
+  const setTasksList = async ( tasks ) => {
+    return dispatch( {
+      type: TASKS_SET_TASKS,
+      payload: tasks
+    } );
+  }
+  // ******************************************
+  // ****** Set Current ptoject to state ******
+  // ******************************************
+  const setCurrentTask = async ( task ) => {
+    return dispatch( {
+      type: TASKS_SET_CURRENT_TASK,
+      payload: task
+    } );
+  }
   return(
     <TaskContext.Provider value = { { 
-        tasksList    : state.tasksList,
-        currentTask    : state.currentTask,
-        getTasksProject : getTasksProject
+        state : state,
+        getTasksProject : getTasksProject,
+        setTasksList : setTasksList,
+        setCurrentTask : setCurrentTask,
     }}>
       { children }
     </TaskContext.Provider>

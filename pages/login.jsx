@@ -31,7 +31,7 @@ const Login = () => {
   }, [ state ])
   return ( 
     <>
-      <Header/>
+      
         <div className={ styles.login }>
           <h1>Login</h1>
           <Formik

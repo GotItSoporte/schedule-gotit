@@ -17,12 +17,15 @@ import styles from '../../styles/pages.module.scss';
 export async function getServerSideProps(context) {
   const { id } = context.params;
     let project =  null;
+    let tasks =  null;
     let message = null;
     let notFound= true; 
   try {
     let result = await scheduleApi.get( `/projects/${id}` );
-    message = 'llamado a api exitoso';
     project = result.data.project
+    result = await scheduleApi.get( `/projects/${id}/tasks` );
+    tasks = result.data.tasks;
+    message = 'llamado a api exitoso';
     notFound = false
   } catch (error) {
       message = 'Hubo un error al obtener el proyecyo';
@@ -31,16 +34,30 @@ export async function getServerSideProps(context) {
   return {
     props:{
       project,
+      tasks,
       message,
       notFound
     } , // will be passed to the page component as props
   }
  }
 
-const Project = ({ notFound, project, message }) => {
-  console.log( {project , message} )
+const Project = ({ notFound, project, message, tasks }) => {
+
+  // Projects Contexts
+  const projectContext = useProjects();
+  const { setProjectsList, currentProject } = projectContext;
+  
+  // Projects Tasklist
+  const tasksContext = useTasks();
+  const { state :tasksState , setTasksList } = tasksContext;
+  
+  useEffect( async () => {
+    await setTasksList( tasks );
+    console.log( tasksState )
+  }, [ tasks ]);
+  
   return ( 
-      <body>
+    <>
       <div>
         <h1>{ notFound? "NOT FOUND" :'Pagina Proyecto'}</h1>
         <h1>{ !project? "NOT FOUND" : project._id}</h1>
@@ -74,8 +91,8 @@ const Project = ({ notFound, project, message }) => {
               </table>
           </div>
       </section>
-      <TasksList/>
-  </body>
+      { tasksState? <TasksList /> : <h2>No hay tareas para mostrar</h2>}
+  </>
    );
 }
  
