@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+//next router
+import Link from 'next/link';
 // contexts
 import useTasks from '../../context/hooks/useTasks';
 // styles
@@ -46,13 +48,17 @@ const TasksList = () => {
 }
  
 const Task = ({ task }) => {
+  // task context
+  const tasksContext = useTasks();
+  const { setCurrentTask } = tasksContext;
   const { name, hours, startDate } = task
+
   return(
     <tr>
       <td>{name}</td>
       <td>{hours}</td>
       <td>Activo/Pendiente/Cerrado</td>
-      <td><a href="#">Ver Más</a></td>
+      <a href="#">Ver Más</a>
     </tr>
   );
 }

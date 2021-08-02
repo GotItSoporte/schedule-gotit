@@ -26,6 +26,7 @@ const ProjectList = () => {
                   <tr>
                       <th>NOMBRE</th>
                       <th>HORAS RESTANTES</th>
+                      <th>HORAS Usadas</th>
                       <th></th>
                   </tr>
               </thead>
@@ -63,12 +64,10 @@ const Project = ({ project, setCurrentProject, getTasksProject })  =>{
   return  (
     <tr>
         <td> { name }</td>
-        <td>{ project.hoursTotal }</td>
-        <td><Link href= { `project/${project._id}` } >
-          <a>Ver mas</a>
-        </Link></td>
+        <td>{ project.hoursLeft }</td>
+        <td>{ project.hoursUsed }</td>
+        <td> <a>Ver mas</a> </td>
     </tr>    
-  
   )
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
 
-const NewTask = () => {
+const NewReq = () => {
   return ( 
     <div>
-      <h1>New Task</h1>
+      <h1>New Req</h1>
     </div>
    );
 }
 
  
-export default NewTask;
+export default NewReq;
