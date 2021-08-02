@@ -25,13 +25,13 @@ const Login = () => {
   // next Router
   const router = useRouter();
   useEffect(() => {
-    if( state.isAuth ){
+    const token = localStorage.getItem('got-it-token');
+    if( token ){
       router.push( '/' );
     }
   }, [ state ])
   return ( 
     <>
-      
         <div className={ styles.login }>
           <h1>Login</h1>
           <Formik
