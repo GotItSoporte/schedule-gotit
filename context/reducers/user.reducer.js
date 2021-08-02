@@ -21,13 +21,14 @@ const userReducer = ( state, action ) =>{
       });
     case USER_LOGIN_SUCESS:
       localStorage.setItem('got-it-token', payload.token);
-      const { loading, token, message, isAuth } = payload
+      const { loading, token, message, isAuth, user } = payload
       return({
         ...state,
         loading,
         token,
         message,
-        isAuth 
+        isAuth, 
+        user
       });
     case USER_AUTH:
       return ({

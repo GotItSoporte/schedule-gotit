@@ -2,6 +2,7 @@ import {
   TASKS_GET_TASKS,
   TASKS_SET_TASKS,
   TASKS_SET_CURRENT_TASK,
+  TASKS_CREATE_REQUERIMENT,
   TASKS_ERROR
 } from '../types';
 // react hook
@@ -53,12 +54,32 @@ const TasksWrapper =({ children }) =>{
       payload: task
     } );
   }
+  // ******************************************
+  // ************* Create new task ************
+  // ******************************************
+  const createRequirement = async ( task ) => {
+    try {
+      const result = await scheduleApi.post( '/tasks/create', task );
+      return dispatch({
+        type: TASKS_CREATE_REQUERIMENT,
+        payload : result.task,
+        message : result.message
+      })
+    } catch (error) {
+      console.log( {error : error.response.data } );
+        return dispatch({
+          type: TASKS_ERROR,
+          payload: error.response.data
+        });
+    }
+  }
   return(
     <TaskContext.Provider value = { { 
         state : state,
         getTasksProject : getTasksProject,
         setTasksList : setTasksList,
         setCurrentTask : setCurrentTask,
+        createRequirement : createRequirement
     }}>
       { children }
     </TaskContext.Provider>

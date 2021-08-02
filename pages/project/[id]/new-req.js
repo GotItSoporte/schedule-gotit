@@ -1,12 +1,17 @@
 import React from 'react';
 // routing
 import { useRouter } from 'next/router';
-// forms validation
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
 // context 
 import useUser from '../../../context/hooks/useUser';
 import useProjects from '../../../context/hooks/useProjects';
+import useTasks from '../../../context/hooks/useTasks';
+// MAterial UI
+import { Select, MenuItem } from '@material-ui/core';
+// forms validation
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+//
+import { TextField } from '@material-ui/core';
 // styles
 import styles from '../../../styles/forms.module.scss'
 
@@ -24,11 +29,21 @@ const NewReq = () => {
   const router = useRouter();
   // context 
   const projectsContext = useProjects();
-  const { currentProject } = projectsContext;
+  const { currentProject, projectsList } = projectsContext;
+  // context 
+  const tasksContext = useTasks();
+  const { createRequirement } = tasksContext;
+
 
   const setNewTask = ( values ) =>{
-    
-    console.log( 'Nuevo req', currentProject )
+    const data = {
+       name : values.name,
+       contact : values.contact,
+       requirement : values.requirement,
+       project : currentProject._id,
+    }
+    console.log( 'Nuevo req', data )
+    createRequirement( data )
   }
   
   return ( 
@@ -58,9 +73,23 @@ const NewReq = () => {
           placeholder="Contacto (Nombre + Correo)" 
           required="required" 
         />
-        <Field 
-          className={ styles.FormId } 
+        <Select
+          name = 'project'
+         
+        >
+          { projectsList.map( project => 
+            <MenuItem
+              value ={ project._id }
+            >
+              { project.name }
+            </MenuItem> 
+          ) }
+          
+        </Select>
+        <TextField 
+          className={ styles.textArea } 
           type="textarea" 
+          multiline
           name="requirement" 
           placeholder="Escriba su requerimiento" 
           required="required" 

@@ -2,6 +2,7 @@ import {
   TASKS_GET_TASKS,
   TASKS_SET_TASKS,
   TASKS_SET_CURRENT_TASK,
+  TASKS_CREATE_REQUERIMENT,
   TASKS_ERROR
 } from '../types';
 
@@ -19,11 +20,16 @@ const tasksReducer = ( state, action ) => {
         ...state,
         currentTask : payload
       });
+    case TASKS_CREATE_REQUERIMENT:
+      return({
+        ...state,
+        message : payload.message
+      })
     case TASKS_ERROR:
-    return ({
-      ...state,
-      error : payload
-    })
+      return ({
+        ...state,
+        error : payload
+      })
     default:
       return state;
   }

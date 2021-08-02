@@ -8,6 +8,8 @@ export const TASKS_SET_TASK           = 'TASKS_SET_TASK';
 export const TASKS_GET_TASKS          = 'TASKS_GET_TASKS';
 export const TASKS_SET_TASKS          = 'TASKS_SET_TASKS';
 export const TASKS_SET_CURRENT_TASK   = 'TASKS_SET_CURRENT_TASK';
+
+export const TASKS_CREATE_REQUERIMENT = 'TASKS_CREATE_REQUERIMENT';
 export const TASKS_ERROR              = 'TASKS_ERROR';
 
 // user /Auth
