@@ -34,12 +34,15 @@ const Header = () => {
   return (  
     <header className = { styles.header }>
             <div id={ styles.logo }>
+              <Link href = '/'>
                 <Image id= { styles.Logo_GotIt  } src={ logo } />
+              </Link>
             </div>
             <div id= { styles.Container }>
                 <ul id={styles.menu}>
                   <li><a onClick ={ log_out } href="#">Cerrar Sesión</a></li>
                   <li><a href="#">Proyectos</a></li>
+                  <li><a href="#">Nuevo requerimiento</a></li>
                 </ul>
             </div>
     </header>
