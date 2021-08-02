@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+// lin router
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 // contexts
 import useProjects from '../context/hooks/useProjects';
@@ -13,7 +15,6 @@ const ProjectList = () => {
   const tasksState = useTasks();
   const { getTasksProject } = tasksState;
   useEffect(() => {
-    console.log( 'list', projectsList )
   }, [ projectsList ])
   
   return ( 
@@ -55,18 +56,26 @@ const ProjectList = () => {
 }
 
 const Project = ({ project, setCurrentProject, getTasksProject })  =>{
+    // Router
+    const router = useRouter();
+
   let name =project.name.length > 18 ? `${project.name.substring( 0, 20 )}...`: project.name;
-  const setProject =  id =>{
-    console.log({ project : id})
+  
+  const linkProject =  id =>{
     setCurrentProject( project )
     getTasksProject( id );
+    router.push( `/project/${ id }` )
   }
+
   return  (
     <tr>
         <td> { name }</td>
         <td>{ project.hoursLeft }</td>
         <td>{ project.hoursUsed }</td>
-        <td> <a>Ver mas</a> </td>
+        <td> <a 
+          onClick = { () => linkProject( project._id ) } 
+          className = { styles.btn }
+        >Ver mas</a> </td>
     </tr>    
   )
 }

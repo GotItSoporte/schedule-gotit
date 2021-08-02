@@ -1,19 +1,32 @@
 import React, { useEffect, useState } from 'react';
 //next router
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 // contexts
 import useTasks from '../../context/hooks/useTasks';
+import useProjects from '../../context/hooks/useProjects';
 // styles
 import styles from '../../styles/pages.module.scss';
 
 const TasksList = () => {
- // Projects Tasklist
+ // Router
+  const router = useRouter();
+
  const tasksContext = useTasks();
  const { state : tasksState, setTasksList } = tasksContext;
  const { tasksList } = tasksState
+ //
+  const projectsContext = useProjects();
+  const { currentProject } = projectsContext;
+
   useEffect(() => {
     console.log( tasksList )
   }, [tasksList]);
+
+  const onNewreq = () => {
+    console.log( 'cliv' )
+    router.push( `/project/${currentProject._id}/new-req` )
+  }
   return ( 
      
     <section className ={ styles.section }>
@@ -37,28 +50,45 @@ const TasksList = () => {
                 (<Task
                   key= { task._id }
                   task ={ task }
+                  router = { router }
+                  currentProject = { currentProject }
                 />)
              ) }
          </tbody>
          </table>
      </div>
-     <button type="submit" className={ styles.NuevoRequerimiento }>Agregar Requerimiento</button>
+     <button 
+        type="button" 
+        className={ styles.NuevoRequerimiento }
+        onClick = { () => onNewreq() }
+      >Agregar Requerimiento </button>
   </section>
    );
 }
  
-const Task = ({ task }) => {
-  // task context
+const Task = ({ task, router , currentProject }) => {
+
   const tasksContext = useTasks();
   const { setCurrentTask } = tasksContext;
   const { name, hours, startDate } = task
+
+
+  const linkTask=  id =>{
+    console.log({ project : id})
+    setCurrentTask( task )
+    router.push( `/project/${currentProject._id}/${ id }` )
+  }
+
 
   return(
     <tr>
       <td>{name}</td>
       <td>{hours}</td>
       <td>Activo/Pendiente/Cerrado</td>
-      <a href="#">Ver Más</a>
+      <td> <a 
+          onClick = { () => linkTask( task._id ) } 
+          className = { styles.btn }
+        >Ver mas</a> </td>
     </tr>
   );
 }

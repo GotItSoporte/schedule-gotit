@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // components
 import Layout from '../../components/layout'
+import Header from '../../components/layout/Header'
 // contexts
 import useProjects from '../../context/hooks/useProjects';
 import useTasks from '../../context/hooks/useTasks';
@@ -54,10 +55,12 @@ const Project = ({ notFound, project, message, tasks }) => {
   useEffect( async () => {
     await setTasksList( tasks );
     console.log( tasksState )
+    console.log( currentProject )
   }, [ tasks ]);
   
   return ( 
     <>
+      <Header /> 
       <div>
         <h1>{ notFound? "NOT FOUND" :'Pagina Proyecto'}</h1>
         <h1>{ !project? "NOT FOUND" : project._id}</h1>

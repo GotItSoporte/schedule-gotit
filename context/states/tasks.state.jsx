@@ -21,10 +21,8 @@ const TasksWrapper =({ children }) =>{
   // ******************************************
   const getTasksProject = async ( id ) => {
     try {
-        console.log('on getTasksProject' );
         //call the api
         const result = await scheduleApi.get(`/projects/${ id }/tasks`);
-        console.log('on getTasksProject', result );
         return dispatch( {
           type: TASKS_GET_TASKS,
           payload: result.data.tasks
