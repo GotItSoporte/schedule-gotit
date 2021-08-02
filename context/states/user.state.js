@@ -39,6 +39,7 @@ const UserWrapper = ({ children }) =>{
         payload: {
           loading:false,
           token : result.data.accessToken,
+          user : result.data.user,
           message : result.data.message,
           isAuth : true
         }

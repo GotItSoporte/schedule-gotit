@@ -5,6 +5,7 @@ import Header from '../../components/layout/Header'
 // contexts
 import useProjects from '../../context/hooks/useProjects';
 import useTasks from '../../context/hooks/useTasks';
+import useUser from '../../context/hooks/useUser';
 // http
 import { scheduleApi } from '../../config/axios';
 import { getProjects } from '../../config/axios/projects';
@@ -48,9 +49,14 @@ const Project = ({ notFound, project, message, tasks }) => {
   const projectContext = useProjects();
   const { setProjectsList, currentProject } = projectContext;
   
-  // Projects Tasklist
+  // Tasks Context
   const tasksContext = useTasks();
   const { state :tasksState , setTasksList } = tasksContext;
+
+  // Users Contexts
+  const userContext = useUser();
+  const { state :userState  } = userContext;
+  const { user } =userState;
   
   useEffect( async () => {
     await setTasksList( tasks );
@@ -61,11 +67,8 @@ const Project = ({ notFound, project, message, tasks }) => {
   return ( 
     <>
       <Header /> 
-      <div>
-        <h1>{ notFound? "NOT FOUND" :'Pagina Proyecto'}</h1>
-        <h1>{ !project? "NOT FOUND" : project._id}</h1>
-      </div>
       <section className ={ styles.section }>
+          <h1>{ user.company }</h1>
           <h1>{ project?.name || 'No Encontrado' }</h1>
           <div className={ styles.tbl_header }>
               <table >
