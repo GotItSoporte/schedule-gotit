@@ -35,7 +35,12 @@ const Header = () => {
   return (  
     <header className = { styles.header }>
             <div id={ styles.logo }>
-              <Link href = '/'>
+              <Link 
+                href ={{
+                        pathname : '/',
+                        query :{ company : user?.company }
+                      }}
+                >
                 <Image id= { styles.Logo_GotIt  } src={ logo } />
               </Link>
             </div>
@@ -47,7 +52,7 @@ const Header = () => {
                     <Link 
                       href = {{
                         pathname : '/new-req',
-                        query :{ userId : user.id }
+                        query :{ company : user?.company }
                       }}
                     >
                       <a>Nuevo requerimiento</a>

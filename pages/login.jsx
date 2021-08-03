@@ -22,16 +22,16 @@ const Login = () => {
   // User context
   const userContext = useUser();
   const { userLogin, state : userState, isAuthenticated } = userContext; 
-  const { isAuth } = userState;
+  const { isAuth, user } = userState;
   // next Router
   const router = useRouter();
   let  onsubmit = false;
   useEffect(() => {
-    console.log( 'refresh', {userState, isAuth})
+    console.log( 'refresh', {userState, isAuth});
     isAuthenticated();
     if( isAuth ){
       console.log( 'auth',{ userState, isAuth })
-      router.push( '/' )
+      router.push({ pathname : '/', query : { company : user?.company } });
     }else{
       console.log( 'auth', false )
     }

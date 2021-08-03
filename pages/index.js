@@ -19,7 +19,8 @@ import styles from '../styles/pages.module.scss';
 // initial props
 export async function getServerSideProps(context) {
 
-  const result = await scheduleApi.get('/projects');
+  const { company } =context.query
+  const result = await scheduleApi.get(`/projects${ company? `?company=${ company }`: '' }`);
 
   if( !result ){ 
     return{
