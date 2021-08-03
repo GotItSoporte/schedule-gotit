@@ -25,6 +25,8 @@ const taskSchema = Yup.object().shape({
     .required('Required'),
   contact: Yup.string()
     .required('Required'),
+  project: Yup.string()
+    .required('Required'),
   requirement: Yup.string(),
 });
 
@@ -63,17 +65,23 @@ const NewReq = ({ projects }) => {
     setProjectsList( projects )
   }, [ ])
 
-  const setNewTask = ( values ) =>{
+  const setNewTask =  values =>{
     const data = {
        name : values.name,
        contact : values.contact,
        requirement : values.requirement,
-       project : currentProject._id,
+       project : values.project,
     }
     console.log( 'Nuevo req', data )
-    createRequirement( data )
+    //createRequirement( data )
+    console.log( 'values ', {data} )
   }
   
+  const handleSelectChange = values=>{
+      if( !values.project ){
+        console.log(' NO HAY PROYECTO ', {values})
+      }
+  }
   return ( 
     <>  
       <Header/>
@@ -84,8 +92,10 @@ const NewReq = ({ projects }) => {
           name : '',
           contact : '',
           requirement : '',
+          project : '',
         }}
         validationSchema = { taskSchema }
+        handleSelectChange
         onSubmit = {  values => setNewTask( values ) }
       >
         <Form method="post">
@@ -103,19 +113,28 @@ const NewReq = ({ projects }) => {
             placeholder="Contacto (Nombre + Correo)" 
             required="required" 
           />
-          <Select
+
+          {/* SELECT */}
+          <Field
+            component ={ Select }
             name = 'project'
-          
+            label = 'Proyeto'
+            fullWidth
+            select
+            inputProps={{
+              id: 'select_id',
+            }}
+            onChange = { ( e ) => handleSelectChange (formik.values)}
           >
-            { projectsList.map( project => 
+           
+            { projectsList?.map( project => 
               <MenuItem
                 value ={ project._id }
               >
                 { project.name }
               </MenuItem> 
             ) }
-            
-          </Select>
+          </Field>
           <TextField 
             className={ styles.textArea } 
             type="textarea" 
