@@ -51,9 +51,6 @@ export default function Home({ projects }) {
   // useEffect
   useEffect( ()=>{
     setProjectsList( projects )
-    if( !state.isAuth ){
-      authentication();
-    }
   }, [ ])
 
   const authentication = async () => {

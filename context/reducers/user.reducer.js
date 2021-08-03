@@ -22,6 +22,7 @@ const userReducer = ( state, action ) =>{
     case USER_LOGIN_SUCESS:
       localStorage.setItem('got-it-token', payload.token);
       const { loading, token, message, isAuth, user } = payload
+      console.log( 'REDUCER',{state}, { payload } )
       return({
         ...state,
         loading,
@@ -30,11 +31,21 @@ const userReducer = ( state, action ) =>{
         isAuth, 
         user
       });
+    case USER_ERROR: 
+    console.log( 'error' )
+      return({
+        ...state,
+        message,
+        error,
+        loading 
+      });
     case USER_AUTH:
       return ({
         ...state,
         isAuth : payload.isAuth,
-        message : payload.message
+        message : payload.message,
+        user: payload.user,
+        isAdmin: payload.isAdmin
       }) 
     case USER_LOGOUT: 
     localStorage.setItem('got-it-token', null);
@@ -43,7 +54,7 @@ const userReducer = ( state, action ) =>{
         token : null,
         message : null ,
         isAuth : null
-      })
+      });
     default:
       return state;
   }

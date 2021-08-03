@@ -17,16 +17,17 @@ import logo from '../../public/Gotit Horizontal.png'
 const Header = () => {
   // User context 
   const userContext = useUser();
-  const { state, isAuthenticated ,logout } = userContext;
+  const { state : useState, isAuthenticated ,logout } = userContext;
+  const  { isAuth, user } = useState;
   // next routing 
   const router = useRouter();
   // useEffect
   useEffect( ()=>{
-    //isAuthenticated();
-    if( !state.isAuth ){
+    isAuthenticated();
+    if( !isAuth ){
       router.push( '/login' )
     }
-  }, [ state ])
+  }, [ useState ])
 
   const log_out = () =>{
     logout();
@@ -42,7 +43,16 @@ const Header = () => {
                 <ul id={styles.menu}>
                   <li><a onClick ={ log_out } href="#">Cerrar Sesión</a></li>
                   <li><a href="#">Proyectos</a></li>
-                  <li><a href="#">Nuevo requerimiento</a></li>
+                  <li>
+                    <Link 
+                      href = {{
+                        pathname : '/new-req',
+                        query :{ userId : user.id }
+                      }}
+                    >
+                      <a>Nuevo requerimiento</a>
+                    </Link>
+                  </li>
                 </ul>
             </div>
     </header>

@@ -20,16 +20,22 @@ import useUser from '../context/hooks/useUser';
 
 const Login = () => {
   // User context
-  const userState = useUser();
-  const { userLogin, state } = userState; 
+  const userContext = useUser();
+  const { userLogin, state : userState, isAuthenticated } = userContext; 
+  const { isAuth } = userState;
   // next Router
   const router = useRouter();
+  let  onsubmit = false;
   useEffect(() => {
-    const token = localStorage.getItem('got-it-token');
-    if( token ){
-      router.push( '/' );
+    console.log( 'refresh', {userState, isAuth})
+    isAuthenticated();
+    if( isAuth ){
+      console.log( 'auth',{ userState, isAuth })
+      router.push( '/' )
+    }else{
+      console.log( 'auth', false )
     }
-  }, [ state ])
+  }, [ isAuth ])
   return ( 
     <>
         <div className={ styles.login }>
@@ -42,7 +48,9 @@ const Login = () => {
            validationSchema={loginSchema}
            onSubmit={values => {
              // same shape as initial values
+             console.log('SUBMIT')
              userLogin(values);
+             onsubmit = true;
            }}
           >
             {({ errors, touched }) => (

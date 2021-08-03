@@ -19,6 +19,8 @@ import  setTokenAuth from '../../config/axios/auth';
 import UserContext , { initialstate } from '../user.context';
 // reducer 
 import userReducer from '../reducers/user.reducer';
+// jwt
+import jwt_decode  from 'jwt-decode';
 
 const UserWrapper = ({ children }) =>{
   const [ state, dispatch ] = useReducer( userReducer, initialstate );
@@ -33,23 +35,27 @@ const UserWrapper = ({ children }) =>{
           loading:true,
         }
       });
-      const result = await scheduleApi.post('/users/login', data );
+      const result = await scheduleApi.post('/users/login', data );// decode token
+      const decodedToken = jwt_decode( result.data.accessToken );
+      const { id, name, role, company, isAdmin } = decodedToken;
       return dispatch({
         type : USER_LOGIN_SUCESS,
         payload: {
           loading:false,
           token : result.data.accessToken,
-          user : result.data.user,
           message : result.data.message,
-          isAuth : true
+          isAuth : true,
+          user : { id, name, role, company },
+          isAdmin,
         }
       });
     } catch (error) {
+      console.log( error )
       return dispatch({
         type : USER_LOGIN_ERROR,
         payload: {
           loading:false,
-          authError:true,
+          isAuth:false,
           message : error.response.data.message,
         }
       });
@@ -62,15 +68,29 @@ const UserWrapper = ({ children }) =>{
   const isAuthenticated = async()=>{
     // get token from localstorage
     const token = localStorage.getItem('got-it-token');
+    if(  !token ){
+      return dispatch({
+        type : USER_LOGIN_ERROR,
+        payload: {
+          loading:false,
+          authError:true,
+          message : 'Usuario no autenticado',
+        }
+      });
+    }
     // set token as Athorization header
     setTokenAuth( token );
     try {
-      const result = await scheduleApi.get('/users/auth');
+      // decode token
+      const decodedToken = jwt_decode( token );
+      const { id, name, role, company, isAdmin } = decodedToken;
       return dispatch({
         type : USER_AUTH, 
         payload: {
-          isAuth : result.data.auth,
-          message : result.data.message
+          isAuth : true,
+          message :"Usuario Autenticado",
+          user :{ id, name, role, company, cellphone, email },
+          isAdmin
         }
       });
     } catch (error) {
@@ -79,9 +99,9 @@ const UserWrapper = ({ children }) =>{
         payload: {
           loading:false,
           authError:true,
-          message : error.response,
+          message : 'Usuario no autenticado',
         }
-      })
+      });
     }
   } 
 
