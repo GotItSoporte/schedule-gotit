@@ -6,7 +6,6 @@ import useProjects from '../context/hooks/useProjects';
 import useUser from '../context/hooks/useUser';
 //components 
 import Header from '../components/layout/Header';
-import Layout from '../components/layout';
 import ProjectList from '../components/ProjectList';
 // api
 import { scheduleApi } from '../config/axios';
