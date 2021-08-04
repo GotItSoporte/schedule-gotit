@@ -10,8 +10,23 @@ import {
   USER_ERROR, 
   USER_LOGOUT,  
 } from '../types';
+// Alerts
+import Swal from 'sweetalert2';
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 const userReducer = ( state, action ) =>{
+  
   const { type, payload } = action;
   switch ( type ) {
     case USER_LOGIN:
@@ -23,6 +38,12 @@ const userReducer = ( state, action ) =>{
       localStorage.setItem('got-it-token', payload.token);
       const { loading, token, message, isAuth, user } = payload
       console.log( 'REDUCER',{state}, { payload } )
+
+      //Alert
+      Toast.fire({
+        icon: 'success',
+        title: message
+      });
       return({
         ...state,
         loading,
@@ -31,13 +52,20 @@ const userReducer = ( state, action ) =>{
         isAuth, 
         user
       });
-    case USER_ERROR: 
-    console.log( 'error' )
+      
+    case USER_LOGIN_ERROR: 
+    //Alert
+    Toast.fire({
+      icon: 'error',
+      title: payload.message
+    });
+
+    console.log( 'error', payload.message )
       return({
         ...state,
-        message,
-        error,
-        loading 
+        loading : false, 
+        message : payload.message,
+        isAuth: payload.isAuth, 
       });
     case USER_AUTH:
       return ({
@@ -46,7 +74,7 @@ const userReducer = ( state, action ) =>{
         message : payload.message,
         user: payload.user,
         isAdmin: payload.isAdmin
-      }) 
+      }) ;
     case USER_LOGOUT: 
     localStorage.setItem('got-it-token', null);
       return({

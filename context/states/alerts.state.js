@@ -11,10 +11,10 @@ import alertReducer from '../reducers/alerts.reducer';
 const AlertWrapper = ({ children }) =>{
   const [ state, dispatch ] = useReducer( alertReducer, initialstate );
 
-  const showAlert = ( messsage, category ) =>{
+  const showAlert = ( message, category ) =>{
     dispatch({
       type : ALERT_SHOW,
-      payload: { messsage, category }
+      payload: { message, category }
     });
     setTimeout(() =>{
       return dispatch({

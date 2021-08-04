@@ -50,7 +50,7 @@ const UserWrapper = ({ children }) =>{
         }
       });
     } catch (error) {
-      console.log( error )
+      console.log( 'errro', error.response.data.message )
       return dispatch({
         type : USER_LOGIN_ERROR,
         payload: {
@@ -70,7 +70,7 @@ const UserWrapper = ({ children }) =>{
     const token = localStorage.getItem('got-it-token');
     if(  !token ){
       return dispatch({
-        type : USER_LOGIN_ERROR,
+        type : USER_ERROR,
         payload: {
           loading:false,
           authError:true,
@@ -95,7 +95,7 @@ const UserWrapper = ({ children }) =>{
       });
     } catch (error) {
       return dispatch({
-        type : USER_LOGIN_ERROR,
+        type : USER_ERROR,
         payload: {
           loading:false,
           authError:true,
