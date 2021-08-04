@@ -26,3 +26,7 @@ export const  USER_LOGOUT           = '  USER_LOGOUT';
 export const  USER_AUTH          = 'USER_AUTH';
 export const  USER_GET_PROJECTS  = 'USER_GET_PROJECTS';
 export const  USER_ERROR         = 'USER_ERROR';
+
+// Alerts
+export const ALERT_SHOW = 'ALERT_SHOW';
+export const ALERT_HIDE = 'ALERT_HIDE';
