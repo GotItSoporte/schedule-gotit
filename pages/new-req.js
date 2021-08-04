@@ -84,7 +84,7 @@ const NewReq = ({ projects }) => {
        project : values.project,
     }
     console.log( 'Nuevo req', data )
-    //createRequirement( data )
+    createRequirement( data )
     console.log( 'values ', {data} )
   }
   

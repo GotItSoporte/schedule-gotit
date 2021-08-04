@@ -60,10 +60,14 @@ const TasksWrapper =({ children }) =>{
   const createRequirement = async ( task ) => {
     try {
       const result = await scheduleApi.post( '/tasks/create', task );
+      console.log( 'result.data', {result: result.data} );
+      console.log( 'data.message', {result: result.data.message} );
       return dispatch({
         type: TASKS_CREATE_REQUERIMENT,
-        payload : result.task,
-        message : result.message
+        payload :{
+          currrentTask : result.task,
+          message : result.data.message,
+        } 
       })
     } catch (error) {
       console.log( {error : error.response.data } );
