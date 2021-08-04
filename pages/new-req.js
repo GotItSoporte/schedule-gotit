@@ -12,7 +12,7 @@ import { scheduleApi } from '../config/axios';
 // MAterial UI
 import { Select, MenuItem } from '@material-ui/core';
 // forms validation
-import { Formik, Form, Field } from 'formik';
+import { useFormik, Form, Field, validateYupSchema } from 'formik';
 import * as Yup from 'yup';
 //
 import { TextField } from '@material-ui/core';
@@ -20,7 +20,7 @@ import { TextField } from '@material-ui/core';
 import styles from '../styles/forms.module.scss'
 
 // yup
-const taskSchema = Yup.object().shape({
+const taskSchema = Yup.object({
   name: Yup.string()
     .required('Required'),
   contact: Yup.string()
@@ -64,7 +64,18 @@ const NewReq = ({ projects }) => {
   useEffect( ()=>{
     setProjectsList( projects )
   }, [ ])
+  //
+  const formik = useFormik({
+    initialValues : {
+      name : '',
+      contact : '',
+      requirement : '',
+      project : '',
+    },
+    validateYupSchema : taskSchema,
+    onSubmit : values =>setNewTask( values ),
 
+  });
   const setNewTask =  values =>{
     const data = {
        name : values.name,
@@ -87,44 +98,47 @@ const NewReq = ({ projects }) => {
       <Header/>
       <div className={ styles.Form}>
       <h1>Nuevo Requerimiento</h1>
-      <Formik
-        initialValues = {{
-          name : '',
-          contact : '',
-          requirement : '',
-          project : '',
-        }}
-        validationSchema = { taskSchema }
-        handleSelectChange
-        onSubmit = {  values => setNewTask( values ) }
-      >
-        <Form method="post">
-          <Field 
+        <form onSubmit={formik.handleSubmit} >
+          <TextField 
             className={ styles.FormId } 
             type="text"
-            name="name" 
             placeholder="Título" 
             required="required" 
+            name="name" 
+            fullWidth
+
+            value = { formik.values.name }
+            onChange = { formik.handleChange }
+            error = { formik.touched.name && Boolean( formik.errors.name ) }
+            helperText={formik.touched.name && formik.errors.name}
           />
-          <Field 
+          <TextField 
             className= { styles.FormId }  
             type="text" 
             name="contact" 
             placeholder="Contacto (Nombre + Correo)" 
             required="required" 
+            fullWidth
+
+            value = { formik.values.contact }
+            onChange = { formik.handleChange }
+            error = { formik.touched.contact && Boolean( formik.errors.contact ) }
+            helperText={formik.touched.contact && formik.errors.contact }
           />
 
           {/* SELECT */}
-          <Field
-            component ={ Select }
+          <Select
+            className = { styles.select }
             name = 'project'
             label = 'Proyeto'
             fullWidth
             select
-            inputProps={{
-              id: 'select_id',
-            }}
-            onChange = { ( e ) => handleSelectChange (formik.values)}
+
+            value = { formik.values.project }
+            onChange = { formik.handleChange }
+            error = { formik.touched.project && Boolean( formik.errors.project ) }
+            helperText={formik.touched.project && formik.errors.project}
+
           >
            
             { projectsList?.map( project => 
@@ -134,7 +148,7 @@ const NewReq = ({ projects }) => {
                 { project.name }
               </MenuItem> 
             ) }
-          </Field>
+          </Select>
           <TextField 
             className={ styles.textArea } 
             type="textarea" 
@@ -142,11 +156,16 @@ const NewReq = ({ projects }) => {
             name="requirement" 
             placeholder="Escriba su requerimiento" 
             required="required" 
-            defaultValue={""} 
+            fullWidth
+
+            value = { formik.values.requirement }
+            onChange = { formik.handleChange }
+            error = { formik.touched.requirement && Boolean( formik.errors.requirement ) }
+            helperText={formik.touched.requirement && formik.errors.requirement}
+
           />
           <button type="submit" className={ styles.btn }>Enviar</button>
-        </Form>
-      </Formik>
+        </form>
     </div>
   </>
    );
