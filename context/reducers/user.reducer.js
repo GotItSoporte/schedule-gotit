@@ -54,6 +54,7 @@ const userReducer = ( state, action ) =>{
       });
       
     case USER_LOGIN_ERROR: 
+    case USER_ERROR: 
     //Alert
     Toast.fire({
       icon: 'error',

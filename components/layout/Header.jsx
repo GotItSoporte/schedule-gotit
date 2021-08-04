@@ -23,8 +23,8 @@ const Header = () => {
   const router = useRouter();
   // useEffect
   useEffect( ()=>{
-    isAuthenticated();
     if( !isAuth ){
+      isAuthenticated();
       router.push( '/login' )
     }
   }, [ useState ])

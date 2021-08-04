@@ -98,7 +98,7 @@ const UserWrapper = ({ children }) =>{
         type : USER_ERROR,
         payload: {
           loading:false,
-          authError:true,
+          isAuth : false,
           message : 'Usuario no autenticado',
         }
       });
