@@ -64,6 +64,11 @@ const Project = ({ notFound, project, message, tasks }) => {
     console.log( currentProject )
   }, [ tasks ]);
   
+  // calculate hours
+  const showSstartDate = new Date(project.startDate)
+  const hoursLeft = 0;
+  const hoursUsed = 0;
+
   return ( 
     <>
       <Header /> 
@@ -75,10 +80,11 @@ const Project = ({ notFound, project, message, tasks }) => {
               <thead>
                   <tr>
                       <th>MESES</th>
-                      <th>HORAS TOTALES</th>
                       <th>HORAS RESTANTES</th>
+                      <th>HORAS USADAS</th>
+                      <th>HORAS TOTALES</th>
                       <th>FECHA DE INICIO</th>
-                      <th>FECHA DE FINALIZACIÓN</th>
+                      <th>FECHA DE Finalizacion</th>
                   </tr>
               </thead>
               </table>
@@ -87,10 +93,11 @@ const Project = ({ notFound, project, message, tasks }) => {
               <table >
               <tbody>
                   <tr>
-                      <td>meses</td>
+                      <td>{ project.months }</td>
+                      <td>{ project?.hoursLeft }</td><td>{ project.hoursTotal }</td>
+                      <td>{ hoursUsed}</td>
                       <td>{ project?.hoursTotal }</td>
-                      <td>{ project?.hoursLeft }</td>
-                      <td>{ project?.startDate }</td>
+                      <td>{ showSstartDate.getFullYear() }</td>
                       <td>{ project?.finishDate || 'no definido' }</td>
                   </tr>
               </tbody>

@@ -27,7 +27,9 @@ const ProjectList = () => {
                   <tr>
                       <th>NOMBRE</th>
                       <th>HORAS RESTANTES</th>
-                      <th>HORAS Usadas</th>
+                      <th>HORAS USADAS</th>
+                      <th>HORAS TOTALES</th>
+                      <th>FECHA DE INICIO</th>
                       <th></th>
                   </tr>
               </thead>
@@ -60,7 +62,11 @@ const Project = ({ project, setCurrentProject, getTasksProject })  =>{
     const router = useRouter();
 
   let name =project.name.length > 18 ? `${project.name.substring( 0, 20 )}...`: project.name;
-  
+  // calculate hours
+  const showSstartDate = new Date(project.startDate)
+  const hoursLeft = 0;
+  const hoursUsed = 0;
+
   const linkProject =  id =>{
     setCurrentProject( project )
     getTasksProject( id );
@@ -70,8 +76,10 @@ const Project = ({ project, setCurrentProject, getTasksProject })  =>{
   return  (
     <tr>
         <td> { name }</td>
-        <td>{ project.hoursLeft }</td>
-        <td>{ project.hoursUsed }</td>
+        <td>{ hoursLeft }</td>
+        <td>{ hoursUsed}</td>
+        <td>{ project.hoursTotal }</td>
+        <td>{ showSstartDate.getFullYear() }</td>
         <td> <a 
           onClick = { () => linkProject( project._id ) } 
           className = { styles.btn }

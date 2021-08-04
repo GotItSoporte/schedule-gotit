@@ -36,8 +36,10 @@ const TasksList = () => {
          <thead>
              <tr>
                  <th>NOMBRE</th>
-                 <th>TIEMPO DE TAREA</th>  
+                 <th>REQUERIDO POR :</th>
+                 <th>CONTACTO</th>  
                  <th>ESTADO</th>  
+                 <th>REQUERIDO El :</th> 
                  <th></th>                   
              </tr>
          </thead>
@@ -70,7 +72,18 @@ const Task = ({ task, router , currentProject }) => {
 
   const tasksContext = useTasks();
   const { setCurrentTask } = tasksContext;
-  const { name, hours, startDate } = task
+  const { 
+    name, 
+    hours, 
+    startDate, 
+    state, 
+    member, 
+    timeWeight, 
+    contact, 
+    requeriment, 
+    description,
+    requirmentDate
+   } = task
 
 
   const linkTask=  id =>{
@@ -83,8 +96,10 @@ const Task = ({ task, router , currentProject }) => {
   return(
     <tr>
       <td>{name}</td>
-      <td>{hours}</td>
-      <td>Activo/Pendiente/Cerrado</td>
+      <td>{ member || 'no especificado' }</td>
+      <td>{ contact || 'no especificado' }</td>
+      <td>{ state }</td>
+      <td>{ requirmentDate }</td>
       <td> <a 
           onClick = { () => linkTask( task._id ) } 
           className = { styles.btn }
