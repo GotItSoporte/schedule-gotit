@@ -13,9 +13,9 @@ $alternative  : #FFFF;
 $alternative-dark  : #FFFF;
 $alternative-light  : #FFFF;
 
-$danger-color : #FFFF;
-$warning-color : #FFFF;
-$success-color  : #FFFF;
+$danger-color : rgb(247, 0, 0);
+$warning-color : rgb(255, 217, 0);
+$success-color  : rgb(0, 250, 54);
 
 // Bootstrap breakpoints
 $breakpoint-small: 576px;
