@@ -48,9 +48,9 @@ const TasksList = () => {
      <div className ={ styles.tbl_content }>
          <table >
          <tbody>
-             { tasksList.map( task => 
+             { tasksList.map( (task, index) => 
                 (<Task
-                  key= { task._id }
+                  key= { index }
                   task ={ task }
                   router = { router }
                   currentProject = { currentProject }
