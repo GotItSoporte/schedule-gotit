@@ -59,7 +59,9 @@ const Project = ({ notFound, project, message, tasks }) => {
   const { user } =userState;
   
   useEffect( async () => {
-    await setTasksList( tasks );
+    async() => {
+      await setTasksList( tasks );
+    }
     console.log( tasksState )
     console.log( currentProject )
   }, [ tasks ]);
