@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const scheduleApi = axios.create({
-  baseURL : process.env.BASE_URL,
+  baseURL : 'https://schedule-got-it.herokuapp.com/schedule/v1',
   headers :  { 'Content-Type': 'application/json' },
 });
 
