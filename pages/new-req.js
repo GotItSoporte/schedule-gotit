@@ -137,8 +137,9 @@ const NewReq = ({ projects }) => {
 
           >
            
-            { projectsList?.map( project => 
+            { projectsList?.map(( project, index) => 
               <MenuItem
+                key = { index }
                 value ={ project._id }
               >
                 { project.name }
