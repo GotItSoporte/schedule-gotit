@@ -7,6 +7,7 @@ import useProjects from '../context/hooks/useProjects';
 import useTasks from '../context/hooks/useTasks';
 // compponents
 import Header from '../components/layout/Header';
+import ErrorForm from '../components/ErrorForm';
 // api
 import { scheduleApi } from '../config/axios';
 // MAterial UI
@@ -22,12 +23,13 @@ import styles from '../styles/forms.module.scss'
 // yup
 const taskSchema = Yup.object({
   name: Yup.string()
-    .required('Required'),
+    .required('El requerimiento debe tener un titulo'),
   contact: Yup.string()
-    .required('Required'),
+    .required('Por favor introdusca un contqacto'),
   project: Yup.string()
     .required('Required'),
-  requirement: Yup.string(),
+  requirement: Yup.string()
+    .required('El requeriiento debe tener una descipcion'),
 });
 
 // get Server Props
@@ -72,11 +74,11 @@ const NewReq = ({ projects }) => {
       requirement : '',
       project : '',
     },
-    validateYupSchema : taskSchema,
+    validationSchema : taskSchema,
     onSubmit : values =>setNewTask( values ),
 
   });
-  const setNewTask =  values =>{
+  const setNewTask = async values =>{
     const data = {
        name : values.name,
        contact : values.contact,
@@ -84,15 +86,11 @@ const NewReq = ({ projects }) => {
        project : values.project,
     }
     console.log( 'Nuevo req', data )
-    createRequirement( data )
-    console.log( 'values ', {data} )
+    await createRequirement( data )
+    
+    formik.resetForm();
   }
-  
-  const handleSelectChange = values=>{
-      if( !values.project ){
-        console.log(' NO HAY PROYECTO ', {values})
-      }
-  }
+
   return ( 
     <>  
       <Header/>
@@ -103,7 +101,6 @@ const NewReq = ({ projects }) => {
             className={ styles.FormId } 
             type="text"
             placeholder="Título" 
-            required="required" 
             name="name" 
             fullWidth
 
@@ -117,7 +114,6 @@ const NewReq = ({ projects }) => {
             type="text" 
             name="contact" 
             placeholder="Contacto (Nombre + Correo)" 
-            required="required" 
             fullWidth
 
             value = { formik.values.contact }
@@ -155,7 +151,6 @@ const NewReq = ({ projects }) => {
             multiline
             name="requirement" 
             placeholder="Escriba su requerimiento" 
-            required="required" 
             fullWidth
 
             value = { formik.values.requirement }
