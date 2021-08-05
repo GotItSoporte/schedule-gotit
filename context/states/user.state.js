@@ -73,6 +73,7 @@ const UserWrapper = ({ children }) =>{
         type : USER_ERROR,
         payload: {
           loading:false,
+          isAuth: false,
           authError:true,
           message : 'Usuario no autenticado',
         }
@@ -99,7 +100,7 @@ const UserWrapper = ({ children }) =>{
         payload: {
           loading:false,
           isAuth : false,
-          message : 'Usuario no autenticado',
+          message : error,
         }
       });
     }

@@ -41,9 +41,8 @@ const userReducer = ( state, action ) =>{
     case USER_LOGIN_ERROR: 
     case USER_ERROR: 
     //Alert
+    localStorage.removeItem('got-it-token')
     FireToast( 'error',payload.message );
-
-    console.log( 'error', payload.message )
       return({
         ...state,
         loading : false, 
@@ -59,7 +58,7 @@ const userReducer = ( state, action ) =>{
         isAdmin: payload.isAdmin
       }) ;
     case USER_LOGOUT: 
-    localStorage.setItem('got-it-token', null);
+    localStorage.removeItem('got-it-token');
       return({
         ...state,
         token : null,

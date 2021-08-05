@@ -29,11 +29,9 @@ const Login = () => {
   useEffect(() => {
     console.log( 'refresh', { isAuth});
     if( isAuth ){
-      console.log( 'auth',{ userState, isAuth })
       router.push({ pathname : '/', query : { company : user?.company } });
     }else{
       isAuthenticated();
-      console.log( 'auth', false )
     }
   }, [ isAuth ])
   return ( 
