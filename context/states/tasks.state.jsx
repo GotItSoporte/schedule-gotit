@@ -70,10 +70,10 @@ const TasksWrapper =({ children }) =>{
         } 
       })
     } catch (error) {
-      console.log( {error : error.response.data } );
+      console.log( {error : error.response.data.message} );
         return dispatch({
           type: TASKS_ERROR,
-          payload: error.response.data
+          payload: error.response.data.message
         });
     }
   }

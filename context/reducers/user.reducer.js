@@ -11,19 +11,7 @@ import {
   USER_LOGOUT,  
 } from '../types';
 // Alerts
-import Swal from 'sweetalert2';
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
+import { FireToast } from '../../config/alerts';
 
 const userReducer = ( state, action ) =>{
   
@@ -40,10 +28,7 @@ const userReducer = ( state, action ) =>{
       console.log( 'REDUCER',{state}, { payload } )
 
       //Alert
-      Toast.fire({
-        icon: 'success',
-        title: message
-      });
+      FireToast( 'success',message )
       return({
         ...state,
         loading,
@@ -56,10 +41,7 @@ const userReducer = ( state, action ) =>{
     case USER_LOGIN_ERROR: 
     case USER_ERROR: 
     //Alert
-    Toast.fire({
-      icon: 'error',
-      title: payload.message
-    });
+    FireToast( 'error',payload.message );
 
     console.log( 'error', payload.message )
       return({

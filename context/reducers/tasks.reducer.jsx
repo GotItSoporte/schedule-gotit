@@ -5,6 +5,8 @@ import {
   TASKS_CREATE_REQUERIMENT,
   TASKS_ERROR
 } from '../types';
+// Sweet Aert
+import { FireToast } from '../../config/alerts';
 
 const tasksReducer = ( state, action ) => {
   const { type, payload } = action;
@@ -21,11 +23,15 @@ const tasksReducer = ( state, action ) => {
         currentTask : payload
       });
     case TASKS_CREATE_REQUERIMENT:
+      // Alert
+      FireToast( 'success', payload.message )
       return({
         ...state,
         message : payload.message
       })
-    case TASKS_ERROR:
+      case TASKS_ERROR:
+      // Alert
+      FireToast( 'success', payload )
       return ({
         ...state,
         error : payload
