@@ -1,14 +1,13 @@
 import {
-  PROJECTS_SET,
+  PROJECTS_GET,
   PROJECTS_ERROR,
-  PROJECTS_GET_TASKS, 
   PROJECTS_SET_CURRENT_PROJECT
 } from '../types';
 
 const projectsReducer = ( state, action ) => {
   const { type, payload } = action;
   switch ( type ) {
-    case PROJECTS_SET:
+    case PROJECTS_GET:
       return({
         ...state,
         projectsList : payload,

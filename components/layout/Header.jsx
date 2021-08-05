@@ -23,12 +23,12 @@ const Header = () => {
   const router = useRouter();
   // useEffect
   useEffect( ()=>{
-    if( !isAuth ){
-      isAuthenticated();
-      if( !isAuth ){
-        router.push( '/login' )
-      }
-    }
+    // if( !isAuth ){
+    //   isAuthenticated();
+    //   if( !isAuth ){
+    //     router.push( '/login' )
+    //   }
+    // }
   }, [ useState ])
 
   const log_out = () =>{

@@ -7,13 +7,13 @@ import useUser from '../context/hooks/useUser';
 //components 
 import Header from '../components/layout/Header';
 import ProjectList from '../components/ProjectList';
+import Spinner from '../components/Spinner';
 // api
 import { scheduleApi } from '../config/axios';
 // material ui
 import { Grid } from '@material-ui/core';
 // styles
 import styles from '../styles/pages.module.scss';
-
 
 // initial props
 export async function getServerSideProps(context) {
@@ -38,31 +38,41 @@ export async function getServerSideProps(context) {
 // page
 export default function Home({ projects }) {
   // userContext
-  const userState = useUser();
-  const { state, isAuthenticated } = userState; 
-  
+  const userContext = useUser();
+  const { state: userState, isAuthenticated } = userContext; 
+  const { isAuth, company } = userState;
   // Projects Contexts
   const projectContext = useProjects();
-  const { setProjectsList, currentProject } = projectContext;
+  const { getProjectsList, currentProject, } = projectContext;
 
   // userContext
   const router = useRouter();
 
   // useEffect
   useEffect( ()=>{
-    setProjectsList( projects )
-  }, [ ])
-
+    if( !isAuth ){
+      authentication();
+    }
+  }, [ isAuth ])
+  
   const authentication = async () => {
     await isAuthenticated();
-    if( !state.isAuth ){
+    console.log('redirect?',{ isAuth })
+    if( !isAuth ){
+      console.log('redirect')
       router.push( '/login' )
     }
+    await getProjectsList( company );
   }
   return(
     <Grid>
-      <Header/>
-      { projects? <ProjectList/> : null}
+    { isAuth? 
+      <>
+        <Header/>
+        <ProjectList/> 
+      </>
+      : <Spinner/>
+    }
     </Grid>
   )
 }

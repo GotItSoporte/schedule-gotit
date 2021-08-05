@@ -56,9 +56,12 @@ const Project = ({ notFound, project, message, tasks }) => {
   // Users Contexts
   const userContext = useUser();
   const { state :userState  } = userContext;
-  const { user } =userState;
+  const { user, isAuth } =userState;
   
   useEffect( async () => {
+    if( !isAuth ){
+      authentication();
+    }
     async() => {
       await setTasksList( tasks );
     }
@@ -66,6 +69,17 @@ const Project = ({ notFound, project, message, tasks }) => {
     console.log( currentProject )
   }, [ tasks ]);
   
+  //
+  const authentication = async () => {
+    await isAuthenticated();
+    console.log('redirect?',{ isAuth })
+    if( !isAuth ){
+      console.log('redirect')
+      router.push( '/login' )
+    }
+    await getProjectsList( company );
+  }
+
   // calculate hours
   const showSstartDate = new Date(project.startDate)
   const hoursLeft = 0;

@@ -1,12 +1,13 @@
 import { 
   PROJECTS_ERROR, 
-  PROJECTS_SET,
-  PROJECTS_GET_TASKS,
+  PROJECTS_GET,
   PROJECTS_SET_CURRENT_PROJECT
 } from '../types';
 // react hook
 import { useReducer } from 'react';
 // api calls
+import { scheduleApi } from '../../config/axios';
+//
 import { getTasksProject as getTasksProjectApi} from '../../config/axios/projects';
 import ProjectContext , { initialstate } from '../projects.context';
 import projectsReducer from '../reducers/projects.reducer';
@@ -16,11 +17,23 @@ const ProjectsWrapper =({ children }) =>{
   // ******************************************
   // ********* Set ptojects to state **********
   // ******************************************
-  const setProjectsList = async ( projects ) => {
+  const getProjectsList = async ( company ) => {
+    console.log( 'GetList')
+    try {
+      const result = await scheduleApi.get(`/projects${ company? `?company=${ company }`: '' }`);
       return dispatch( {
-        type: PROJECTS_SET,
-        payload: projects
+        type: PROJECTS_GET,
+        payload: result.data.projects,
       } );
+    } catch (error) {
+      return dispatch( {
+        type: PROJECTS_ERROR,
+        payload: {
+          message: error.response.data.message,
+        },
+      } );
+      
+    }
   }
   // ******************************************
   // ****** Set Current ptoject to state ******
@@ -35,7 +48,7 @@ const ProjectsWrapper =({ children }) =>{
     <ProjectContext.Provider value = { { 
         projectsList    : state.projectsList,
         currentProject  : state.currentProject,
-        setProjectsList : setProjectsList,
+        getProjectsList : getProjectsList,
         setCurrentProject: setCurrentProject,
     }}>
       { children }

@@ -69,6 +69,7 @@ const UserWrapper = ({ children }) =>{
     // get token from localstorage
     const token = localStorage.getItem('got-it-token');
     if(  !token ){
+      console.log( 'no token' );
       return dispatch({
         type : USER_ERROR,
         payload: {
@@ -84,7 +85,8 @@ const UserWrapper = ({ children }) =>{
     try {
       // decode token
       const decodedToken = jwt_decode( token );
-      const { id, name, role, company, isAdmin } = decodedToken;
+      console.log({ decodedToken })
+      const { id, name, role, company, isAdmin, cellphone, email } = decodedToken;
       return dispatch({
         type : USER_AUTH, 
         payload: {

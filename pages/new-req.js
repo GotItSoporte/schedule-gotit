@@ -57,15 +57,33 @@ const NewReq = ({ projects }) => {
   const router = useRouter();
   // context 
   const projectsContext = useProjects();
-  const { currentProject, projectsList, setProjectsList } = projectsContext;
+  const { currentProject, projectsList, getProjectsList } = projectsContext;
   // context 
   const tasksContext = useTasks();
   const { createRequirement } = tasksContext;
 
-  // useEffect
-  useEffect( ()=>{
-    setProjectsList( projects )
-  }, [ ])
+  // userContext
+  const userContext = useUser();
+  const { state: userState, isAuthenticated } = userContext; 
+  const { isAuth, company } = userState;
+
+   // useEffect
+   useEffect( ()=>{
+    if( !isAuth ){
+      authentication();
+    }
+  }, [ isAuth ]);
+  //
+  const authentication = async () => {
+    await isAuthenticated();
+    console.log('redirect?',{ isAuth })
+    if( !isAuth ){
+      console.log('redirect')
+      router.push( '/login' )
+    }
+    await getProjectsList( company );
+  }
+
   //
   const formik = useFormik({
     initialValues : {
