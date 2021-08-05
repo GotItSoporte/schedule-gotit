@@ -15,7 +15,7 @@ const ProjectList = () => {
   const tasksState = useTasks();
   const { getTasksProject } = tasksState;
   useEffect(() => {
-  }, [ projectsList ])
+  }, [  ])
   
   return ( 
     <>
@@ -41,7 +41,7 @@ const ProjectList = () => {
                 {projectsList.map( (project , index)=> 
                 <>
                     <Project 
-                      key = { project._id }
+                      key = { index }
                       project = { project }
                       setCurrentProject = { setCurrentProject }
                       getTasksProject = { getTasksProject }

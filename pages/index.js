@@ -62,7 +62,7 @@ export default function Home({ projects }) {
   return(
     <Grid>
       <Header/>
-       <ProjectList/>
+      { projects? <ProjectList/> : null}
     </Grid>
   )
 }
