@@ -37,14 +37,7 @@ const Header = () => {
   return (  
     <header className = { styles.header }>
             <div id={ styles.logo }>
-              <Link 
-                href ={{
-                        pathname : '/',
-                        query :{ company : user?.company }
-                      }}
-                >
                 <Image id= { styles.Logo_GotIt  } src={ logo } />
-              </Link>
             </div>
             <div id= { styles.Container }>
                 <ul id={styles.menu}>
