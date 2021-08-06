@@ -89,7 +89,7 @@ const Project = ({ notFound, project, message, tasks }) => {
     <>
       <Header /> 
       <section className ={ styles.section }>
-          <h1>{ user.company }</h1>
+          <h1>{ user?.company }</h1>
           <h1>{ project?.name || 'No Encontrado' }</h1>
           <div className={ styles.tbl_header }>
               <table >

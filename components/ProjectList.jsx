@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 // lin router
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+// compponets
+import BtnsContainer from './layout/BtnsContainer';
 // contexts
 import useProjects from '../context/hooks/useProjects';
 import useTasks from '../context/hooks/useTasks';
@@ -75,15 +77,17 @@ const Project = ({ project, setCurrentProject, getTasksProject })  =>{
 
   return  (
     <tr>
-        <td> { name }</td>
+      <td> { name }</td>
         <td>{ hoursLeft }</td>
         <td>{ hoursUsed}</td>
         <td>{ project.hoursTotal }</td>
         <td>{ showSstartDate.getFullYear() }</td>
-        <td> <a 
-          onClick = { () => linkProject( project._id ) } 
-          className = { styles.btn }
-        >Ver mas</a> </td>
+        <td>
+          <BtnsContainer
+            itemID = { project._id }
+            seeFunc ={ linkProject }
+          />
+        </td>
     </tr>    
   )
 }
