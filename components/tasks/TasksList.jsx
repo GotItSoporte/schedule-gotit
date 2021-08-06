@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 //next router
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+// components
+import BtnsContainer from '../layout/BtnsContainer';
 // contexts
 import useTasks from '../../context/hooks/useTasks';
 import useProjects from '../../context/hooks/useProjects';
+// icons
 // styles
 import styles from '../../styles/pages.module.scss';
 
@@ -82,28 +85,32 @@ const Task = ({ task, router , currentProject }) => {
     contact, 
     requeriment, 
     description,
-    requirmentDate
+    requirmentDate,
+    requieredUser
    } = task
 
 
   const linkTask=  id =>{
     console.log({ project : id})
     setCurrentTask( task )
-    router.push( `/project/${currentProject._id}/${ id }` )
+    router.push( `/project/${currentProject._id}/task` )
   }
 
 
   return(
     <tr>
       <td>{name}</td>
-      <td>{ member || 'no especificado' }</td>
+      <td>{ requieredUser.name || 'no especificado' }</td>
       <td>{ contact || 'no especificado' }</td>
       <td>{ state }</td>
       <td>{ requirmentDate }</td>
-      <td> <a 
-          onClick = { () => linkTask( task._id ) } 
-          className = { styles.btn }
-        >Ver mas</a> </td>
+      <td className = {styles.btns_container}>
+        <BtnsContainer
+          itemID ={ task._id }
+          seeFunc = {linkTask}
+          
+        />
+      </td>
     </tr>
   );
 }

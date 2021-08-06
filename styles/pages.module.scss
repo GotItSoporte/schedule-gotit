@@ -117,14 +117,3 @@
 	font-size: 15px;
 }
 
-.btn{
-	background-color: $primary;
-	color : #FFF;
-	border-radius: 0.2rem;
-	padding: 0.3rem 1rem 0.3rem 1rem;
-
-	&:hover{
-		background-color: $primary-light;
-		cursor: pointer;
-	}
-}
