@@ -15,61 +15,46 @@ import { Grid } from '@material-ui/core';
 // styles
 import styles from '../styles/pages.module.scss';
 
-// initial props
-export async function getServerSideProps(context) {
-
-  const { company } =context.query
-  const result = await scheduleApi.get(`/projects${ company? `?company=${ company }`: '' }`);
-
-  if( !result ){ 
-    return{
-      notFound: true,
-    } 
-  }
-
-  //const projects = [error];
- return {
-   props: {
-     projects : result.data.projects
-   }, // will be passed to the page component as props
- }
-}
 
 // page
-export default function Home({ projects }) {
+export default function Home() {
   // userContext
   const userContext = useUser();
   const { state: userState, isAuthenticated } = userContext; 
-  const { isAuth, company } = userState;
+  const { isAuth, token, user } = userState;
   // Projects Contexts
   const projectContext = useProjects();
-  const { getProjectsList, currentProject, } = projectContext;
+  const { getProjectsList, currentProject } = projectContext;
 
   // userContext
   const router = useRouter();
-
+  
   // useEffect
   useEffect( ()=>{
     if( !isAuth ){
       authentication();
     }
+    getProjects( user?.company );
   }, [ isAuth ])
   
   const authentication = async () => {
     await isAuthenticated();
-    console.log('redirect?',{ isAuth })
     if( !isAuth ){
-      console.log('redirect')
       router.push( '/login' )
     }
-    await getProjectsList( company );
+  }
+
+  const getProjects = async company => {
+    if( company ){
+      await getProjectsList( company )
+    }
   }
   return(
     <Grid>
     { isAuth? 
       <>
         <Header/>
-        <ProjectList/> 
+        { user?.company? <ProjectList/> : <Spinner/> } 
       </>
       : <Spinner/>
     }

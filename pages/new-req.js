@@ -32,27 +32,7 @@ const taskSchema = Yup.object({
     .required('El requeriiento debe tener una descipcion'),
 });
 
-// get Server Props
-export async function getServerSideProps(context) {
-
-  const { company } =context.query
-  const result = await scheduleApi.get(`/projects${ company? `?company=${ company }`: '' }`);
-
-  if( !result ){ 
-    return{
-      notFound: true,
-    } 
-  }
-
-  //const projects = [error];
- return {
-   props: {
-     projects : result.data.projects
-   }, // will be passed to the page component as props
- }
-}
-
-const NewReq = ({ projects }) => {
+const NewReq = () => {
   // router
   const router = useRouter();
   // context 
@@ -65,25 +45,29 @@ const NewReq = ({ projects }) => {
   // userContext
   const userContext = useUser();
   const { state: userState, isAuthenticated } = userContext; 
-  const { isAuth, company } = userState;
+  const { isAuth, user } = userState;
 
    // useEffect
    useEffect( ()=>{
     if( !isAuth ){
-      authentication();
+      if( !isAuth ){
+        authentication();
+      }
+      getProjects( user?.company );
     }
   }, [ isAuth ]);
   //
   const authentication = async () => {
     await isAuthenticated();
-    console.log('redirect?',{ isAuth })
     if( !isAuth ){
-      console.log('redirect')
       router.push( '/login' )
     }
-    await getProjectsList( company );
   }
-
+  const getProjects = async company => {
+    if( company ){
+      await getProjectsList( company )
+    }
+  }
   //
   const formik = useFormik({
     initialValues : {
