@@ -101,7 +101,7 @@ const Task = ({ task, router , currentProject }) => {
     <tr>
       <td>{name}</td>
       <td>{ requieredUser.name || 'no especificado' }</td>
-      <td>{ contact || 'no especificado' }</td>
+      <td>{ contact.name || 'no especificado' }</td>
       <td>{ state }</td>
       <td>{ requirmentDate }</td>
       <td className = {styles.btns_container}>

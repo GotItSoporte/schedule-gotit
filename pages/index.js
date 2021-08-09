@@ -34,7 +34,7 @@ export default function Home() {
     if( !isAuth ){
       authentication();
     }
-    getProjects( user?.company );
+    getProjects( user );
   }, [ isAuth ])
   
   const authentication = async () => {
@@ -44,16 +44,21 @@ export default function Home() {
     }
   }
 
-  const getProjects = async company => {
-    if( company ){
-      await getProjectsList( company )
+  const getProjects = async user => {
+
+    if( user.role ){
+      await getProjectsList(  )
+    }else{
+      await getProjectsList( user.company )
     }
   }
+
   return(
     <Grid>
     { isAuth? 
       <>
         <Header/>
+        <h1>{ user.role ? 'PROYECTOS' : 'TUS PROYECTOS'}</h1>
         { user?.company? <ProjectList/> : <Spinner/> } 
       </>
       : <Spinner/>

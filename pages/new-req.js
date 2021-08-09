@@ -54,7 +54,11 @@ const NewReq = () => {
   const setNewTask = async values =>{
     const data = {
        name : values.name,
-       contact : values.contact,
+       contact : {
+        name : values.contactName,
+        email : values.contactMail,
+        cellphone : values.contactNumber,
+      },
        requirement : values.requirement,
        project : values.project,
     }
