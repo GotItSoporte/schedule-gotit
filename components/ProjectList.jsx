@@ -22,7 +22,7 @@ const ProjectList = () => {
   return ( 
     <>
       <section className = { styles.section }>
-        <h1>TUS PROYECTOS</h1>
+        
         <div className={ styles.tbl_header }>
             <table >
               <thead>
