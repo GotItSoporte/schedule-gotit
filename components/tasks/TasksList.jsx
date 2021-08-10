@@ -92,11 +92,10 @@ const Task = ({ task, router , currentProject }) => {
 
 
   const linkTask= () =>{
-    console.log({ project : id})
     setCurrentTask( task )
     router.push( {
       pathname : `/project/${currentProject._id}/task`,
-      query :{ taskID : _id } 
+      query :{ taskID : _id }
     })
   }
 

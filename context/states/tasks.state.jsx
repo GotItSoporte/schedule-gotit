@@ -3,6 +3,7 @@ import {
   TASKS_SET_TASKS,
   TASKS_SET_CURRENT_TASK,
   TASKS_CREATE_REQUERIMENT,
+  TASKS_EDIT_REQUERIMENT,
   TASKS_ERROR
 } from '../types';
 // react hook
@@ -77,13 +78,38 @@ const TasksWrapper =({ children }) =>{
         });
     }
   }
+  // ******************************************
+  // ************  Edit Requeriment  ***********
+  // ******************************************
+  const editRequirement = async ( task, taskID ) => {
+    console.log( { taskID } )
+    try {
+      const result = await scheduleApi.put( `/requirements/61129af646bf562f042ab7e3`, task );
+      console.log( 'data.updatedTask', {updatedTask: result.data.updatedTask} );
+      return dispatch({
+        type: TASKS_EDIT_REQUERIMENT,
+        payload :{
+          currentTask : result.data.updatedTask,
+          message : result.data.message,
+        } 
+      })
+    } catch (error) {
+      console.log( {error : error.response.data.message} );
+      console.log( {error : error.response.data.error} );
+        return dispatch({
+          type: TASKS_ERROR,
+          payload: error.response.data.message
+        });
+    }
+  }
   return(
     <TaskContext.Provider value = { { 
         state : state,
         getTasksProject : getTasksProject,
         setTasksList : setTasksList,
         setCurrentTask : setCurrentTask,
-        createRequirement : createRequirement
+        createRequirement : createRequirement,
+        editRequirement : editRequirement
     }}>
       { children }
     </TaskContext.Provider>

@@ -62,21 +62,13 @@ const Project = ({ notFound, project, message, tasks }) => {
     if( !isAuth ){
       authentication();
     }
-    async() => {
-      await setTasksList( tasks );
-    }
-    console.log( tasksState )
-    console.log( currentProject )
+     await setTasksList( tasks );
+
   }, [ tasks ]);
   
   //
   const authentication = async () => {
-    await isAuthenticated();
-    console.log('redirect?',{ isAuth })
-    if( !isAuth ){
-      console.log('redirect')
-      router.push( '/login' )
-    }
+    
     await getProjectsList( company );
   }
 
