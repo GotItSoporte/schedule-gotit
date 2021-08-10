@@ -10,10 +10,11 @@ import useTasks from '../context/hooks/useTasks';
 //styles
 import styles from '../styles/pages.module.scss';
 
-const ProjectList = () => {
+const ProjectList = ({ userRole }) => {
   // contexts 
   const projectsState = useProjects();
   const { projectsList, setCurrentProject } = projectsState;
+  //
   const tasksState = useTasks();
   const { getTasksProject } = tasksState;
   useEffect(() => {
@@ -22,12 +23,13 @@ const ProjectList = () => {
   return ( 
     <>
       <section className = { styles.section }>
-        
+      <h1>{ userRole? 'PROYECTOS' : 'TUS PROYECTOS'}</h1>
         <div className={ styles.tbl_header }>
             <table >
               <thead>
                   <tr>
                       <th>NOMBRE</th>
+                      { userRole? <th>Cliente</th> : null}
                       <th>HORAS RESTANTES</th>
                       <th>HORAS USADAS</th>
                       <th>HORAS TOTALES</th>
@@ -47,6 +49,7 @@ const ProjectList = () => {
                       project = { project }
                       setCurrentProject = { setCurrentProject }
                       getTasksProject = { getTasksProject }
+                      userRole = { userRole }
                     />
                 </>
                 )}
@@ -59,7 +62,7 @@ const ProjectList = () => {
   );
 }
 
-const Project = ({ project, setCurrentProject, getTasksProject })  =>{
+const Project = ({ project, setCurrentProject, getTasksProject, userRole })  =>{
     // Router
     const router = useRouter();
 
@@ -78,6 +81,7 @@ const Project = ({ project, setCurrentProject, getTasksProject })  =>{
   return  (
     <tr>
       <td> { name }</td>
+        { userRole? <td>{ project.company }</td> : null}
         <td>{ hoursLeft }</td>
         <td>{ hoursUsed}</td>
         <td>{ project.hoursTotal }</td>
@@ -86,6 +90,8 @@ const Project = ({ project, setCurrentProject, getTasksProject })  =>{
           <BtnsContainer
             itemID = { project._id }
             seeFunc ={ linkProject }
+            showEdit = { userRole}
+            showDelete = { false }
           />
         </td>
     </tr>    

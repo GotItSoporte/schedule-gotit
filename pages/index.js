@@ -28,7 +28,7 @@ export default function Home() {
 
   // userContext
   const router = useRouter();
-  
+
   // useEffect
   useEffect( ()=>{
     if( !isAuth ){
@@ -46,20 +46,22 @@ export default function Home() {
 
   const getProjects = async user => {
 
-    if( user.role ){
-      await getProjectsList(  )
+    if( user?.role ){
+      await getProjectsList(  );
+
     }else{
-      await getProjectsList( user.company )
+      await getProjectsList( user?.company )
     }
+
   }
+
 
   return(
     <Grid>
     { isAuth? 
       <>
         <Header/>
-        <h1>{ user.role ? 'PROYECTOS' : 'TUS PROYECTOS'}</h1>
-        { user?.company? <ProjectList/> : <Spinner/> } 
+        { user?.company? <ProjectList userRole = { user.role } /> : <Spinner/> } 
       </>
       : <Spinner/>
     }

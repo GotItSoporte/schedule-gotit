@@ -72,48 +72,98 @@
 		cursor: pointer;
 	}
 }
-#CampoRequerimiento {
-	margin: 20px;
-	min-height: 50px;
-	h5 {
-		font-size: 20px;
-		color:$primary;
-		text-transform: uppercase;
-		font-weight: 300;
-		text-align: left;
-		margin-bottom: 15px;
-		border: 1px solid $primary;
-		display: table-cell;
-		padding: 3 10 3 10;
-		width: 100%;
-	}
-}
-#TodoRequerimiento {
-	h1 {
-		font-size: 30px;
-		color: $secondary;
-		text-transform: uppercase;
-		font-weight: 300;
-		text-align: center;
-		margin-bottom: 15px;
-	}
-	&:hover{
-		background-color: $primary-light;
-		cursor: pointer;
-	}
-}
-#InfoRequerimiento {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	div {
-		width: 40%;
-	}
-}
-#Descripcion {
-	background-color: rgb(236, 236, 236);
-	width: 100%;
-	padding: 7 10 7 10;
-	font-size: 15px;
+
+
+/*Requerimiento*/
+
+#Informacion {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  display: grid;
+  place-content: center;
+  max-width: 95%;
 }
 
+#Informacion2 {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  padding: 20px;
+}
+
+#Informacion span {
+  color: $secondary;
+  font-weight: bold;
+}
+
+#InfoRequerimiento {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(218, 218, 218);
+}
+
+#Titulo {
+  Color: $secondary;
+  border-bottom: 1px solid rgb(218, 218, 218);
+
+  h1 {
+    margin-bottom: 5px;
+  }
+}
+
+.InfoContacto {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+
+.Campos {
+  text-align: left;
+  margin-top: 40px;
+  border-bottom: 1px solid rgb(228, 228, 228);
+  border-left: 1px solid rgb(228, 228, 228);
+
+  span {
+    font-size: 12px;
+    margin-left: 5px;
+  }
+
+  a {
+    font-size: 14px;
+    margin-left: 8px;
+  }
+}
+
+.Descripcion {
+  margin-top: 40px;
+
+  span {
+    font-size: 15px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
+
+#btn {
+  display: grid;
+  place-content: center;
+}
+
+#BotEditar {
+  border: none;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 20px;
+  border-radius: 3px;
+  background-color: $primary;
+  color: #eee;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 150px;
+  padding: 3px;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: $primary-light;
+  }
+}

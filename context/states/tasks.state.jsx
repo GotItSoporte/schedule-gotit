@@ -59,7 +59,7 @@ const TasksWrapper =({ children }) =>{
   // ******************************************
   const createRequirement = async ( task ) => {
     try {
-      const result = await scheduleApi.post( '/tasks/create', task );
+      const result = await scheduleApi.post( '/requirements', task );
       console.log( 'result.data', {result: result.data} );
       console.log( 'data.message', {result: result.data.message} );
       return dispatch({

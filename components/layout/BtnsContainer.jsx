@@ -5,7 +5,7 @@ import { Visibility, EditRounded, DeleteOutline} from '@material-ui/icons';
 //
 import styles from '../../styles/btns.module.scss';
 
-const BtnsContainer = ({ seeFunc, editFunc, deleteFunc, itemID }) => {
+const BtnsContainer = ({ seeFunc, editFunc, deleteFunc, itemID, showEdit, showDelete }) => {
 
   const seeFunc0 = ( itemID ) =>{
     console.log('Ver mas ', itemID )
@@ -25,15 +25,19 @@ const BtnsContainer = ({ seeFunc, editFunc, deleteFunc, itemID }) => {
       className = { styles._btn }
     ><Visibility/></a> 
 
-    <a 
-      onClick = { () => editFunc0( itemID ) } 
-      className = { styles._btn }
-    ><EditRounded/></a> 
+    { showEdit?  
+      <a 
+        onClick = { () => editFunc0( itemID ) } 
+        className = { styles._btn }
+      ><EditRounded/></a> 
+    : null } 
 
-    <a 
-      onClick = { () => deleteFunc0( itemID) } 
-      className = { styles._btn_delete }
-    ><DeleteOutline/></a>
+    { showDelete ?
+      <a 
+        onClick = { () => deleteFunc0( itemID) } 
+        className = { styles._btn_delete }
+      ><DeleteOutline/></a>
+    : null }
   </div> );
 }
  
