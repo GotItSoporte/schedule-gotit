@@ -47,10 +47,10 @@
 	}
 }
 .Form {
-	position: absolute;
-	top: 30%;
-	left: 25%;
-	width: 50%;
+	box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px, 
+		rgb(0 0 0 / 5%) 0px 4px 6px -2px;
+	margin: 2rem 0rem 2rem 0rem;
+	padding: 1rem 8rem 1rem 8rem;
 	h1 {
 		color: $secondary;
 		letter-spacing: 1px;
@@ -70,6 +70,7 @@
 			width: 100%;
 			margin-bottom: 0;
 			outline: none;
+			margin: 0.5em 0 0.3rem 0;
 			padding: 10px;
 			font-size: 13px;
 			border: 1px solid rgba(0,0,0,0.3) !important;

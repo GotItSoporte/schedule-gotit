@@ -13,23 +13,34 @@ import { TextField } from '@material-ui/core';
 // styles
 import styles from '../../styles/forms.module.scss';
 
-// yup
-const taskSchema = Yup.object({
-  name: Yup.string()
-    .required('El requerimiento debe tener un titulo'),
-  contactName: Yup.string()
-    .required('Por favor introdusca un contacto'),
-  contactMail: Yup.string()
-    .email( 'introduzca un correo valido' )
-    .required('Por favor introdusca correo de contacto'),
-  contactNumber: Yup.string(),
-  project: Yup.string()
-    .required('Required'),
-  requirement: Yup.string()
-    .required('El requeriiento debe tener una descipcion'),
-});
 
-const TaskForm = ({ projects, submitFunction, isrequeriment }) => {
+const TaskForm = ({ projects, submitFunction, isrequeriment, edit }) => {
+  // yup
+  const taskSchema = edit ?
+    Yup.object({
+      name: Yup.string(),
+      contactName: Yup.string(),
+      contactMail: Yup.string()
+        .email( 'introduzca un correo valido' ),
+      contactNumber: Yup.string(),
+      project: Yup.string(),
+      requirement: Yup.string(),
+    })
+  :
+    Yup.object({
+      name: Yup.string()
+        .required('El requerimiento debe tener un titulo'),
+      contactName: Yup.string()
+        .required('Por favor introdusca un contacto'),
+      contactMail: Yup.string()
+        .email( 'introduzca un correo valido' )
+        .required('Por favor introdusca correo de contacto'),
+      contactNumber: Yup.string(),
+      project: Yup.string()
+        .required('Required'),
+      requirement: Yup.string()
+        .required('El requeriiento debe tener una descipcion'),
+    });
    // router
    const router = useRouter();
    //
@@ -106,29 +117,33 @@ const TaskForm = ({ projects, submitFunction, isrequeriment }) => {
            />
  
            {/* SELECT */}
-           <Select
-             className = { styles.select }
-             name = 'project'
-             label = 'Proyeto'
-             fullWidth
-             select
- 
-             value = { formik.values.project }
-             onChange = { formik.handleChange }
-             error = { formik.touched.project && Boolean( formik.errors.project ) }
-             helperText={formik.touched.project && formik.errors.project}
- 
-           >
+          { !edit?
             
-             { projects?.map(( project, index) => 
-               <MenuItem
-                 key = { index }
-                 value ={ project._id }
-               >
-                 { project.name }
-               </MenuItem> 
-             ) }
-           </Select>
+            <Select
+              className = { styles.select }
+              name = 'project'
+              label = 'Proyeto'
+              fullWidth
+              select
+  
+              value = { formik.values.project }
+              onChange = { formik.handleChange }
+              error = { formik.touched.project && Boolean( formik.errors.project ) }
+              helperText={formik.touched.project && formik.errors.project}
+            >
+              
+              { projects?.map(( project, index) => 
+                <MenuItem
+                  key = { index }
+                  value ={ project._id }
+                >
+                  { project.name }
+                </MenuItem> 
+              ) }
+            </Select>
+            :
+            null
+          }
            <TextField 
              className={ styles.textArea } 
              type="textarea" 

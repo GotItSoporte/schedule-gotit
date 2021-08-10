@@ -72,6 +72,7 @@ const NewReq = () => {
         isrequeriment = {true}
         projects = { projectsList }
         submitFunction = { setNewTask }
+        edit = { false }
       />   
     </>
   );
