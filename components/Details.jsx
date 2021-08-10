@@ -1,16 +1,26 @@
 import React from 'react';
-import userContext from '../context/user.context';
+import useUser from '../context/hooks/useUser';
+import useTasks from '../context/hooks/useTasks';
 //componetes
 
 import styles from '../styles/pages.module.scss';
 
-const Details = ({ editable, user }) => {
+const Details = ({ editable }) => {
+// userContext
+const userContext = useUser();
+const { state: userState, isAuthenticated } = userContext; 
+const { user } = userState;
+// tsk Context
+const taskContext = useUser();
+const { state: taskState } = taskContext; 
+const { currentTask } = taskState;
+
   return ( 
     <>
           <div id={ styles.Informacion2 }>
             <div id={ styles.InfoRequerimiento }>
               <div id={ styles.Titulo }>
-                <h1>Nombre del requerimiento</h1>
+                <h1>{ currentTask.name }</h1>
               </div>
               <div className={ styles.InfoContacto }>
                 <div className={ styles.Campos }>
@@ -19,10 +29,10 @@ const Details = ({ editable, user }) => {
                 </div>
                 <div className={ styles.Campos }>
                   <span>Estado</span><br />
-                  <a>Activo</a>
+                  <a>{ currentTask.state}</a>
                 </div>
                 <div className={ styles.Campos }>
-                  <span>Nombre de contacto</span><br />
+                  <span>{ currentTask.contact.name }</span><br />
                   <a>Ysabel Melendez</a>
                 </div>
                 <div className={ styles.Campos }>

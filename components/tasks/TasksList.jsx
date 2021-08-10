@@ -86,14 +86,18 @@ const Task = ({ task, router , currentProject }) => {
     requeriment, 
     description,
     requirmentDate,
-    requieredUser
+    requieredUser,
+    _id
    } = task
 
 
-  const linkTask=  id =>{
+  const linkTask= () =>{
     console.log({ project : id})
     setCurrentTask( task )
-    router.push( `/project/${currentProject._id}/task` )
+    router.push( {
+      pathname : `/project/${currentProject._id}/task`,
+      query :{ taskID : _id } 
+    })
   }
 
 
@@ -107,8 +111,7 @@ const Task = ({ task, router , currentProject }) => {
       <td className = {styles.btns_container}>
         <BtnsContainer
           itemID ={ task._id }
-          seeFunc = {linkTask}
-          
+          seeFunc = {linkTask}  
         />
       </td>
     </tr>
