@@ -42,18 +42,38 @@ const Task = ({ task }) => {
   const { currentTask } = taskState;
 
   const [ showForm, setShowForm ] = useState( false );
-  const updateReq = async values =>{
-      const data = {
-         name : values.name,
-         contact : {
-          name : values.contactName,
-          email : values.contactMail,
-          cellphone : values.contactNumber,
-        },
-         requirement : values.requirement,
-      }
-      await editRequirement( data, currentTask._id );
+
+  // Formik objects
+  let initialValues = {
+    name           : currentTask?.name ,
+    contact        : currentTask?.contact,
+    requirement    : currentTask?.requirement ,
   }
+
+  useEffect(() => {
+    initialValues = {
+      name           : currentTask?.name ,
+      contact        : currentTask?.contact,
+      requirement    : currentTask?.requirement ,
+    }
+  }, [currentTask] )
+  console.log({initialValues})
+  // update function
+  const updateReq = async values =>{
+
+    for( let property in values.contact ){
+        values.contact[ property ] = values.contact[ property ] || currentTask.contact[ property ];
+    }
+    for( let property in values ){
+      if( !values[ property ] ){ 
+        delete values[ property ]
+       }
+    }
+    console.log( {values})
+      await editRequirement( values, currentTask._id );
+    setShowForm( false )
+  }
+
   return ( 
     <>
       <Header/>
@@ -61,8 +81,8 @@ const Task = ({ task }) => {
             <Details
               editable
               user ={ user }
-              setShowForm = { setShowForm }
               showForm = { showForm }
+              setShowForm = { setShowForm }
             />
         {
           showForm?
@@ -71,6 +91,8 @@ const Task = ({ task }) => {
               projects = { projectsList }
               submitFunction = { updateReq }
               edit = { true }
+              task = { currentTask }
+              initialValues = { initialValues }
           />
 
           :null

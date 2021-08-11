@@ -51,19 +51,20 @@ const NewReq = () => {
     }
   }
   //
+  let initialValues = {
+    name           : '',
+    contact        : {
+          name        :'',
+          email       : '',
+          cellphone   : ''
+    },
+    requirement    : '' ,
+    project : ''
+  }
+
   const setNewTask = async values =>{
-    const data = {
-       name : values.name,
-       contact : {
-        name : values.contactName,
-        email : values.contactMail,
-        cellphone : values.contactNumber,
-      },
-       requirement : values.requirement,
-       project : values.project,
-    }
-    console.log( 'Nuevo req', data )
-    await createRequirement( data )
+    console.log( 'Nuevo req', values )
+    await createRequirement( values )
   }
   return ( 
     <>  
@@ -73,6 +74,7 @@ const NewReq = () => {
         projects = { projectsList }
         submitFunction = { setNewTask }
         edit = { false }
+        initialValues = { initialValues }
       />   
     </>
   );

@@ -5,16 +5,20 @@ import useTasks from '../context/hooks/useTasks';
 
 import styles from '../styles/pages.module.scss';
 
-const Details = ({ editable, showFrom, setShowForm }) => {
-// userContext
-const userContext = useUser();
-const { state: userState, isAuthenticated } = userContext; 
-const { user } = userState;
-// tsk Context
-const taskContext = useTasks();
-const { state: taskState } = taskContext; 
-const { currentTask } = taskState;
-console.log( { currentTask } )
+const Details = ({ editable, showForm, setShowForm }) => {
+  // userContext
+  const userContext = useUser();
+  const { state: userState, isAuthenticated } = userContext; 
+  const { user } = userState;
+  // tsk Context
+  const taskContext = useTasks();
+  const { state: taskState } = taskContext; 
+  const { currentTask } = taskState;
+
+  const handleClick = () => {
+    setShowForm( !showForm )
+  }
+
   return ( 
     <>
           <div id={ styles.Informacion2 }>
@@ -83,7 +87,7 @@ console.log( { currentTask } )
           </div>
           { editable? 
               <div  id={styles.btn}>
-              <button onClick = { () => setShowForm( !showFrom )  } id={ styles.BotEditar }>Editar</button>
+              <button onClick = { handleClick } id={ styles.BotEditar }>Editar</button>
             </div>
             :
             null

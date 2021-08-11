@@ -1,12 +1,10 @@
 import React from 'react';
 // routing
 import { useRouter } from 'next/router';
-// compponents
-// api
 // MAterial UI
 import { Select, MenuItem } from '@material-ui/core';
 // forms validation
-import { useFormik, Form, Field } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 //
 import { TextField } from '@material-ui/core';
@@ -14,15 +12,17 @@ import { TextField } from '@material-ui/core';
 import styles from '../../styles/forms.module.scss';
 
 
-const TaskForm = ({ projects, submitFunction, isrequeriment, edit }) => {
+const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues }) => {
   // yup
   const taskSchema = edit ?
     Yup.object({
       name: Yup.string(),
-      contactName: Yup.string(),
-      contactMail: Yup.string()
-        .email( 'introduzca un correo valido' ),
-      contactNumber: Yup.string(),
+      contact : Yup.object ({
+        name :  Yup.string(),
+        email :  Yup.string()
+          .email( 'introduzca un correo valido' ),
+        cellphone :  Yup.string(),
+      }),
       project: Yup.string(),
       requirement: Yup.string(),
     })
@@ -30,19 +30,20 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit }) => {
     Yup.object({
       name: Yup.string()
         .required('El requerimiento debe tener un titulo'),
-      contactName: Yup.string()
+      contact : Yup.object ({
+        name :  Yup.string()
         .required('Por favor introdusca un contacto'),
-      contactMail: Yup.string()
+        email :  Yup.string()
         .email( 'introduzca un correo valido' )
         .required('Por favor introdusca correo de contacto'),
-      contactNumber: Yup.string(),
+        cellphone :  Yup.string(),
+      }),
       project: Yup.string()
         .required('Required'),
       requirement: Yup.string()
         .required('El requeriiento debe tener una descipcion'),
     });
-   // router
-   const router = useRouter();
+
    //
    const submit = async values =>{
       submitFunction( values )
@@ -50,14 +51,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit }) => {
    }
  
    const formik = useFormik({
-     initialValues : {
-       name           : '',
-       contactName    : '',
-       contactMail    : '',
-       contactNumber  : '',
-       requirement    : '',
-       project        : '',
-     },
+     initialValues,
      validationSchema : taskSchema,
      onSubmit : values =>submit( values ),
  
@@ -82,38 +76,38 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit }) => {
            <TextField 
              className= { styles.FormId }  
              type="text" 
-             name="contactName" 
+             name="contact.name" 
              placeholder="Contacto (Nombre + Correo)" 
              fullWidth
  
-             value = { formik.values.contactName }
+             value = { formik.values.contact?.name  }
              onChange = { formik.handleChange }
-             error = { formik.touched.contactName && Boolean( formik.errors.contactName ) }
-             helperText={formik.touched.contactName && formik.errors.contactName }
+             error = { formik.touched.contact?.name && Boolean( formik.errors.contact?.name  ) }
+             helperText={formik.touched.contact?.name  && formik.errors.contact?.name  }
            />
            <TextField 
              className= { styles.FormId }  
              type="text" 
-             name="contactMail" 
+             name="contact.email" 
              placeholder="Correo Contacto" 
              fullWidth
  
-             value = { formik.values.contactMail }
+             value = { formik.values.contact?.email }
              onChange = { formik.handleChange }
-             error = { formik.touched.contactMail && Boolean( formik.errors.contactMail ) }
-             helperText={formik.touched.contactMail && formik.errors.contactMail }
+             error = { formik.touched.contact?.email && Boolean( formik.errors.contact?.email ) }
+             helperText={formik.touched.contact?.email && formik.errors.contact?.email }
            />
            <TextField 
              className= { styles.FormId }  
              type="text" 
-             name="contactNumber" 
+             name="contact.cellphone" 
              placeholder="Numero de contacto" 
              fullWidth
  
-             value = { formik.values.contactNumber }
+             value = { formik.values.contact?.cellphone }
              onChange = { formik.handleChange }
-             error = { formik.touched.contactNumber && Boolean( formik.errors.contactNumber ) }
-             helperText={formik.touched.contactNumber && formik.errors.contactNumber }
+             error = { formik.touched.contact?.cellphone && Boolean( formik.errors.contact?.cellphone ) }
+             helperText={formik.touched.contact?.cellphone && formik.errors.contact?.cellphone }
            />
  
            {/* SELECT */}
