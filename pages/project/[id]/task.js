@@ -13,8 +13,20 @@ import styles from '../../../styles/pages.module.scss';
 
 import { scheduleApi } from '../../../config/axios';
 
+export async function getServerSideProps(context) {
+  const { query } = context
+  let result ;
+  try {
+    result = await scheduleApi.get( `/tasks/${ query.taskID }` )
+  } catch (error) {
+    console.log( {error : error} )
+  }
+  return {
+    props: { task : result.data.task }, // will be passed to the page component as props
+  }
+}
 
-const Task = () => {
+const Task = ({ task }) => {
      // context 
   const projectsContext = useProjects();
   const { projectsList } = projectsContext;
