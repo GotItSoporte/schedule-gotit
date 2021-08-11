@@ -1,30 +1,48 @@
 @import './variables.scss';
+
 .login {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -150px 0 0 -150px;
-	width: 300px;
-	height: 300px;
-	h1 {
-		color: #F2622A;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  display: grid;
+  place-content: center;
+  max-width: 95%;
+	height: 100%;
+}
+.login2 {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  padding: 30px 60px 60px 60px;
+  background-color: #2E4054;
+  border-radius: 10px;
+
+	& h1 {
+		Color: $primary;
 		letter-spacing: 1px;
 		text-align: center;
 	}
 }
 .LoginId {
-	width: 100%;
-	margin: 0.5rem 0 0 0;
-	outline: none;
-	padding: 10px;
-	font-size: 13px;
-	border: 1px solid rgba(0,0,0,0.3);
-	border-radius: 4px;
-	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
-	&:focus {
-		box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2);
-	}
-} 
+  background-color: #304257;
+  color: white;
+  width: 100%;
+  margin-bottom: 10px;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+
+  &:focus {
+    box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+  }
+
+  &::placeholder {
+    color: rgb(170, 169, 169);
+  }
+}
+
 .btn {
 	border: none;
 	font-family: 'Open Sans', Arial, sans-serif;
@@ -33,18 +51,19 @@
 	padding: 0;
 	-webkit-appearance: none;
 	border-radius: 4px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	background-color: $primary;
-	color: #eee;
-	font-weight: bold;
-	margin: 1rem 0 0 0;
-	text-transform: uppercase;
-	width: 100%;
-	&:hover {
-		background-color: $primary-light;
-		cursor: pointer;
-	}
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background-color: $secondary;
+  color: #eee;
+  font-weight: bold;
+  margin-bottom: 2em;
+  text-transform: uppercase;
+  width: 100%;
+
+  &:hover {
+    background-color: $secondary-light;
+  }
 }
 .Form {
 	box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px, 

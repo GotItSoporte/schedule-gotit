@@ -36,53 +36,55 @@ const Login = () => {
   return ( 
 
         <div className={ styles.login }>
-          <h1>Login</h1>
-          <Formik
-           initialValues={{
-            userName: '',
-            password: '',
-           }}
-           validationSchema={loginSchema}
-           onSubmit={ async values => {
-             // same shape as initial values
-             console.log('SUBMIT')
-             await userLogin(values);
-           }}
-          >
-            {({ errors, touched }) => (
-              <Form >
-                <Field 
-                  className= {styles.LoginId}
-                  type="text" 
-                  name="userName" 
-                  placeholder="Usuario" 
-                  required="required"  
-                />
-                {errors.userName && touched.userName ? (
-                <ErrorForm 
-                  classStyle= { styles.error_message } 
-                  errorMessage = {errors.userName}
-                />
-                ) : null}
+          <div className={ styles.login2 }>
+            <h1>INICIAR SESIÓN</h1>
+            <Formik
+            initialValues={{
+              userName: '',
+              password: '',
+            }}
+            validationSchema={loginSchema}
+            onSubmit={ async values => {
+              // same shape as initial values
+              console.log('SUBMIT')
+              await userLogin(values);
+            }}
+            >
+              {({ errors, touched }) => (
+                <Form >
+                  <Field 
+                    className= {styles.LoginId}
+                    type="text" 
+                    name="userName" 
+                    placeholder="Usuario" 
+                    required="required"  
+                  />
+                  {errors.userName && touched.userName ? (
+                  <ErrorForm 
+                    classStyle= { styles.error_message } 
+                    errorMessage = {errors.userName}
+                  />
+                  ) : null}
 
-                <Field 
-                  className={styles.LoginId} 
-                  type="password" 
-                  name="password" 
-                  placeholder="Contraseña" 
-                  required="required" 
-                />
-                {errors.password && touched.password ? (
-                <ErrorForm 
-                  classStyle= { styles.error_message } 
-                  errorMessage = {errors.password}
-                />
-                ) : null}
+                  <Field 
+                    className={styles.LoginId} 
+                    type="password" 
+                    name="password" 
+                    placeholder="Contraseña" 
+                    required="required" 
+                  />
+                  {errors.password && touched.password ? (
+                  <ErrorForm 
+                    classStyle= { styles.error_message } 
+                    errorMessage = {errors.password}
+                  />
+                  ) : null}
 
-                <button type="submit" className={ styles.btn }>Iniciar Sesión</button>
-              </Form>
-            )}
-          </Formik>
+                  <button type="submit" className={ styles.btn }>Iniciar Sesión</button>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </div>
   );
 }
