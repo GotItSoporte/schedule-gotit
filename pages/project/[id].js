@@ -86,47 +86,53 @@ const Project = ({ notFound, project, message, tasks }) => {
   return ( 
     <>
       <Header /> 
-      <section className ={ styles.section }>
-          <h1>{ user?.company }</h1>
-          <h1>{ project?.name || 'No Encontrado' }</h1>
-          <div className={ styles.tbl_header }>
-              <table >
-              <thead>
-                  <tr>
-                      <th>MESES</th>
-                      <th>HORAS RESTANTES</th>
-                      <th>HORAS USADAS</th>
-                      <th>HORAS TOTALES</th>
-                      <th>FECHA DE INICIO</th>
-                      <th>FECHA DE Finalizacion</th>
-                  </tr>
-              </thead>
-              </table>
-          </div>
-          <div className ={ styles.tbl_content }>
-              <table >
-              <tbody>
-                  <tr>
-                      <td>{ project.months }</td>
-                      <td>{ project?.hoursLeft }</td><td>{ project.hoursTotal }</td>
-                      <td>{ hoursUsed}</td>
-                      <td>{ project?.hoursTotal }</td>
-                      <td>{ showSstartDate.getFullYear() }</td>
-                      <td>{ project?.finishDate || 'no definido' }</td>
-                  </tr>
-              </tbody>
-              </table>
-          </div>
-      </section>
-      { tasksState? <TasksList /> : <h2>No hay tareas para mostrar</h2>}
-      <button 
-        type="button" 
-        className={ styles.NuevoRequerimiento }
-        onClick = { () => router.push( {
-          pathname : '/new-req',
-          query :{ company : user?.company }
-        } )}
-      >Agregar Requerimiento </button>
+      <div id={ styles.TodoInicio }>
+      </div>
+        <div id={ styles.TodoInicio2 }>
+          <section className ={ styles.section }>
+              { user?.role? <h1>{ user?.company }</h1> : null }
+              <h1>{ project?.name || 'No Encontrado' }</h1>
+              <div className={ styles.tbl_header }>
+                  <table >
+                  <thead>
+                      <tr>
+                          <th>MESES</th>
+                          <th>HORAS RESTANTES</th>
+                          <th>HORAS USADAS</th>
+                          <th>HORAS TOTALES</th>
+                          <th>FECHA DE INICIO</th>
+                          <th>FECHA DE Finalizacion</th>
+                      </tr>
+                  </thead>
+                  </table>
+              </div>
+              <div className ={ styles.tbl_content }>
+                  <table >
+                  <tbody>
+                      <tr>
+                          <td>{ project.months }</td>
+                          <td>{ project?.hoursLeft }</td>
+                          <td>{ hoursUsed}</td>
+                          <td>{ project?.hoursTotal }</td>
+                          <td>{ showSstartDate.getFullYear() }</td>
+                          <td>{ project?.finishDate || 'no definido' }</td>
+                      </tr>
+                  </tbody>
+                  </table>
+              </div>
+            { tasksState? <TasksList /> : <h2>No hay tareas para mostrar</h2>}
+            <button 
+              type="button" 
+              className={ styles.NuevoRequerimiento }
+              onClick = { () => router.push( {
+                pathname : '/new-req',
+                query :{ company : user?.company }
+              } )}
+            >Agregar Requerimiento </button>
+          </section>
+        </div>
+           <div id={ styles.Proyecto }>
+           </div>
   </>
    );
 }

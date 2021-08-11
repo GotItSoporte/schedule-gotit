@@ -21,44 +21,50 @@ const ProjectList = ({ userRole }) => {
   }, [  ])
   
   return ( 
-    <>
-      <section className = { styles.section }>
-      <h1>{ userRole? 'PROYECTOS' : 'TUS PROYECTOS'}</h1>
-        <div className={ styles.tbl_header }>
-            <table >
-              <thead>
-                  <tr>
-                      <th>NOMBRE</th>
-                      { userRole? <th>Cliente</th> : null}
-                      <th>HORAS RESTANTES</th>
-                      <th>HORAS USADAS</th>
-                      <th>HORAS TOTALES</th>
-                      <th>FECHA DE INICIO</th>
-                      <th></th>
-                  </tr>
-              </thead>
-            </table>
-        </div>
-        <div className={ styles.tbl_content }>
-            <table >
-              <tbody>
-                {projectsList.map( (project , index)=> 
-                <>
-                    <Project 
-                      key = { index }
-                      project = { project }
-                      setCurrentProject = { setCurrentProject }
-                      getTasksProject = { getTasksProject }
-                      userRole = { userRole }
-                    />
-                </>
-                )}
-               
-              </tbody>
-            </table>
-        </div>
-        </section>
-    </>
+  
+     <div id={ styles.TodoInicio }>
+       <div id={ styles.TodoInicio2 }>
+           <div id={ styles.Proyecto }>
+            <section className = { styles.section }>
+            <h1>{ userRole? 'PROYECTOS' : 'TUS PROYECTOS'}</h1>
+              <div >
+                  <table >
+                    <thead>
+                        <tr>
+                            <th>NOMBRE</th>
+                            { userRole? <th>Cliente</th> : null}
+                            <th>HORAS RESTANTES</th>
+                            <th>HORAS USADAS</th>
+                            <th>HORAS TOTALES</th>
+                            <th>FECHA DE INICIO</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                  </table>
+              </div>
+              <div className={ styles.tbl_content }>
+                  <table >
+                    <tbody>
+                      {projectsList.map( (project , index)=> 
+                      <>
+                          <Project 
+                            key = { index }
+                            project = { project }
+                            setCurrentProject = { setCurrentProject }
+                            getTasksProject = { getTasksProject }
+                            userRole = { userRole }
+                          />
+                      </>
+                      )}
+                    
+                    </tbody>
+                  </table>
+              </div>
+              </section>
+           </div>
+       </div>
+     </div>
+
   );
 }
 

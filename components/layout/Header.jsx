@@ -42,6 +42,16 @@ const Header = () => {
             <div id= { styles.Container }>
                 <ul id={styles.menu}>
                   <li><a onClick ={ log_out } href="#">Cerrar Sesión</a></li>
+                        <li>
+                          <Link 
+                            href = {{
+                              pathname : '/new-req',
+                              query :{ company : user?.company }
+                            }}
+                            >
+                            <a>Nuevo requerimiento</a>
+                          </Link>
+                        </li>
                   <li>
                     <Link 
                       href = {{
@@ -50,16 +60,6 @@ const Header = () => {
                       }}
                     >
                       <a>Proyectos</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      href = {{
-                        pathname : '/new-req',
-                        query :{ company : user?.company }
-                      }}
-                      >
-                      <a>Nuevo requerimiento</a>
                     </Link>
                   </li>
                 </ul>

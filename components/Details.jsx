@@ -20,7 +20,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
   }
 
   return ( 
-    <>
+    <div id = { styles.Informacion }>
           <div id={ styles.Informacion2 }>
             <div id={ styles.InfoRequerimiento }>
               <div id={ styles.Titulo }>
@@ -28,27 +28,27 @@ const Details = ({ editable, showForm, setShowForm }) => {
               </div>
               <div className={ styles.InfoContacto }>
                 <div className={ styles.Campos }>
-                  <span>Usuario</span><br />
+                  <span>USUARIO</span><br />
                   <a>{ user?.name }</a>
                 </div>
                 <div className={ styles.Campos }>
-                  <span>Estado</span><br />
+                  <span>ESTADO</span><br />
                   <a>{ currentTask?.state}</a>
                 </div>
                 <div className={ styles.Campos }>
-                  <span>Nombre de Contacto</span><br />
+                  <span>NOMBRE DE CONTACTO</span><br />
                   <a>{ currentTask?.contact.name }</a>
                 </div>
                 <div className={ styles.Campos }>
-                  <span>Email de contacto</span><br />
+                  <span>EMAIL DE CONTACTO</span><br />
                   <a>{ currentTask?.contact.email }</a>
                 </div>
                 <div className={ styles.Campos }>
-                  <span>Fecha de creacion</span><br />
+                  <span>ECHA DE CREACIÓN</span><br />
                   <a>{ currentTask?.requirmentDate }</a>
                 </div>
                 <div className={ styles.Campos }>
-                  <span>Fecha de finalización</span><br />
+                  <span>FECHA DE FINALIZACIÓN</span><br />
                   <a>{ currentTask?.finishDate || 'En curso' }</a>
                 </div>
               </div>
@@ -84,15 +84,15 @@ const Details = ({ editable, showForm, setShowForm }) => {
                 : null
               }
             </div>
+            { editable? 
+                <div  id={styles.btn}>
+                <button onClick = { handleClick } id={ styles.BotEditar }>Editar</button>
+              </div>
+              :
+              null
+            }
           </div>
-          { editable? 
-              <div  id={styles.btn}>
-              <button onClick = { handleClick } id={ styles.BotEditar }>Editar</button>
-            </div>
-            :
-            null
-          }
-    </>
+    </div>
    );
 }
  
