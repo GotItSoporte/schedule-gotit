@@ -13,8 +13,8 @@ import * as Yup from 'yup';
 
  const loginSchema = Yup.object().shape({
    userName: Yup.string()
-     .required('El nombre de ususario es obligatorio'),
-   password: Yup.string().required('El password es obligarotio')
+     .required('El nombre de usuario es obligatorio'),
+   password: Yup.string().required('El password es obligatorio')
  });
 
 const Login = () => {

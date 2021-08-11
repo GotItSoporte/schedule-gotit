@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+// 
+import { useRouter } from 'next/router';
 // components
 import Layout from '../../components/layout'
 import Header from '../../components/layout/Header'
@@ -44,6 +46,9 @@ export async function getServerSideProps(context) {
  }
 
 const Project = ({ notFound, project, message, tasks }) => {
+  // Routes
+   // next routing 
+   const router = useRouter();
 
   // Projects Contexts
   const projectContext = useProjects();
@@ -57,6 +62,7 @@ const Project = ({ notFound, project, message, tasks }) => {
   const userContext = useUser();
   const { state :userState  } = userContext;
   const { user, isAuth } =userState;
+  
   
   useEffect( async () => {
     if( !isAuth ){
@@ -113,6 +119,14 @@ const Project = ({ notFound, project, message, tasks }) => {
           </div>
       </section>
       { tasksState? <TasksList /> : <h2>No hay tareas para mostrar</h2>}
+      <button 
+        type="button" 
+        className={ styles.NuevoRequerimiento }
+        onClick = { () => router.push( {
+          pathname : '/new-req',
+          query :{ company : user?.company }
+        } )}
+      >Agregar Requerimiento </button>
   </>
    );
 }

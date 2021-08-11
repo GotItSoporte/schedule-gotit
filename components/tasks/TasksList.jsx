@@ -26,10 +26,6 @@ const TasksList = () => {
     console.log( tasksList )
   }, [tasksList]);
 
-  const onNewreq = () => {
-    console.log( 'cliv' )
-    router.push( `/project/${currentProject._id}/new-req` )
-  }
   return ( 
      
     <section className ={ styles.section }>
@@ -62,11 +58,6 @@ const TasksList = () => {
          </tbody>
          </table>
      </div>
-     <button 
-        type="button" 
-        className={ styles.NuevoRequerimiento }
-        onClick = { () => onNewreq() }
-      >Agregar Requerimiento </button>
   </section>
    );
 }
