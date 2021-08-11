@@ -30,7 +30,6 @@ const TasksWrapper =({ children }) =>{
           payload: result.data.tasks
         } );
       } catch (error) {
-        console.log( {error : error.response.data } );
         return dispatch({
           type: TASKS_ERROR,
           payload: error.response.data
@@ -61,8 +60,6 @@ const TasksWrapper =({ children }) =>{
   const createRequirement = async ( task ) => {
     try {
       const result = await scheduleApi.post( '/requirements', task );
-      console.log( 'result.data', {result: result.data} );
-      console.log( 'data.message', {result: result.data.message} );
       return dispatch({
         type: TASKS_CREATE_REQUERIMENT,
         payload :{
@@ -71,7 +68,6 @@ const TasksWrapper =({ children }) =>{
         } 
       })
     } catch (error) {
-      console.log( {error : error.response.data.message} );
         return dispatch({
           type: TASKS_ERROR,
           payload: error.response.data.message
@@ -82,10 +78,8 @@ const TasksWrapper =({ children }) =>{
   // ************  Edit Requeriment  ***********
   // ******************************************
   const editRequirement = async ( task, taskID ) => {
-    console.log( { taskID, task } )
     try {
       const result = await scheduleApi.put( `/requirements/${ taskID }`, task );
-      console.log( 'data.updatedTask', {updatedTask: result.data.updatedTask} );
       return dispatch({
         type: TASKS_EDIT_REQUERIMENT,
         payload :{
@@ -94,8 +88,6 @@ const TasksWrapper =({ children }) =>{
         } 
       })
     } catch (error) {
-      console.log( {error : error.response.data.message} );
-      console.log( {error : error.response.data.error} );
         return dispatch({
           type: TASKS_ERROR,
           payload: error.response.data.message

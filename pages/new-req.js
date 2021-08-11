@@ -63,7 +63,6 @@ const NewReq = () => {
   }
 
   const setNewTask = async values =>{
-    console.log( 'Nuevo req', values )
     await createRequirement( values )
   }
   return ( 

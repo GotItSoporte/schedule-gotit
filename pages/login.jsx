@@ -27,7 +27,6 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log( 'refresh', { isAuth});
     if( isAuth ){
       router.push({ pathname : '/', query : { company : user?.company } });
     }else{

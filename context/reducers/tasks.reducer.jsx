@@ -27,7 +27,6 @@ const tasksReducer = ( state, action ) => {
     case TASKS_CREATE_REQUERIMENT:
       // Alert
       FireToast( 'success', payload.message )
-      console.log( {payload} )
       return({
         ...state,
         message : payload.message,

@@ -16,11 +16,10 @@ import { scheduleApi } from '../../../config/axios';
 export async function getServerSideProps(context) {
   const { query } = context
   let result ;
-  console.log( {id : query.taskID} )
   try {
     result = await scheduleApi.get( `/tasks/${ query.taskID }` )
   } catch (error) {
-    console.log( {error : error} )
+
   }
   return {
     props: { task : result.data.task }, // will be passed to the page component as props
@@ -57,7 +56,6 @@ const Task = ({ task }) => {
       requirement    : currentTask?.requirement ,
     }
   }, [currentTask] )
-  console.log({initialValues})
   // update function
   const updateReq = async values =>{
 
@@ -69,7 +67,6 @@ const Task = ({ task }) => {
         delete values[ property ]
        }
     }
-    console.log( {values})
       await editRequirement( values, currentTask._id );
     setShowForm( false )
   }
