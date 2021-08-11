@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 //componetes
 import Header from '../../../components/layout/Header';
 import Details from '../../../components/Details';
@@ -41,6 +41,7 @@ const Task = ({ task }) => {
   const { state: taskState, editRequirement } = taskContext; 
   const { currentTask } = taskState;
 
+  const [ showForm, setShowForm ] = useState( false );
   const updateReq = async values =>{
       const data = {
          name : values.name,
@@ -60,13 +61,20 @@ const Task = ({ task }) => {
             <Details
               editable
               user ={ user }
+              setShowForm = { setShowForm }
+              showForm = { showForm }
             />
-        <TaskForm 
-            isrequeriment = {true}
-            projects = { projectsList }
-            submitFunction = { updateReq }
-            edit = { true }
-        />
+        {
+          showForm?
+          <TaskForm 
+              isrequeriment = {true}
+              projects = { projectsList }
+              submitFunction = { updateReq }
+              edit = { true }
+          />
+
+          :null
+        }
 
     </div>
 
