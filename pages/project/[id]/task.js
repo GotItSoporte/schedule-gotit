@@ -16,6 +16,7 @@ import { scheduleApi } from '../../../config/axios';
 export async function getServerSideProps(context) {
   const { query } = context
   let result ;
+  console.log( {id : query.taskID} )
   try {
     result = await scheduleApi.get( `/tasks/${ query.taskID }` )
   } catch (error) {

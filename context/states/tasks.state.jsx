@@ -84,7 +84,7 @@ const TasksWrapper =({ children }) =>{
   const editRequirement = async ( task, taskID ) => {
     console.log( { taskID } )
     try {
-      const result = await scheduleApi.put( `/requirements/61129af646bf562f042ab7e3`, task );
+      const result = await scheduleApi.put( `/requirements/${ taskID }`, task );
       console.log( 'data.updatedTask', {updatedTask: result.data.updatedTask} );
       return dispatch({
         type: TASKS_EDIT_REQUERIMENT,
