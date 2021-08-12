@@ -70,7 +70,7 @@ const Task = ({ task }) => {
       await editRequirement( values, currentTask._id );
     setShowForm( false )
   }
-
+  
   return ( 
     <>
       <Header/>

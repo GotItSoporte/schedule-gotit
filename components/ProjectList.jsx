@@ -74,6 +74,7 @@ const Project = ({ project, setCurrentProject, getTasksProject, userRole })  =>{
 
   let name =project.name.length > 18 ? `${project.name.substring( 0, 20 )}...`: project.name;
   // calculate hours
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const showSstartDate = new Date(project.startDate)
   const hoursLeft = 0;
   const hoursUsed = 0;
@@ -91,7 +92,7 @@ const Project = ({ project, setCurrentProject, getTasksProject, userRole })  =>{
         <td>{ hoursLeft }</td>
         <td>{ hoursUsed}</td>
         <td>{ project.hoursTotal }</td>
-        <td>{ showSstartDate.getFullYear() }</td>
+        <td>{ showSstartDate.toLocaleDateString( 'es-Es', dateOptions) }</td>
         <td>
           <BtnsContainer
             itemID = { project._id }

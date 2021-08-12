@@ -79,7 +79,10 @@ const Project = ({ notFound, project, message, tasks }) => {
   }
 
   // calculate hours
-  const showSstartDate = new Date(project.startDate)
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const startDate = new Date( project?.startDate ).toLocaleDateString( 'es-ES', dateOptions)
+  const finishDate = finishDate? new Date( project?.finishDate ).toLocaleDateString( 'es-ES', dateOptions)
+         : 'No asignada';
   const hoursLeft = 0;
   const hoursUsed = 0;
 
@@ -114,8 +117,8 @@ const Project = ({ notFound, project, message, tasks }) => {
                           <td>{ project?.hoursLeft }</td>
                           <td>{ hoursUsed}</td>
                           <td>{ project?.hoursTotal }</td>
-                          <td>{ showSstartDate.getFullYear() }</td>
-                          <td>{ project?.finishDate || 'no definido' }</td>
+                          <td>{ startDate }</td>
+                          <td>{ finishDate }</td>
                       </tr>
                   </tbody>
                   </table>

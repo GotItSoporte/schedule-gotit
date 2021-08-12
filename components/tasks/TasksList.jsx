@@ -25,7 +25,7 @@ const TasksList = () => {
   useEffect(() => {
     console.log( tasksList )
   }, [tasksList]);
-
+  
   return ( 
      
     <section className ={ styles.section }>
@@ -80,7 +80,8 @@ const Task = ({ task, router , currentProject }) => {
     requieredUser,
     _id
    } = task
-
+   const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+   const showedDate = `${new Date(requirmentDate).toLocaleDateString( 'es-ES', dateOptions ) } ${ new Date(requirmentDate).getHours() } : ${ new Date(requirmentDate).getMinutes() } `
 
   const linkTask= () =>{
     setCurrentTask( task )
@@ -97,8 +98,8 @@ const Task = ({ task, router , currentProject }) => {
       <td>{ requieredUser.name || 'no especificado' }</td>
       <td>{ contact.name || 'no especificado' }</td>
       <td>{ state }</td>
-      <td>{ requirmentDate }</td>
-      <td className = {styles.btns_container}>
+      <td>{ showedDate}</td>
+      <td className = { styles.btns_container }>
         <BtnsContainer
           itemID ={ task._id }
           seeFunc = {linkTask}  

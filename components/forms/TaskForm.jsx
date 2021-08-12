@@ -73,7 +73,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               value = { formik.values.name }
               onChange = { formik.handleChange }
               error = { formik.touched.name && Boolean( formik.errors.name ) }
-              helperText={formik.touched.name && formik.errors.name}
+              helpertext={formik.touched.name && formik.errors.name}
             />
             <TextField 
               className= { styles.FormId }  
@@ -85,7 +85,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               value = { formik.values.contact?.name  }
               onChange = { formik.handleChange }
               error = { formik.touched.contact?.name && Boolean( formik.errors.contact?.name  ) }
-              helperText={formik.touched.contact?.name  && formik.errors.contact?.name  }
+              helpertext={formik.touched.contact?.name  && formik.errors.contact?.name  }
             />
             <TextField 
               className= { styles.FormId }  
@@ -97,7 +97,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               value = { formik.values.contact?.email }
               onChange = { formik.handleChange }
               error = { formik.touched.contact?.email && Boolean( formik.errors.contact?.email ) }
-              helperText={formik.touched.contact?.email && formik.errors.contact?.email }
+              helpertext={formik.touched.contact?.email && formik.errors.contact?.email }
             />
             <TextField 
               className= { styles.FormId }  
@@ -109,7 +109,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               value = { formik.values.contact?.cellphone }
               onChange = { formik.handleChange }
               error = { formik.touched.contact?.cellphone && Boolean( formik.errors.contact?.cellphone ) }
-              helperText={formik.touched.contact?.cellphone && formik.errors.contact?.cellphone }
+              helpertext={formik.touched.contact?.cellphone && formik.errors.contact?.cellphone }
             />
   
             {/* SELECT */}
@@ -126,7 +126,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
                 value = { formik.values.project }
                 onChange = { formik.handleChange }
                 error = { formik.touched.project && Boolean( formik.errors.project ) }
-                helperText={formik.touched.project && formik.errors.project}
+                helpertext={formik.touched.project && formik.errors.project}
               >
                 
                 { projects?.map(( project, index) => 

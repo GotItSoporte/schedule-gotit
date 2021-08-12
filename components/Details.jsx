@@ -18,7 +18,8 @@ const Details = ({ editable, showForm, setShowForm }) => {
   const handleClick = () => {
     setShowForm( !showForm )
   }
-
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const reqDate = new Date( currentTask?.requirmentDate ).toLocaleDateString( 'es-ES', dateOptions)
   return ( 
     <div id = { styles.Informacion }>
           <div id={ styles.Informacion2 }>
@@ -45,7 +46,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
                 </div>
                 <div className={ styles.Campos }>
                   <span>ECHA DE CREACIÓN</span><br />
-                  <a>{ currentTask?.requirmentDate }</a>
+                  <a>{ reqDate }</a>
                 </div>
                 <div className={ styles.Campos }>
                   <span>FECHA DE FINALIZACIÓN</span><br />
