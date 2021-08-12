@@ -23,13 +23,13 @@ const BtnsContainer = ({ seeFunc, editFunc, deleteFunc, itemID, showEdit, showDe
     <a 
       onClick = { () => seeFunc( itemID ) } 
       className = { styles._btn }
-    ><Visibility/></a> 
+    >Ver Mas </a> 
 
     { showEdit?  
       <a 
         onClick = { () => editFunc0( itemID ) } 
         className = { styles._btn }
-      ><EditRounded/></a> 
+      > Editar <EditRounded/></a> 
     : null } 
 
     { showDelete ?

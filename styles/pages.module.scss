@@ -26,7 +26,8 @@
 .section {
   h4 {
     font-size: 20px;
-    color: #F2622A;
+    font-weight: bold !important;
+    color: $secondary;
     text-transform: uppercase;
     font-weight: 300;
     text-align: center;
@@ -68,14 +69,14 @@
     font-family: 'Open Sans', Arial, sans-serif;
     padding: 5;
     border-radius: 3px;
-    background-color: #f04501;
+    background-color: $secondary; 
     color: #eee;
     font-weight: bold;
     text-transform: uppercase;
     text-decoration: none;
 
     &:hover {
-      background-color: #d43c00;
+      background-color: $secondary-light;
     }
   }
 }
@@ -87,7 +88,7 @@
   font-family: 'Open Sans', Arial, sans-serif;
   font-size: 20px;
   border-radius: 3px;
-  background-color: #f04501;
+  background-color: $secondary;
   color: #eee;
   font-weight: bold;
   text-transform: uppercase;
@@ -96,7 +97,7 @@
   margin-top: 10px;
 
   &:hover {
-    background-color: #d43c00;
+    background-color: $secondary-light;
   }
 }
 
@@ -120,7 +121,7 @@
 }
 
 #Informacion span {
-  color: #f04501;
+  color: $secondary;
   font-weight: bold;
 }
 
@@ -130,7 +131,7 @@
 }
 
 #Titulo {
-  Color: #00c3ff;
+  Color: $primary;
   border-bottom: 1px solid rgba(218, 218, 218, 0.5);
   text-align: center;
 
@@ -190,7 +191,7 @@
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 20px;
 	border-radius: 3px;  
-	background-color: #f04501;
+	background-color: $secondary;
 	color: #eee;
 	font-weight: bold;
 	text-transform: uppercase;
