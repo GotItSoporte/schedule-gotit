@@ -85,13 +85,19 @@ const Project = ({ project, setCurrentProject, getTasksProject, userRole })  =>{
     router.push( `/project/${ id }` )
   }
 
+  let timeTotal = project?.time[ project?.currentMonth - 1 ].minutes;
+  let timeUsed = project?.time[ project?.currentMonth - 1 ].minutesUsed;
+  let timeLeft = (timeTotal - timeUsed) / 60 ;
+  timeTotal = timeTotal / 60;
+  timeLeft = timeLeft / 60;
+
   return  (
     <tr>
       <td> { name }</td>
         { userRole? <td>{ project.company }</td> : null}
-        <td>{ hoursLeft }</td>
-        <td>{ hoursUsed}</td>
-        <td>{ project.hoursTotal }</td>
+        <td>{ Math.floor(timeLeft)  }</td>
+        <td>{ timeUsed }</td>
+        <td>{ timeTotal }</td>
         <td>{ showSstartDate.toLocaleDateString( 'es-Es', dateOptions) }</td>
         <td>
           <BtnsContainer

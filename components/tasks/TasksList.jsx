@@ -29,7 +29,7 @@ const TasksList = () => {
   return ( 
      
     <section className ={ styles.section }>
-     <h4>LISTA DE TAREAS</h4>
+     <h4>REQUERIMIENTOS</h4>
      <div className={ styles.tbl_header }>
          <table >
          <thead>

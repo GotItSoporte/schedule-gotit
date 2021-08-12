@@ -83,8 +83,11 @@ const Project = ({ notFound, project, message, tasks }) => {
   const startDate = new Date( project?.startDate ).toLocaleDateString( 'es-ES', dateOptions)
   const finishDate = finishDate? new Date( project?.finishDate ).toLocaleDateString( 'es-ES', dateOptions)
          : 'No asignada';
-  const hoursLeft = 0;
-  const hoursUsed = 0;
+  let timeTotal = project?.time[ project?.currentMonth - 1 ].minutes;
+  let timeUsed = project?.time[ project?.currentMonth - 1 ].minutesUsed;
+  let timeLeft = (timeTotal - timeUsed) / 60 ;
+  timeTotal = timeTotal / 60;
+  timeLeft = timeLeft / 60;
 
   return ( 
     <>
@@ -114,9 +117,9 @@ const Project = ({ notFound, project, message, tasks }) => {
                   <tbody>
                       <tr>
                           <td>{ project.months }</td>
-                          <td>{ project?.hoursLeft }</td>
-                          <td>{ hoursUsed}</td>
-                          <td>{ project?.hoursTotal }</td>
+                          <td>{ Math.floor(timeLeft)  }</td>
+                          <td>{ timeUsed }</td>
+                          <td>{ timeTotal }</td>
                           <td>{ startDate }</td>
                           <td>{ finishDate }</td>
                       </tr>
