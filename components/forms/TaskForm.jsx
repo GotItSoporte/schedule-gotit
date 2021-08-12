@@ -59,101 +59,106 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
    return ( 
      <>  
        <div className={ styles.Form }>
-       <h1>Nuevo Requerimiento</h1>
-         <form onSubmit={formik.handleSubmit} >
-           <TextField 
-             className={ styles.FormId } 
-             type="text"
-             placeholder="Título" 
-             name="name" 
-             fullWidth
- 
-             value = { formik.values.name }
-             onChange = { formik.handleChange }
-             error = { formik.touched.name && Boolean( formik.errors.name ) }
-             helperText={formik.touched.name && formik.errors.name}
-           />
-           <TextField 
-             className= { styles.FormId }  
-             type="text" 
-             name="contact.name" 
-             placeholder="Contacto (Nombre + Correo)" 
-             fullWidth
- 
-             value = { formik.values.contact?.name  }
-             onChange = { formik.handleChange }
-             error = { formik.touched.contact?.name && Boolean( formik.errors.contact?.name  ) }
-             helperText={formik.touched.contact?.name  && formik.errors.contact?.name  }
-           />
-           <TextField 
-             className= { styles.FormId }  
-             type="text" 
-             name="contact.email" 
-             placeholder="Correo Contacto" 
-             fullWidth
- 
-             value = { formik.values.contact?.email }
-             onChange = { formik.handleChange }
-             error = { formik.touched.contact?.email && Boolean( formik.errors.contact?.email ) }
-             helperText={formik.touched.contact?.email && formik.errors.contact?.email }
-           />
-           <TextField 
-             className= { styles.FormId }  
-             type="text" 
-             name="contact.cellphone" 
-             placeholder="Numero de contacto" 
-             fullWidth
- 
-             value = { formik.values.contact?.cellphone }
-             onChange = { formik.handleChange }
-             error = { formik.touched.contact?.cellphone && Boolean( formik.errors.contact?.cellphone ) }
-             helperText={formik.touched.contact?.cellphone && formik.errors.contact?.cellphone }
-           />
- 
-           {/* SELECT */}
-          { !edit?
-            
-            <Select
-              className = { styles.select }
-              name = 'project'
-              label = 'Proyeto'
+
+        <div className={ styles.Form2 }>
+          <h1>NUEVO REQUERIMIENTO</h1>
+          <form onSubmit={formik.handleSubmit} >
+            <TextField 
+              className={ styles.FormId } 
+              type="text"
+              placeholder="Título" 
+              name="name" 
               fullWidth
-              select
   
-              value = { formik.values.project }
+              value = { formik.values.name }
               onChange = { formik.handleChange }
-              error = { formik.touched.project && Boolean( formik.errors.project ) }
-              helperText={formik.touched.project && formik.errors.project}
-            >
+              error = { formik.touched.name && Boolean( formik.errors.name ) }
+              helperText={formik.touched.name && formik.errors.name}
+            />
+            <TextField 
+              className= { styles.FormId }  
+              type="text" 
+              name="contact.name" 
+              placeholder="Nombre de contacto" 
+              fullWidth
+  
+              value = { formik.values.contact?.name  }
+              onChange = { formik.handleChange }
+              error = { formik.touched.contact?.name && Boolean( formik.errors.contact?.name  ) }
+              helperText={formik.touched.contact?.name  && formik.errors.contact?.name  }
+            />
+            <TextField 
+              className= { styles.FormId }  
+              type="text" 
+              name="contact.email" 
+              placeholder="Correo de Contacto" 
+              fullWidth
+  
+              value = { formik.values.contact?.email }
+              onChange = { formik.handleChange }
+              error = { formik.touched.contact?.email && Boolean( formik.errors.contact?.email ) }
+              helperText={formik.touched.contact?.email && formik.errors.contact?.email }
+            />
+            <TextField 
+              className= { styles.FormId }  
+              type="text" 
+              name="contact.cellphone" 
+              placeholder="Numero telefonico de contacto" 
+              fullWidth
+  
+              value = { formik.values.contact?.cellphone }
+              onChange = { formik.handleChange }
+              error = { formik.touched.contact?.cellphone && Boolean( formik.errors.contact?.cellphone ) }
+              helperText={formik.touched.contact?.cellphone && formik.errors.contact?.cellphone }
+            />
+  
+            {/* SELECT */}
+            { !edit?
               
-              { projects?.map(( project, index) => 
-                <MenuItem
-                  key = { index }
-                  value ={ project._id }
-                >
-                  { project.name }
-                </MenuItem> 
-              ) }
-            </Select>
-            :
-            null
-          }
-           <TextField 
-             className={ styles.textArea } 
-             type="textarea" 
-             multiline
-             name="requirement" 
-             placeholder="Escriba su requerimiento" 
-             fullWidth
- 
-             value = { formik.values.requirement }
-             onChange = { formik.handleChange }
-             error = { formik.touched.requirement && Boolean( formik.errors.requirement ) }
-             helperText={formik.touched.requirement && formik.errors.requirement}
- 
-           />
-           <button type="submit" className={ styles.btn }>Enviar</button>
-         </form>
+              <Select
+                className = { styles.select }
+                name = 'project'
+                label = 'Proyeto'
+                placeholder = 'Proyecto al que agregar requeirimiento'
+                fullWidth
+                select
+    
+                value = { formik.values.project }
+                onChange = { formik.handleChange }
+                error = { formik.touched.project && Boolean( formik.errors.project ) }
+                helperText={formik.touched.project && formik.errors.project}
+              >
+                
+                { projects?.map(( project, index) => 
+                  <MenuItem
+                    key = { index }
+                    value ={ project._id }
+                  >
+                    { project.name }
+                  </MenuItem> 
+                ) }
+              </Select>
+              :
+              null
+            }
+            <TextField 
+              className={ styles.textArea } 
+              type="textarea" 
+              multiline
+              name="requirement" 
+              placeholder="Por favor describa su requerimiento" 
+              fullWidth
+  
+              value = { formik.values.requirement }
+              onChange = { formik.handleChange }
+              error = { formik.touched.requirement && Boolean( formik.errors.requirement ) }
+              helperText={formik.touched.requirement && formik.errors.requirement}
+  
+            />
+            <button type="submit" className={ styles.btn }>Enviar</button>
+          </form>
+
+        </div>
      </div>
    </>
   );
