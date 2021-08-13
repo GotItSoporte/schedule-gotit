@@ -34,10 +34,22 @@ const Header = () => {
   const log_out = () =>{
     logout();
   }
+
+  const goToIndex = () => {
+    console.log( 'CLICK !!!')
+    router.push({
+      pathname : '/',
+      query : { company : user.company }
+    })
+  }
   return (  
     <header className = { styles.header }>
-            <div id={ styles.logo }>
-                <Image id= { styles.Logo_GotIt  } src={ logo } />
+            <div id={ styles.logo } >
+                <Image 
+                  id= { styles.Logo_GotIt  } 
+                  src={ logo } 
+                  onClick = { () => goToIndex() }
+                />
             </div>
             <div id= { styles.Container }>
                 <ul id={styles.menu}>
