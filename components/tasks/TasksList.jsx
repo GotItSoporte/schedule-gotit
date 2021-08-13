@@ -35,6 +35,7 @@ const TasksList = () => {
          <thead>
              <tr>
                  <th>NOMBRE</th>
+                 <th>REF</th>
                  <th>REQUERIDO POR :</th>
                  <th>CONTACTO</th>  
                  <th>ESTADO</th>  
@@ -67,6 +68,7 @@ const Task = ({ task, router , currentProject }) => {
   const tasksContext = useTasks();
   const { setCurrentTask } = tasksContext;
   const { 
+    ref,
     name, 
     hours, 
     startDate, 
@@ -94,7 +96,8 @@ const Task = ({ task, router , currentProject }) => {
 
   return(
     <tr>
-      <td>{name}</td>
+      <td>{ name }</td>
+      <td>{ ref }</td>
       <td>{ requieredUser.name || 'no especificado' }</td>
       <td>{ contact.name || 'no especificado' }</td>
       <td>{ state }</td>
