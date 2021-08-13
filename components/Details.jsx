@@ -27,7 +27,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
               <div id={ styles.Titulo }>
                 <h1>{ currentTask?.name }</h1>
               </div>
-              <div id={ styles.InfoContacto }>
+              <div className={ styles.InfoContacto }>
                 <div className={ styles.Campos }>
                   <span>USUARIO</span><br />
                   <a>{ user?.name }</a>
@@ -58,7 +58,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
                 <p>{ currentTask?.requirement }</p>
               </div>
             </div>
-            <div id={ styles.InfoSolucio }>
+            <div id={ styles.InfoSolucion }>
                 {/* Si el caso ya fue tomado */}
               { currentTask?.isTask ?
                 <>
