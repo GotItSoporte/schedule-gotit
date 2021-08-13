@@ -39,6 +39,7 @@ const Task = ({ task }) => {
   const taskContext = useTasks();
   const { state: taskState, editRequirement } = taskContext; 
   const { currentTask } = taskState;
+  const { isTask, finished } = currentTask;
 
   const [ showForm, setShowForm ] = useState( false );
 
@@ -76,7 +77,7 @@ const Task = ({ task }) => {
       <Header/>
       <div id={ styles.Informacion }>
             <Details
-              editable
+              editable = { (!user.role && !isTask) || ( user.role && isTask && !finished )   }
               user ={ user }
               showForm = { showForm }
               setShowForm = { setShowForm }

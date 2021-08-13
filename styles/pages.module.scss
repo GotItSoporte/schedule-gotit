@@ -111,39 +111,39 @@
   display: grid;
   place-content: center;
   max-width: 95%;
-}
-
-#Informacion2 {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  padding: 30px 60px 60px 60px;
-  background-color: #2E4054;
-  border-radius: 10px;
-}
-
-#Informacion span {
-  color: $secondary;
-  font-weight: bold;
-}
-
-#InfoRequerimiento {
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(218, 218, 218, 0.5);
-}
-
-#Titulo {
-  Color: $primary;
-  border-bottom: 1px solid rgba(218, 218, 218, 0.5);
-  text-align: center;
-
-  h1 {
-    margin-bottom: 5px;
+  
+  span {
+    color: $secondary;
+    font-weight: bold;
   }
-}
 
-#InfoContacto {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
+  #Informacion2 {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    padding: 30px 60px 60px 60px;
+    background-color: #2E4054;
+    border-radius: 10px;
+    
+    #InfoRequerimiento {
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(218, 218, 218, 0.5);
+      
+      #Titulo {
+        Color: $primary;
+        border-bottom: 1px solid rgba(218, 218, 218, 0.5);
+        text-align: center;
+      
+        h1 {
+          margin-bottom: 5px;
+        }
+      }
+
+      #InfoContacto{    
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);    
+        grid-gap: 10px;
+      }
+    }
+  }
 }
 
 .Campos {

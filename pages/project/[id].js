@@ -87,7 +87,6 @@ const Project = ({ notFound, project, message, tasks }) => {
   let timeUsed = project?.time[ project?.currentMonth - 1 ].minutesUsed;
   let timeLeft = (timeTotal - timeUsed) / 60 ;
   timeTotal = timeTotal / 60;
-  timeLeft = timeLeft / 60;
 
   return ( 
     <>

@@ -27,7 +27,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
               <div id={ styles.Titulo }>
                 <h1>{ currentTask?.name }</h1>
               </div>
-              <div className={ styles.InfoContacto }>
+              <div id={ styles.InfoContacto }>
                 <div className={ styles.Campos }>
                   <span>USUARIO</span><br />
                   <a>{ user?.name }</a>
@@ -85,6 +85,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
                 : null
               }
             </div>
+            
             { editable? 
                 <div  id={styles.btn}>
                 <button onClick = { handleClick } id={ styles.BotEditar }>Editar</button>
