@@ -81,7 +81,7 @@ const Project = ({ notFound, project, message, tasks }) => {
   // calculate hours
   const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const startDate = new Date( project?.startDate ).toLocaleDateString( 'es-ES', dateOptions)
-  const finishDate = finishDate? new Date( project?.finishDate ).toLocaleDateString( 'es-ES', dateOptions)
+  const finishDate = project?.finishDate? new Date( project?.finishDate ).toLocaleDateString( 'es-ES', dateOptions)
          : 'No asignada';
   let timeTotal = project?.time[ project?.currentMonth - 1 ].minutes;
   let timeUsed = project?.time[ project?.currentMonth - 1 ].minutesUsed;
