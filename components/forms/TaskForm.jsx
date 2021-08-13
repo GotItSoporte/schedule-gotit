@@ -7,7 +7,7 @@ import { Select, MenuItem } from '@material-ui/core';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 //
-import { TextField } from '@material-ui/core';
+import { TextField, InputLabel } from '@material-ui/core';
 // styles
 import styles from '../../styles/forms.module.scss';
 
@@ -114,30 +114,33 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
   
             {/* SELECT */}
             { !edit?
-              
-              <Select
-                className = { styles.select }
-                name = 'project'
-                label = 'Proyeto'
-                placeholder = 'Proyecto al que agregar requeirimiento'
-                fullWidth
-                select
-    
-                value = { formik.values.project }
-                onChange = { formik.handleChange }
-                error = { formik.touched.project && Boolean( formik.errors.project ) }
-                helpertext={formik.touched.project && formik.errors.project}
-              >
-                
-                { projects?.map(( project, index) => 
-                  <MenuItem
-                    key = { index }
-                    value ={ project._id }
-                  >
-                    { project.name }
-                  </MenuItem> 
-                ) }
-              </Select>
+              <>
+                <InputLabel id = 'selectProject'> Proyecto </InputLabel>
+                <Select
+                  labelId = 'selectProject'
+                  className = { styles.select }
+                  label = 'Proyeto'
+                  inputProps={{
+                    name : 'project'
+                  }}
+                  fullWidth
+      
+                  value = { formik.values.project }
+                  onChange = { formik.handleChange }
+                  error = { formik.touched.project && Boolean( formik.errors.project ) }
+                  helpertext={formik.touched.project && formik.errors.project}
+                >
+                  { projects?.map(( project, index) => 
+                    <MenuItem
+                      classes = { styles.option }
+                      key = { index }
+                      value ={ project._id }
+                    >
+                      { project.name }
+                    </MenuItem> 
+                  ) }
+                </Select>
+              </>
               :
               null
             }
