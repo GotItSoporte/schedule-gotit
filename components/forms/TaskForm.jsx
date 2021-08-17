@@ -1,7 +1,10 @@
 import React from 'react';
 // routing
 import { useRouter } from 'next/router';
+// components
+import TextInput from './inputs/TextInput';
 // MAterial UI
+import SubmitButton from './SubmitButton';
 import { Select, MenuItem } from '@material-ui/core';
 // forms validation
 import { useFormik } from 'formik';
@@ -63,8 +66,8 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
         <div className={ styles.Form2 }>
           <h1>NUEVO REQUERIMIENTO</h1>
           <form onSubmit={formik.handleSubmit} >
-            <TextField 
-              className={ styles.FormId } 
+            <TextInput 
+              styles = { styles.FormId }
               type="text"
               placeholder="Título" 
               name="name" 
@@ -73,10 +76,10 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               value = { formik.values.name }
               onChange = { formik.handleChange }
               error = { formik.touched.name && Boolean( formik.errors.name ) }
-              helpertext={formik.touched.name && formik.errors.name}
+              helperText={formik.touched.name && formik.errors.name}
             />
-            <TextField 
-              className= { styles.FormId }  
+            <TextInput 
+              styles= { styles.FormId }  
               type="text" 
               name="contact.name" 
               placeholder="Nombre de contacto" 
@@ -85,10 +88,10 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               value = { formik.values.contact?.name  }
               onChange = { formik.handleChange }
               error = { formik.touched.contact?.name && Boolean( formik.errors.contact?.name  ) }
-              helpertext={formik.touched.contact?.name  && formik.errors.contact?.name  }
+              helperText={formik.touched.contact?.name  && formik.errors.contact?.name  }
             />
-            <TextField 
-              className= { styles.FormId }  
+            <TextInput 
+              styles= { styles.FormId }  
               type="text" 
               name="contact.email" 
               placeholder="Correo de Contacto" 
@@ -97,7 +100,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               value = { formik.values.contact?.email }
               onChange = { formik.handleChange }
               error = { formik.touched.contact?.email && Boolean( formik.errors.contact?.email ) }
-              helpertext={formik.touched.contact?.email && formik.errors.contact?.email }
+              helperText={formik.touched.contact?.email && formik.errors.contact?.email }
             />
             <TextField 
               className= { styles.FormId }  
@@ -128,7 +131,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
                   value = { formik.values.project }
                   onChange = { formik.handleChange }
                   error = { formik.touched.project && Boolean( formik.errors.project ) }
-                  helpertext={formik.touched.project && formik.errors.project}
+                  helperText={formik.touched.project && formik.errors.project}
                 >
                   { projects?.map(( project, index) => 
                     <MenuItem
@@ -158,7 +161,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               helperText={formik.touched.requirement && formik.errors.requirement}
   
             />
-            <button type="submit" className={ styles.btn }>Enviar</button>
+            <SubmitButton styles={ styles.btn } textButton = { 'ENviar'} />
           </form>
 
         </div>

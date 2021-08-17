@@ -4,27 +4,45 @@ import { useRouter } from 'next/router';
 // context 
 import useUser from '../context/hooks/useUser';
 // componets
-import ErrorForm from '../components/ErrorForm';
+import TextInput from '../components/forms/inputs/TextInput';
+import SubmitButton from '../components/forms/SubmitButton';
 //styles
 import styles from '../styles/forms.module.scss'
 // form validation
-import { Formik, Form, Field } from 'formik';
+import { useFormik} from 'formik';
 import * as Yup from 'yup';
+// Material 
+import { TextField } from '@material-ui/core';
 
- const loginSchema = Yup.object().shape({
-   userName: Yup.string()
-     .required('El nombre de usuario es obligatorio'),
-   password: Yup.string().required('El password es obligatorio')
- });
 
 const Login = () => {
   // User context
   const userContext = useUser();
   const { userLogin, state : userState, isAuthenticated } = userContext; 
   const { isAuth, user, message } = userState;
-
+  
   // next Router
   const router = useRouter();
+  
+  // FORMIK 
+  const loginSchema = Yup.object({
+    userName: Yup.string()
+      .required('El nombre de usuario es obligatorio'),
+    password: Yup.string().required('El password es obligatorio')
+  });
+  const initialValues ={
+    userName : '',
+    password : ''
+  }
+  const formik = useFormik({
+    initialValues,
+    validationSchema : loginSchema,
+    onSubmit : async values =>{
+      // same shape as initial values
+      console.log('SUBMIT')
+      await userLogin(values);
+    },
+  });
 
   useEffect(() => {
     if( isAuth ){
@@ -38,52 +56,36 @@ const Login = () => {
         <div className={ styles.login }>
           <div className={ styles.login2 }>
             <h1>INICIAR SESIÓN</h1>
-            <Formik
-            initialValues={{
-              userName: '',
-              password: '',
-            }}
-            validationSchema={loginSchema}
-            onSubmit={ async values => {
-              // same shape as initial values
-              console.log('SUBMIT')
-              await userLogin(values);
-            }}
-            >
-              {({ errors, touched }) => (
-                <Form >
-                  <Field 
-                    className= {styles.LoginId}
-                    type="text" 
-                    name="userName" 
-                    placeholder="Usuario" 
-                    required="required"  
-                  />
-                  {errors.userName && touched.userName ? (
-                  <ErrorForm 
-                    classStyle= { styles.error_message } 
-                    errorMessage = {errors.userName}
-                  />
-                  ) : null}
+              <form onSubmit= {formik.handleSubmit } >
+                <TextInput 
+                  styles= { styles.FormId }
+                  type="text" 
+                  name="userName" 
+                  placeholder="Usuario" 
+                 
 
-                  <Field 
-                    className={styles.LoginId} 
-                    type="password" 
-                    name="password" 
-                    placeholder="Contraseña" 
-                    required="required" 
-                  />
-                  {errors.password && touched.password ? (
-                  <ErrorForm 
-                    classStyle= { styles.error_message } 
-                    errorMessage = {errors.password}
-                  />
-                  ) : null}
+                  value = { formik.values.userName }
+                  onChange = { formik.handleChange }
+                   error = { formik.touched.userName && Boolean( formik.errors.userName ) }
+                  helperText={formik.touched.userName && formik.errors.userName}
+                />
+                <TextInput 
+                  styles ={ styles.FormId } 
+                  type="password" 
+                  name="password" 
+                  placeholder="Contraseña" 
 
-                  <button type="submit" className={ styles.btn }>Iniciar Sesión</button>
-                </Form>
-              )}
-            </Formik>
+                  value = { formik.values.password }
+                  onChange = { formik.handleChange }
+                  error = { formik.touched.password && Boolean( formik.errors.password ) }
+                  helperText={formik.touched.password && formik.errors.password}
+                />
+                <SubmitButton
+                  styles = {  styles.btn }
+                  textButton = 'INCIAR SESIÓN'
+                /> 
+               
+              </form>
           </div>
         </div>
   );

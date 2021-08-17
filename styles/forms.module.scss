@@ -16,7 +16,7 @@ $form-font-placeholder-color : #aaa;
   padding: 30px 60px 60px 60px;
   background-color: #2E4054;
   border-radius: 10px;
-
+		
 	& h1 {
 		Color: $primary;
 		letter-spacing: 1px;
@@ -84,8 +84,9 @@ $form-font-placeholder-color : #aaa;
   }
 }
 .FormId{ 
+	width: 100%;
+	margin-bottom: 1rem !important;
 	& div{
-	
 		& input{
 			background-color: $background-light-color;
 			color: $form-font-color ;
@@ -141,6 +142,7 @@ $form-font-placeholder-color : #aaa;
 
 .textArea{
 	& div{
+		margin-bottom: 1rem;     
 		:focus{
 			box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); 
 		}
@@ -149,7 +151,6 @@ $form-font-placeholder-color : #aaa;
 			color: $form-font-color ;
 			width: 100%;
 			height: 150px !important; 
-			margin-bottom: 10px;     
 			outline: none;
 			padding: 10px;
 			font-size: 13px;	

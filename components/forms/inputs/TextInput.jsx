@@ -1,32 +1,8 @@
 import React from 'react';
 // MAterial UI
 import { TextField } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import { PlayCircleFilledWhite } from '@material-ui/icons';
-const styledTextInput = withStyles({
-  root: {
-    background: 'white',
-    '& label.Mui-focused': {
-      color: 'white'
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: 'white'
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'white'
-      },
-      '&:hover fieldset': {
-        borderColor: 'white'
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'white'
-      }
-    }
-  }
-})( TextField );
 
-const TextInput = ( 
+const TextInput = ({ 
   styles,
   type,
   name, 
@@ -35,11 +11,13 @@ const TextInput = (
   value,
   onChange, 
   error, 
-  helpertext ) => {
+  helperText 
+}) => {
+  //const classes = useStyles();
+  console.log({ styles })
   return ( 
-    <styledTextInput 
-      className={ styles } 
-
+    <TextField 
+      className = { styles }
       type= { type }
       name= { name } 
       placeholder= { placeholder } 
@@ -47,7 +25,7 @@ const TextInput = (
       value = { value }
       onChange = { onChange }
       error = { error }
-      helpertext={ helpertext }
+      helperText={ helperText }
     />
    );
 }
