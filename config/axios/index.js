@@ -1,7 +1,8 @@
+import { PersonPinCircleSharp } from '@material-ui/icons';
 import axios from 'axios';
 
 const scheduleApi = axios.create({
-  baseURL : 'https://schedule-got-it.herokuapp.com/schedule/v1',
+  baseURL : process.env.BASE_URL,
   headers :  { 'Content-Type': 'application/json' },
 });
 

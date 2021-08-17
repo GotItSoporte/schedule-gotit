@@ -1,6 +1,6 @@
 import React from 'react';
 // MAterial UI
-import { Select, MenuItem } from '@material-ui/core';
+import { Select, InputLabel } from '@material-ui/core';
 import styles from '../../../styles/forms.module.scss';
 const SelectInput = ({ 
   children,
