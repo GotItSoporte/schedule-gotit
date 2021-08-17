@@ -14,7 +14,6 @@ const TextInput = ({
   helperText 
 }) => {
   //const classes = useStyles();
-  console.log({ styles })
   return ( 
     <TextField 
       className = { styles }
