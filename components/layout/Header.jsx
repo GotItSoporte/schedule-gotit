@@ -56,17 +56,22 @@ const Header = () => {
             </div>
             <div id= { styles.Container }>
                 <ul id={styles.menu}>
-                  <li><a onClick ={ log_out } href="#">Cerrar Sesión</a></li>
-                        <li>
-                          <Link 
-                            href = {{
-                              pathname : '/new-req',
-                              query :{ company : user?.company }
-                            }}
-                            >
-                            <a>Nuevo requerimiento</a>
-                          </Link>
-                        </li>
+                  <li>
+                    <a onClick ={ log_out } href="#">Cerrar Sesión</a>
+                  </li>
+                    { !user?.role ?
+                      <li>
+                        <Link 
+                          href = {{
+                            pathname : '/new-req',
+                            query :{ company : user?.company }
+                          }}
+                          >
+                          <a>Nuevo requerimiento</a>
+                        </Link>
+                      </li>
+                      : null
+                    }
                   <li>
                     <Link 
                       href = {{

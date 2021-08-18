@@ -1,6 +1,7 @@
 import { 
   PROJECTS_ERROR, 
   PROJECTS_GET,
+  PROJECTS_SUCCES,
   PROJECTS_SET_CURRENT_PROJECT
 } from '../types';
 // react hook
@@ -19,10 +20,14 @@ const ProjectsWrapper =({ children }) =>{
   // ******************************************
   const getProjectsList = async ( company ) => {
     console.log( 'GetList')
+    dispatch( {
+      type: PROJECTS_GET,
+      payload: { loading: true }
+    });
     try {
       const result = await scheduleApi.get(`/projects${ company? `?company=${ company }`: '' }`);
       return dispatch( {
-        type: PROJECTS_GET,
+        type: PROJECTS_SUCCES,
         payload: result.data.projects,
       } );
     } catch (error) {
