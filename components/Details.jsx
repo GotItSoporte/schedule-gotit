@@ -20,6 +20,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
   }
   const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const reqDate = new Date( currentTask?.requirmentDate ).toLocaleDateString( 'es-ES', dateOptions)
+  
   return ( 
     <div id = { styles.Informacion }>
           <div id={ styles.Informacion2 }>
@@ -65,7 +66,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
                   <div className={ styles.InfoContacto }>
                     <div className={ styles.Campos }>
                       <span>Propietario del caso</span><br />
-                      <a>{ currentTask?.member || 'Este Caso no ha sio tomado' }</a>
+                      <a>{ currentTask?.member?.name || '-----' }</a>
                     </div>
                     <div className={ styles.Campos }>
                       <span>Email de contacto</span><br />
@@ -73,12 +74,12 @@ const Details = ({ editable, showForm, setShowForm }) => {
                     </div>
                     <div className={ styles.Campos }>
                       <span>Tiempo de solución</span><br />
-                      <a>3 Horas</a>
+                      <a>{ currentTask.time } Minutos</a>
                     </div>
                   </div>
                   <div className={ styles.Descripcion }>
                     <span>Descripcion de la solución</span>
-                    <p>{ currentTask?.description || 'No se ha tomado' }</p>
+                    <p>{ currentTask?.description || '' }</p>
                   </div>
                   
                 </>
