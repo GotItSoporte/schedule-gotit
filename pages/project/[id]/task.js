@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../../components/layout/Header';
 import Details from '../../../components/Details';
 import TaskForm from '../../../components/forms/TaskForm';
+import ReqForm from '../../../components/forms/reqForm';
 
 // context 
 import useUser from '../../../context/hooks/useUser';
@@ -12,6 +13,7 @@ import useTasks from '../../../context/hooks/useTasks';
 import styles from '../../../styles/pages.module.scss';
 
 import { scheduleApi } from '../../../config/axios';
+import { curryRight } from 'lodash';
 
 export async function getServerSideProps(context) {
   const { query } = context
@@ -39,7 +41,8 @@ const Task = ({ task }) => {
   const taskContext = useTasks();
   const { state: taskState, editRequirement } = taskContext; 
   const { currentTask } = taskState;
-  const { isTask, finished } = currentTask;
+  let isTask = currentTask?.isTask || false;
+  let finished = currentTask?.finished || false;
 
   const [ showForm, setShowForm ] = useState( false );
 
@@ -49,7 +52,11 @@ const Task = ({ task }) => {
     contact        : currentTask?.contact,
     requirement    : currentTask?.requirement ,
   }
-
+   let initialValuesTask = {
+     time : currentTask?.time * currentTask?.timeWeight,
+     finished : currentTask?.finished,
+     description : currentTask?.description,
+   }
   useEffect(() => {
     initialValues = {
       name           : currentTask?.name ,
@@ -84,15 +91,24 @@ const Task = ({ task }) => {
             />
         {
           showForm?
-          <TaskForm 
-              isrequeriment = {true}
-              projects = { projectsList }
-              submitFunction = { updateReq }
-              edit = { true }
-              task = { currentTask }
-              initialValues = { initialValues }
-          />
-
+            isTask ?
+            <TaskForm
+                isrequeriment = {true}
+                projects = { projectsList }
+                submitFunction = { updateReq }
+                edit = { true }
+                task = { currentTask }
+                initialValues = { initialValues }
+            />
+            : 
+            <ReqForm 
+                isrequeriment = {true}
+                projects = { projectsList }
+                submitFunction = { updateReq }
+                edit = { true }
+                task = { currentTask }
+                initialValues = { initialValuesTask }
+            />
           :null
         }
 

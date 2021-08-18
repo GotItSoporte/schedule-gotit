@@ -7,7 +7,7 @@ import useProjects from '../context/hooks/useProjects';
 import useTasks from '../context/hooks/useTasks';
 // compponents
 import Header from '../components/layout/Header';
-import TaskForm from '../components/forms/TaskForm';
+import ReqForm from '../components/forms/reqForm';
 import Spinner from '../components/Spinner';
 // api
 import { scheduleApi } from '../config/axios';
@@ -68,7 +68,7 @@ const NewReq = () => {
     <>
         <Header/>
     { isAuth? 
-        <TaskForm
+        <ReqForm
           isrequeriment = {true}
           projects = { projectsList }
           submitFunction = { setNewTask }
