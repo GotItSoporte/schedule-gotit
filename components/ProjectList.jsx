@@ -103,7 +103,7 @@ const Project = ({ project, setCurrentProject, getTasksProject, userRole })  =>{
           <BtnsContainer
             itemID = { project._id }
             seeFunc ={ linkProject }
-            showEdit = { userRole}
+            showEdit = { userRole === 'admin' }
             showDelete = { false }
           />
         </td>
