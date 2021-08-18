@@ -19,7 +19,6 @@ const ProjectsWrapper =({ children }) =>{
   // ********* Set ptojects to state **********
   // ******************************************
   const getProjectsList = async ( company ) => {
-    console.log( 'GetList')
     dispatch( {
       type: PROJECTS_GET,
       payload: { loading: true }

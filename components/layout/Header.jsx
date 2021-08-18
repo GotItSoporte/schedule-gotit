@@ -39,7 +39,6 @@ const Header = () => {
   }
 
   const goToIndex = () => {
-    console.log( 'CLICK !!!')
     router.push({
       pathname : '/',
       query : { company : user.company }

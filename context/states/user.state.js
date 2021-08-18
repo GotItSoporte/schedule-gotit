@@ -50,7 +50,7 @@ const UserWrapper = ({ children }) =>{
         }
       });
     } catch (error) {
-      console.log( 'errro', error.response.data.message )
+      console.log( 'error', error.response.data.message )
       return dispatch({
         type : USER_LOGIN_ERROR,
         payload: {
@@ -69,7 +69,6 @@ const UserWrapper = ({ children }) =>{
     // get token from localstorage
     const token = localStorage.getItem('got-it-token');
     if(  !token ){
-      console.log( 'no token' );
       return dispatch({
         type : USER_ERROR,
         payload: {
@@ -85,7 +84,6 @@ const UserWrapper = ({ children }) =>{
     try {
       // decode token
       const decodedToken = jwt_decode( token );
-      console.log({ decodedToken })
       const { id, name, role, company, isAdmin, cellphone, email } = decodedToken;
       return dispatch({
         type : USER_AUTH, 

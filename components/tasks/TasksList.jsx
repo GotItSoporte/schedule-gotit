@@ -22,10 +22,6 @@ const TasksList = () => {
   const projectsContext = useProjects();
   const { currentProject } = projectsContext;
 
-  useEffect(() => {
-    console.log( tasksList )
-  }, [tasksList]);
-  
   return ( 
      
     <section className ={ styles.section }>

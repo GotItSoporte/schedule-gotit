@@ -25,8 +25,6 @@ const userReducer = ( state, action ) =>{
     case USER_LOGIN_SUCESS:
       localStorage.setItem('got-it-token', payload.token);
       const { loading, token, message, isAuth, user } = payload
-      console.log( 'REDUCER',{state}, { payload } )
-
       //Alert
       FireToast( 'success',message )
       return({

@@ -53,10 +53,6 @@ const StyledButtonsContainer = styled.div`
 
 const BtnsContainer = ({ seeFunc, editFunc, deleteFunc, itemID, showEdit, showDelete }) => {
 
-  const seeFunc0 = ( itemID ) =>{
-    console.log('Ver mas ', itemID )
-  }
-  
   const editFunc0 = ( itemID ) =>{
     console.log('Editar ', itemID )
   }

@@ -88,7 +88,6 @@ const Project = ({ project, setCurrentProject, getTasksProject, userRole })  =>{
   let timeTotal = project?.time[ project?.currentMonth - 1 ].minutes;
   let timeUsed = project?.time[ project?.currentMonth - 1 ].minutesUsed;
   let timeLeft = (timeTotal - timeUsed) / 60 ;
-  console.log({ timeTotal, timeUsed, timeLeft })
   timeTotal = timeTotal / 60;
   timeUsed = timeUsed / 60;
   return  (

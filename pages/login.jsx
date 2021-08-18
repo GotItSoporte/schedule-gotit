@@ -39,7 +39,6 @@ const Login = () => {
     validationSchema : loginSchema,
     onSubmit : async values =>{
       // same shape as initial values
-      console.log('SUBMIT')
       await userLogin(values);
     },
   });
