@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // routing
 import { useRouter } from 'next/router';
 // components
@@ -14,8 +14,8 @@ import { TextField, InputLabel } from '@material-ui/core';
 // styles
 import styles from '../../styles/forms.module.scss';
 
-
-const ReqForm = ({ projects, submitFunction, isrequeriment, edit, initialValues }) => {
+const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
+  
   // yup
   const taskSchema = edit ?
     Yup.object({
@@ -57,14 +57,13 @@ const ReqForm = ({ projects, submitFunction, isrequeriment, edit, initialValues 
      initialValues,
      validationSchema : taskSchema,
      onSubmit : values =>submit( values ),
- 
    });
    return ( 
      <>  
        <div className={ styles.Form }>
 
         <div className={ styles.Form2 }>
-          <h1>NUEVO REQUERIMIENTO</h1>
+          <h1>{ edit? 'EDITAR REQUERIMIENTO' : 'NUEVO REQUERIMIENTO'}</h1>
           <form onSubmit={formik.handleSubmit} >
             <TextInput 
               styles = { styles.FormId }

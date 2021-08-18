@@ -98,7 +98,7 @@ const Task = ({ task }) => {
                 submitFunction = { updateReq }
                 edit = { true }
                 task = { currentTask }
-                initialValues = { initialValues }
+                initialValues = { initialValuesTask }
             />
             : 
             <ReqForm 
@@ -107,7 +107,7 @@ const Task = ({ task }) => {
                 submitFunction = { updateReq }
                 edit = { true }
                 task = { currentTask }
-                initialValues = { initialValuesTask }
+                initialValues = { initialValues }
             />
           :null
         }
