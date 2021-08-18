@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../../components/layout/Header';
 import Details from '../../../components/Details';
 import TaskForm from '../../../components/forms/TaskForm';
-import ReqForm from '../../../components/forms/reqForm';
+import ReqForm from '../../../components/forms/ReqForm';
 
 // context 
 import useUser from '../../../context/hooks/useUser';

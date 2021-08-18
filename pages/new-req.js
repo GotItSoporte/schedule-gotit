@@ -7,7 +7,7 @@ import useProjects from '../context/hooks/useProjects';
 import useTasks from '../context/hooks/useTasks';
 // compponents
 import Header from '../components/layout/Header';
-import ReqForm from '../components/forms/reqForm';
+import ReqForm from '../components/forms/ReqForm';
 import Spinner from '../components/Spinner';
 // api
 import { scheduleApi } from '../config/axios';
