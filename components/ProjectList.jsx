@@ -90,6 +90,7 @@ const Project = ({ project, setCurrentProject, getTasksProject, userRole })  =>{
   let timeLeft = (timeTotal - timeUsed) / 60 ;
   console.log({ timeTotal, timeUsed, timeLeft })
   timeTotal = timeTotal / 60;
+  timeUsed = timeUsed / 60;
   return  (
     <tr>
       <td> { name }</td>

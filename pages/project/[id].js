@@ -126,14 +126,17 @@ const Project = ({ notFound, project, message, tasks }) => {
                   </table>
               </div>
             { tasksState? <TasksList /> : <h2>No hay tareas para mostrar</h2>}
-            <button 
-              type="button" 
-              className={ styles.NuevoRequerimiento }
-              onClick = { () => router.push( {
-                pathname : '/new-req',
-                query :{ company : user?.company }
-              } )}
-            >Agregar Requerimiento </button>
+            { !user.role?
+              <button 
+                type="button" 
+                className={ styles.NuevoRequerimiento }
+                onClick = { () => router.push( {
+                  pathname : '/new-req',
+                  query :{ company : user?.company }
+                } )}
+              >Agregar Requerimiento </button>
+              : null
+            }
           </section>
         </div>
            <div id={ styles.Proyecto }>
