@@ -1,9 +1,6 @@
 import React from 'react';
 // styles 
-import styles from '../styles/spinner.module.scss';
 import styled, { keyframes } from 'styled-components';
-
-
 const Spinner = () => {
   return ( 
     <StyledSpinner>
@@ -12,7 +9,6 @@ const Spinner = () => {
       </StyledSpinner>
   );
 }
-
 const lds_facebook  = keyframes`
  0% {
     top: 8px;
