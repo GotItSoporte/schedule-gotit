@@ -1,6 +1,7 @@
 export const PROJECTS_GET                 = 'PROJECTS_GET';
 export const PROJECTS_SET_CURRENT_PROJECT = 'PROJECTS_SET_CURRENT_PROJECT';
 export const PROJECTS_ERROR               = 'PROJECTS_ERROR';
+export const PROJECTS_SUCCES              = 'PROJECTS_SUCCES';
 
 // tasks
 export const TASKS_SET_TASK           = 'TASKS_SET_TASK';
