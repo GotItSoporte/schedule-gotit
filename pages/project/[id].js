@@ -126,7 +126,7 @@ const Project = ({ notFound, project, message, tasks }) => {
                   </table>
               </div>
             { tasksState? <TasksList /> : <h2>No hay tareas para mostrar</h2>}
-            { !user.role?
+            { !user?.role?
               <button 
                 type="button" 
                 className={ styles.NuevoRequerimiento }

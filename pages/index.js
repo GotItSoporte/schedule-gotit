@@ -61,7 +61,7 @@ export default function Home() {
     { isAuth? 
       <>
         <Header/>
-        { user?.company? <ProjectList userRole = { user.role } /> : <Spinner/> } 
+        { user?.company? <ProjectList userRole = { user?.role } /> : <Spinner/> } 
       </>
       : <Spinner/>
     }

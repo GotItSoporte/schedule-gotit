@@ -32,6 +32,9 @@ const Header = () => {
   }, [ useState ])
 
   const log_out = () =>{
+    router.push({
+      pathname : '/login',
+    })
     logout();
   }
 
