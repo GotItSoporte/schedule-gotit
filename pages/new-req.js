@@ -8,6 +8,7 @@ import useTasks from '../context/hooks/useTasks';
 // compponents
 import Header from '../components/layout/Header';
 import TaskForm from '../components/forms/TaskForm';
+import Spinner from '../components/Spinner';
 // api
 import { scheduleApi } from '../config/axios';
 // forms validation
@@ -41,9 +42,7 @@ const NewReq = () => {
   //
   const authentication = async () => {
     await isAuthenticated();
-    if( !isAuth ){
-      router.push( '/login' )
-    }
+
   }
   const getProjects = async company => {
     if( company ){
@@ -65,17 +64,19 @@ const NewReq = () => {
   const setNewTask = async values =>{
     await createRequirement( values )
   }
-  return ( 
-    <>  
-      <Header/>
-      <TaskForm
-        isrequeriment = {true}
-        projects = { projectsList }
-        submitFunction = { setNewTask }
-        edit = { false }
-        initialValues = { initialValues }
-      />   
-    </>
+  return (
+    <>
+        <Header/>
+    { isAuth? 
+        <TaskForm
+          isrequeriment = {true}
+          projects = { projectsList }
+          submitFunction = { setNewTask }
+          edit = { false }
+          initialValues = { initialValues }
+        />   
+    : <Spinner/>}
+    </> 
   );
 }
 

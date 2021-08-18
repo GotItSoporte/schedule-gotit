@@ -35,7 +35,7 @@ export default function Home() {
       authentication();
     }
     getProjects( user );
-  }, [ isAuth ])
+  }, [ ])
   
   const authentication = async () => {
     await isAuthenticated();
