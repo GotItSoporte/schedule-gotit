@@ -39,7 +39,7 @@ const Task = ({ task }) => {
   const { isAuth, user } = userState;
   // userContext
   const taskContext = useTasks();
-  const { state: taskState, editRequirement } = taskContext; 
+  const { state: taskState, editRequirement, setReqAsTask, editActiveTask } = taskContext; 
   const { currentTask } = taskState;
   let isTask = currentTask?.isTask || false;
   let finished = currentTask?.finished || false;
@@ -53,8 +53,9 @@ const Task = ({ task }) => {
     requirement    : currentTask?.requirement ,
   }
    let initialValuesTask = {
-     time : currentTask?.time * currentTask?.timeWeight,
+     time : currentTask?.time * currentTask?.timeWeight || 0,
      finished : currentTask?.finished,
+     success : currentTask?.success,
      description : currentTask?.description,
    }
   useEffect(() => {
@@ -79,23 +80,38 @@ const Task = ({ task }) => {
     setShowForm( false )
   }
   
+  const setAsTask = async values => {
+    values.time = parseInt( values.time )
+    values.timeWeight = 1;
+    console.log( 'setAs', { values } )
+    await setReqAsTask( values, currentTask._id );
+    setShowForm( false )
+  }
+
+  const editTask = async values => {
+    values.timeWeight = 1;
+    values.time = parseInt( values.time )
+    console.log( 'Editt',{ values } )
+    await editActiveTask( values, currentTask._id );
+    setShowForm( false )
+  }
   return ( 
     <>
       <Header/>
       <div id={ styles.Informacion }>
             <Details
-              editable = { (!user?.role && !isTask) || ( user?.role && isTask && !finished )   }
+              editable = { (!user?.role && !isTask) || ( !finished )   }
               user ={ user }
               showForm = { showForm }
               setShowForm = { setShowForm }
             />
         {
           showForm?
-            isTask ?
+            user.role ?
             <TaskForm
                 isrequeriment = {true}
                 projects = { projectsList }
-                submitFunction = { updateReq }
+                submitFunction = { isTask? editTask : setAsTask}
                 edit = { true }
                 task = { currentTask }
                 initialValues = { initialValuesTask }

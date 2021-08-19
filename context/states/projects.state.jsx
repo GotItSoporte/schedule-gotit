@@ -33,7 +33,7 @@ const ProjectsWrapper =({ children }) =>{
       return dispatch( {
         type: PROJECTS_ERROR,
         payload: {
-          message: error.response.data.message,
+          message: error.response?.data?.message,
         },
       } );
       

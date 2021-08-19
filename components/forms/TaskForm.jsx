@@ -3,6 +3,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 // components
 import TextInput from './inputs/TextInput';
+import CheckBox from './inputs/CheckBox';
 // MAterial UI
 import SubmitButton from './SubmitButton';
 import { Select, MenuItem } from '@material-ui/core';
@@ -20,14 +21,16 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
   const taskSchema = edit ?
     Yup.object({
       time: Yup.number(),
-      decription: Yup.string(),
-      finished: Yup.string(),
+      description: Yup.string(),
+      finished: Yup.boolean(),
+      success: Yup.boolean(),
     })
   :
     Yup.object({
       time: Yup.string().required('Debes especificar el tiempo empleado'),
-      decription: Yup.string().required( 'Es necesario escribir una breve descripción' ),
-      finished: Yup.string().required( 'Especifica si se ha finalizao' ),
+      description: Yup.string().required( 'Es necesario escribir una breve descripción' ),
+      finished: Yup.boolean(),
+      success: Yup.boolean(),
     });
 
    //
@@ -61,19 +64,34 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               error = { formik.touched.time && Boolean( formik.errors.time ) }
               helperText={formik.touched.time && formik.errors.time}
             />
+            <CheckBox
+              id = 'finished'
+              checked = { formik.values.finished }
+              onBlur = { formik.handleBlur }
+              onChange = { formik.handleChange }
+              
+              label="Se cierra el seguimiento a este requerimiento"
+            />
+            <CheckBox
+              id = 'success'
+              checked = { formik.values.success }
+              onBlur = { formik.handleBlur }
+              onChange = { formik.handleChange }
 
+              label="Si, se dio solución al requerimiento"
+            />
             <TextField 
               className={ styles.textArea } 
               type="textarea" 
               multiline
-              name="decription" 
-              placeholder="Por favor describa su requerimiento" 
+              name="description" 
+              placeholder="Por favor escriba suna breve descripción de la solución" 
               fullWidth
   
-              value = { formik.values.decription }
+              value = { formik.values.description }
               onChange = { formik.handleChange }
-              error = { formik.touched.decription && Boolean( formik.errors.decription ) }
-              helperText={formik.touched.decription && formik.errors.decription}
+              error = { formik.touched.description && Boolean( formik.errors.description ) }
+              helperText={formik.touched.description && formik.errors.description}
   
             />
             <SubmitButton styles={ styles.btn } textButton = { 'ENviar'} />

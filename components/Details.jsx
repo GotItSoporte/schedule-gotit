@@ -50,6 +50,10 @@ const Details = ({ editable, showForm, setShowForm }) => {
                   <a>{ reqDate }</a>
                 </div>
                 <div className={ styles.Campos }>
+                  <span>CÓDIGO DE REFERENCIA</span><br />
+                  <a>{ currentTask?.ref }</a>
+                </div>
+                <div className={ styles.Campos }>
                   <span>FECHA DE FINALIZACIÓN</span><br />
                   <a>{ currentTask?.finishDate || 'En curso' }</a>
                 </div>
@@ -59,8 +63,8 @@ const Details = ({ editable, showForm, setShowForm }) => {
                 <p>{ currentTask?.requirement }</p>
               </div>
             </div>
+            {/* Si el caso ya fue tomado */}
             <div id={ styles.InfoSolucion }>
-                {/* Si el caso ya fue tomado */}
               { currentTask?.isTask ?
                 <>
                   <div className={ styles.InfoContacto }>
