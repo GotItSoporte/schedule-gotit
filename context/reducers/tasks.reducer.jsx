@@ -4,6 +4,8 @@ import {
   TASKS_SET_CURRENT_TASK,
   TASKS_CREATE_REQUERIMENT,
   TASKS_EDIT_REQUERIMENT,
+  TASKS_SET_TASK_ACTIVE,
+  TASKS_EDIT_ACTIVE_TASK,
   TASKS_ERROR
 } from '../types';
 // Sweet Aert
@@ -23,8 +25,10 @@ const tasksReducer = ( state, action ) => {
         ...state,
         currentTask : payload
       });
-    case TASKS_EDIT_REQUERIMENT:
+    case TASKS_SET_TASK_ACTIVE:
+    case TASKS_EDIT_ACTIVE_TASK:
     case TASKS_CREATE_REQUERIMENT:
+    case TASKS_EDIT_REQUERIMENT:
       // Alert
       FireToast( 'success', payload.message )
       return({

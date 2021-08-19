@@ -4,6 +4,8 @@ import {
   TASKS_SET_CURRENT_TASK,
   TASKS_CREATE_REQUERIMENT,
   TASKS_EDIT_REQUERIMENT,
+  TASKS_SET_TASK_ACTIVE,
+  TASKS_EDIT_ACTIVE_TASK,
   TASKS_ERROR
 } from '../types';
 // react hook
@@ -55,7 +57,7 @@ const TasksWrapper =({ children }) =>{
     } );
   }
   // ******************************************
-  // ************* Create new task ************
+  // ********* Create new Requeriment *********
   // ******************************************
   const createRequirement = async ( task ) => {
     try {
@@ -94,6 +96,50 @@ const TasksWrapper =({ children }) =>{
         });
     }
   }
+
+
+  // ******************************************
+  // ****** Set Requirement As Active *********
+  // ******************************************
+  const setReqAsTask = async ( task, taskID ) => {
+   try {
+    const result = await scheduleApi.put ( `/requeriments/set-time/${ taskID }`, task );
+      return dispatch({
+        type : TASKS_SET_TASK_ACTIVE,
+        payload : {
+          currentTask : result.data.updatedTask,
+          message : result.data.message,
+        },
+    })
+   } catch (error) {
+    return dispatch({
+      type: TASKS_ERROR,
+      payload: error.response.data.message
+    });
+   } 
+  
+  }
+  // ******************************************
+  // ***********  Edit Active task  ***********
+  // ******************************************
+  const editActiveTask = async ( task, taskID ) => {
+   try {
+    const result = await scheduleApi.put ( `/requeriments/set-time/${ taskID }`, task );
+      return dispatch({
+        type : TASKS_EDIT_ACTIVE_TASK,
+        payload : {
+          currentTask : result.data.updatedTask,
+          message : result.data.message,
+        },
+    })
+   } catch (error) {
+    return dispatch({
+      type: TASKS_ERROR,
+      payload: error.response.data.message
+    });
+   } 
+  }
+
   return(
     <TaskContext.Provider value = { { 
         state : state,
@@ -101,7 +147,9 @@ const TasksWrapper =({ children }) =>{
         setTasksList : setTasksList,
         setCurrentTask : setCurrentTask,
         createRequirement : createRequirement,
-        editRequirement : editRequirement
+        editRequirement : editRequirement,
+        setReqAsTask : setReqAsTask,
+        editActiveTask : editActiveTask,
     }}>
       { children }
     </TaskContext.Provider>
