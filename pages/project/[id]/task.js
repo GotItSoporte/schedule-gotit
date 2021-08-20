@@ -100,7 +100,7 @@ const Task = ({ task }) => {
       <Header/>
       <div id={ styles.Informacion }>
             <Details
-              editable = { (!user?.role && !isTask) || ( !finished )   }
+              editable = { !isTask || ( user?.role && !finished  )   }
               user ={ user }
               showForm = { showForm }
               setShowForm = { setShowForm }
