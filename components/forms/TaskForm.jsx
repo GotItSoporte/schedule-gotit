@@ -4,9 +4,13 @@ import { useRouter } from 'next/router';
 // components
 import TextInput from './inputs/TextInput';
 import CheckBox from './inputs/CheckBox';
+import TimeInput from './inputs/TimeInput';
 // MAterial UI
 import SubmitButton from './SubmitButton';
 import { Select, MenuItem } from '@material-ui/core';
+import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/pickers'
+import DateFnsUtils from '@date-io/date-fns';
+import MomentUtils from '@date-io/moment';
 // forms validation
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -16,21 +20,34 @@ import { TextField, InputLabel } from '@material-ui/core';
 import styles from '../../styles/forms.module.scss';
 
 
-const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues }) => {
+const TaskForm = ({  submitFunction, edit, initialValues }) => {
+ 
   // yup
   const taskSchema = edit ?
-    Yup.object({
+    Yup.array({
       time: Yup.number(),
-      description: Yup.string(),
+      sessions : Yup.array().of (
+        Yup.object({
+          startTime : Yup.date().nullable(),   
+          finishTime : Yup.date().nullable(),    
+        })
+      ),
       finished: Yup.boolean(),
       success: Yup.boolean(),
+      description: Yup.string(),
     })
   :
     Yup.object({
       time: Yup.string().required('Debes especificar el tiempo empleado'),
-      description: Yup.string().required( 'Es necesario escribir una breve descripción' ),
+      sessions : Yup.array().of (
+        Yup.object({
+          startTime : Yup.date().nullable(),   
+          finishTime : Yup.date().nullable(),    
+        })
+      ),      
       finished: Yup.boolean(),
       success: Yup.boolean(),
+      description: Yup.string().required( 'Es necesario escribir una breve descripción' ),
     });
 
    //
@@ -45,6 +62,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
      onSubmit : values =>{submit( values )},
  
    });
+
    return ( 
      <>  
        <div className={ styles.Form }>
@@ -64,13 +82,38 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               error = { formik.touched.time && Boolean( formik.errors.time ) }
               helperText={formik.touched.time && formik.errors.time}
             />
+            <MuiPickersUtilsProvider  utils = { DateFnsUtils }>
+              {
+                formik.values.sessions?.map ( ( session, index ) => 
+                <div
+                    key = { index }
+                >
+                    <TimeInput
+                      fullWidth
+                      id = { `${index}-start` }
+                      value = { formik.values.sessions[ index ].startTime }
+                      label = 'Hora de inicio'
+                      formikSetFieldValue= {  formik.setFieldValue  }
+                    />
+                    <TimeInput
+                    fullWidth
+                    id = { `${index}-finish` }
+                    value = { formik.values.sessions[ index ].finishTime }
+                    label = 'Hora de finalizacion'
+                    formikSetFieldValue= {  formik.setFieldValue  }
+                  />
+                  </div>
+                )
+              }
+
+            </MuiPickersUtilsProvider>
             <CheckBox
               id = 'finished'
               checked = { formik.values.finished }
               onBlur = { formik.handleBlur }
               onChange = { formik.handleChange }
               
-              label="Se cierra el seguimiento a este requerimiento"
+              label="Dar el requerimiento por Cerrado"
             />
             <CheckBox
               id = 'success'
@@ -78,7 +121,7 @@ const TaskForm = ({ projects, submitFunction, isrequeriment, edit, initialValues
               onBlur = { formik.handleBlur }
               onChange = { formik.handleChange }
 
-              label="Si, se dio solución al requerimiento"
+              label="Se Ha dado solución al requerimiento"
             />
             <TextField 
               className={ styles.textArea } 

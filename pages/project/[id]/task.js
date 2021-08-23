@@ -54,6 +54,7 @@ const Task = ({ task }) => {
   }
    let initialValuesTask = {
      time : currentTask?.time * currentTask?.timeWeight || 0,
+     sessions : currentTask?.sessions,
      finished : currentTask?.finished,
      success : currentTask?.success,
      description : currentTask?.description,
@@ -84,7 +85,7 @@ const Task = ({ task }) => {
     values.time = parseInt( values.time )
     values.timeWeight = 1;
     console.log( 'setAs', { values } )
-    await setReqAsTask( values, currentTask._id );
+   // await setReqAsTask( values, currentTask._id );
     setShowForm( false )
   }
 
@@ -92,7 +93,7 @@ const Task = ({ task }) => {
     values.timeWeight = 1;
     values.time = parseInt( values.time )
     console.log( 'Editt',{ values } )
-    await editActiveTask( values, currentTask._id );
+   // await editActiveTask( values, currentTask._id );
     setShowForm( false )
   }
   return ( 
