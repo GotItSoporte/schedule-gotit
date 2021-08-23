@@ -2,13 +2,9 @@ import React from 'react';
 // componets
 import TimeInput from './TimeInput';
 
-const SessionsInput = ({ sessions<[]> }) => {
+const SessionsInput = ({ sessions, values }) => {
   return ( 
-    { sessions.map( (session, index )=> {
-
-    } )
-
-    }
+    <h1>Seessions Input</h1>
   );
 }
  
