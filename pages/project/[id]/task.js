@@ -13,7 +13,6 @@ import useTasks from '../../../context/hooks/useTasks';
 import styles from '../../../styles/pages.module.scss';
 
 import { scheduleApi } from '../../../config/axios';
-import { curryRight } from 'lodash';
 
 export async function getServerSideProps(context) {
   const { query } = context
@@ -53,7 +52,7 @@ const Task = ({ task }) => {
     requirement    : currentTask?.requirement ,
   }
    let initialValuesTask = {
-     time : currentTask?.time * currentTask?.timeWeight || 0,
+     time : currentTask?.time || 0,
      sessions : currentTask?.sessions,
      finished : currentTask?.finished,
      success : currentTask?.success,

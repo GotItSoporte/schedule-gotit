@@ -5,9 +5,10 @@ import { useRouter } from 'next/router';
 import TextInput from './inputs/TextInput';
 import CheckBox from './inputs/CheckBox';
 import TimeInput from './inputs/TimeInput';
+import SessionsInput from './inputs/SessionsInput';
 // MAterial UI
 import SubmitButton from './SubmitButton';
-import { Select, MenuItem } from '@material-ui/core';
+
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns';
 import MomentUtils from '@date-io/moment';
@@ -81,32 +82,14 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
               onChange = { formik.handleChange }
               error = { formik.touched.time && Boolean( formik.errors.time ) }
               helperText={formik.touched.time && formik.errors.time}
+              />
+            <SessionsInput  
+              sessions = { formik.values.sessions } 
+              formikSetFieldValue = {  formik.setFieldValue  }
+              
+              formikTouchedSessions = { formik.touched.sessions }
+              formikErrorsSessions = { formik.errors.sessions }
             />
-            <MuiPickersUtilsProvider  utils = { DateFnsUtils }>
-              {
-                formik.values.sessions?.map ( ( session, index ) => 
-                <div
-                    key = { index }
-                >
-                    <TimeInput
-                      fullWidth
-                      id = { `${index}-start` }
-                      value = { formik.values.sessions[ index ].startTime }
-                      label = 'Hora de inicio'
-                      formikSetFieldValue= {  formik.setFieldValue  }
-                    />
-                    <TimeInput
-                    fullWidth
-                    id = { `${index}-finish` }
-                    value = { formik.values.sessions[ index ].finishTime }
-                    label = 'Hora de finalizacion'
-                    formikSetFieldValue= {  formik.setFieldValue  }
-                  />
-                  </div>
-                )
-              }
-
-            </MuiPickersUtilsProvider>
             <CheckBox
               id = 'finished'
               checked = { formik.values.finished }
