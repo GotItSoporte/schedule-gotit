@@ -19,7 +19,7 @@ import * as Yup from 'yup';
 import { TextField, Grid } from '@material-ui/core';
 // styles
 import styles from '../../styles/forms.module.scss';
-
+import { StyledForm } from '../../styles/StyledForm';
 
 const TaskForm = ({  submitFunction, edit, initialValues }) => {
   // yup
@@ -65,9 +65,18 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
     
    return ( 
      <>  
-       <div className={ styles.Form }>
+       <StyledForm 
+        container
+        justifyContent = 'center'
+        alignItems = 'center'
+       >
 
-        <div className={ styles.Form2 }>
+        <Grid 
+          className = 'form-container'
+          item
+          xs = { 12 }
+          md = { 8 }
+        >
           <h1>EDITAR TAREA</h1>
           <form onSubmit={formik.handleSubmit} >
             <TextInput 
@@ -127,8 +136,8 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
             <SubmitButton styles={ styles.btn } textButton = { 'ENviar'} />
           </form>
 
-        </div>
-     </div>
+        </Grid>
+     </StyledForm>
    </>
   );
 }

@@ -27,7 +27,7 @@ const theme = {
   'warning-color' : 'rgb(255, 217, 0)',
   'success-color'  : 'rgb(0, 250, 54)',
 
-
+  
 };
 
 function MyApp({ Component, pageProps }) {

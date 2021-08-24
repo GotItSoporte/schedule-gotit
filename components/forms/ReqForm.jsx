@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import TextInput from './inputs/TextInput';
 // MAterial UI
 import SubmitButton from './SubmitButton';
-import { Select, MenuItem } from '@material-ui/core';
+import { Select, MenuItem, Grid } from '@material-ui/core';
 // forms validation
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -13,9 +13,9 @@ import * as Yup from 'yup';
 import { TextField, InputLabel } from '@material-ui/core';
 // styles
 import styles from '../../styles/forms.module.scss';
+import { StyledForm } from '../../styles/StyledForm';
 
-const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
-  
+const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {  
   // yup
   const taskSchema = edit ?
     Yup.object({
@@ -60,9 +60,18 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
    });
    return ( 
      <>  
-       <div className={ styles.Form }>
+       <StyledForm 
+        container
+        justifyContent = 'center'
+        alignItems = 'center'
+       >
 
-        <div className={ styles.Form2 }>
+        <Grid 
+          className = 'form-container'
+          item
+          xs = { 12 }
+          md = { 8 }
+        >
           <h1>{ edit? 'EDITAR REQUERIMIENTO' : 'NUEVO REQUERIMIENTO'}</h1>
           <form onSubmit={formik.handleSubmit} >
             <TextInput 
@@ -163,8 +172,8 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
             <SubmitButton styles={ styles.btn } textButton = { 'ENviar'} />
           </form>
 
-        </div>
-     </div>
+        </Grid>
+     </StyledForm>
    </>
   );
 }
