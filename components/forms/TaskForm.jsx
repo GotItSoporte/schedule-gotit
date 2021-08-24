@@ -16,7 +16,7 @@ import MomentUtils from '@date-io/moment';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 //
-import { TextField, InputLabel } from '@material-ui/core';
+import { TextField, Grid } from '@material-ui/core';
 // styles
 import styles from '../../styles/forms.module.scss';
 
@@ -89,23 +89,27 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
               formikTouchedSessions = { formik.touched.sessions }
               formikErrorsSessions = { formik.errors.sessions }
             />
+            <Grid
+              container
+              direction = 'column'
+            >
+              <CheckBox
+                id = 'finished'
+                checked = { formik.values.finished }
+                onBlur = { formik.handleBlur }
+                onChange = { formik.handleChange }
+                
+                label="Dar el requerimiento por Cerrado"
+              />
+              <CheckBox
+                id = 'success'
+                checked = { formik.values.success }
+                onBlur = { formik.handleBlur }
+                onChange = { formik.handleChange }
 
-            <CheckBox
-              id = 'finished'
-              checked = { formik.values.finished }
-              onBlur = { formik.handleBlur }
-              onChange = { formik.handleChange }
-              
-              label="Dar el requerimiento por Cerrado"
-            />
-            <CheckBox
-              id = 'success'
-              checked = { formik.values.success }
-              onBlur = { formik.handleBlur }
-              onChange = { formik.handleChange }
-
-              label="Se Ha dado solución al requerimiento"
-            />
+                label="Se Ha dado solución al requerimiento"
+              />
+            </Grid>
             <TextField 
               className={ styles.textArea } 
               type="textarea" 

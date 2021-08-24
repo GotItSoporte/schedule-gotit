@@ -105,7 +105,7 @@ const Task = ({ task }) => {
             />
         {
           showForm?
-            user.role ?
+            user?.role ?
             <TaskForm
                 isrequeriment = {true}
                 projects = { projectsList }

@@ -10,6 +10,37 @@ import TimeInput from './TimeInput';
 import TextInput from './TextInput';
 import CheckBox from './CheckBox';
 
+// styles
+import styled from 'styled-components';
+
+const StyledSessions = styled(Grid)`
+  margin: 0 0 1rem 0;
+`;
+
+const StyledContainer = styled(Grid)`
+padding: 0 0 0.5rem 0;
+& div{
+    padding: 0 0 0.5rem 0;
+    color : ${ props => props.theme[ 'color-input-text' ]  };
+    & label {
+      color : ${ props => props.theme[ 'color-text' ] };
+    }
+  }
+`;
+const StyledLabel = styled(InputLabel)`
+  padding: 0.5rem 0  0.5rem 0 !important;
+   color : ${ props => props.theme[ 'secondary' ] } !important;
+`;
+
+const StyledAddButton = styled(Button)`
+  max-width: 12rem;
+   border-color : ${ props => props.theme[ 'secondary' ] } ;
+`;
+
+const StyledDeleteButton = styled(Button)`
+   border-color : ${ props => props.theme[ 'secondary' ] } !important;
+`;
+
 const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, formikErrorsSessions }) => {
   // Add Session chekBox;
   const handleAddSession = () => {
@@ -53,19 +84,22 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
      );
   }, [ sessions ]);
   return ( 
-    <Grid 
+    <StyledSessions 
       container
       direction =  'column'
     >
         <MuiPickersUtilsProvider  utils = { DateFnsUtils }  >
         {sessions?.map ( ( session, index ) => 
-        <Grid 
+        <StyledContainer 
           key ={ index }
           container
+          justifyContent = 'space-between'
+          alignItems = 'center'
         > 
           <Grid item xs = { 12 }>
-            <InputLabel id = 'sessionsPickers'> Sesión del { transformDate (session.startTime) } </InputLabel>
+            <StyledLabel id = 'sessionsPickers'> Sesión del { transformDate (session.startTime) } </StyledLabel>
           </Grid>
+          <Grid item xs = { 6 } md = { 3 }>
             <TimeInput
               fullWidth
               id = { `sessions.${index}.startTime` }
@@ -74,6 +108,8 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
               formikSetFieldValue= { formikSetFieldValue }
               onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
               />
+          </Grid>
+          <Grid item xs = { 6 } md = { 3 }>
             <TimeInput
               fullWidth
               id = { `sessions.${index}.finishTime` }
@@ -82,6 +118,8 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
               formikSetFieldValue= { formikSetFieldValue }
               onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
             />
+          </Grid>
+          <Grid item xs = { 4 } md = { 1 }>
             <TextInput
               type="text"
                 label = 'minutos'
@@ -92,17 +130,22 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
               error = { formikTouchedSessions?.value && Boolean( formikErrorsSessions?.value ) }
               helperText={ formikTouchedSessions?.value && formikErrorsSessions?.value }
             />
-        <Button 
-          onClick = {() => deleteSession( index ) }
-        > quitar Sesión</Button>
-      </Grid >
+          </Grid>
+          <Grid item xs = { 4 } md = { 2 }>
+            <StyledDeleteButton 
+              variant="outlined"
+              onClick = {() => deleteSession( index ) }
+            > X</StyledDeleteButton>
+          </Grid>
+      </StyledContainer >
         )}
         </MuiPickersUtilsProvider>
         
-      <Button 
+      <StyledAddButton 
+        variant = 'outlined'
         onClick = { handleAddSession }
-      > Agregr Sesión</Button>
-    </Grid>
+      > Agregr Sesión</StyledAddButton>
+    </StyledSessions>
   );
 }
  
