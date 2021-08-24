@@ -82,17 +82,15 @@ const Task = ({ task }) => {
   
   const setAsTask = async values => {
     values.time = parseInt( values.time )
-    values.timeWeight = 1;
     console.log( 'setAs', { values } )
    // await setReqAsTask( values, currentTask._id );
     setShowForm( false )
   }
 
   const editTask = async values => {
-    values.timeWeight = 1;
     values.time = parseInt( values.time )
     console.log( 'Editt',{ values } )
-   // await editActiveTask( values, currentTask._id );
+    await editActiveTask( values, currentTask._id );
     setShowForm( false )
   }
   return ( 

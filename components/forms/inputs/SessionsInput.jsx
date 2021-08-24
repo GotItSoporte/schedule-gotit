@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-// componets
-import { InputLabel } from '@material-ui/core';
+// MaterialUi
+import { InputLabel, Grid } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns';
 import MomentUtils from '@date-io/moment';
-import moment from 'moment';
 
+// componets
 import TimeInput from './TimeInput';
 import TextInput from './TextInput';
 
@@ -35,42 +35,51 @@ const SessionsInput = ({ sessions, formikSetFieldValue, onChange, formikTouchedS
      );
   }, [ sessions ])
   return ( 
-    <MuiPickersUtilsProvider  utils = { DateFnsUtils }>
-      {sessions?.map ( ( session, index ) => 
-        <div
-        key = { index }
-        > 
-        <InputLabel id = 'sessionsPickers'> Sesión del { transformDate (session.startTime) } </InputLabel>
-          <TimeInput
-            fullWidth
-            id = { `sessions.${index}.startTime` }
-            value = { sessions[ index ].startTime }
-            label = 'Hora de inicio'
-            formikSetFieldValue= { formikSetFieldValue }
-            onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
+    <Grid 
+      container
+      direction =  'column'
+    >
+      <MuiPickersUtilsProvider  utils = { DateFnsUtils }>
+      <Grid 
+        container
+      > 
+        {sessions?.map ( ( session, index ) => 
+        <>
+          <Grid item xs = { 12 }>
+            <InputLabel id = 'sessionsPickers'> Sesión del { transformDate (session.startTime) } </InputLabel>
+          </Grid>
+            <TimeInput
+              fullWidth
+              id = { `sessions.${index}.startTime` }
+              value = { sessions[ index ].startTime }
+              label = 'Hora de inicio'
+              formikSetFieldValue= { formikSetFieldValue }
+              onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
+              />
+            <TimeInput
+              fullWidth
+              id = { `sessions.${index}.finishTime` }
+              value = { sessions[ index ].finishTime }
+              label = 'Hora de finalizacion'
+              formikSetFieldValue= { formikSetFieldValue }
+              onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
             />
-          <TimeInput
-            fullWidth
-            id = { `sessions.${index}.finishTime` }
-            value = { sessions[ index ].finishTime }
-            label = 'Hora de finalizacion'
-            formikSetFieldValue= { formikSetFieldValue }
-            onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
-          />
-          <TextInput
-             type="text"
-              label = 'minutos'
-             placeholder="minutes" 
-             name= { `sessions.${index}.value` } 
-             value = { sessions[ index ].value }
-             
-             error = { formikTouchedSessions?.value && Boolean( formikErrorsSessions?.value ) }
-             helperText={ formikTouchedSessions?.value && formikErrorsSessions?.value }
-          />
-        </div>
-      )}
-      
-    </MuiPickersUtilsProvider>
+            <TextInput
+              type="text"
+                label = 'minutos'
+              placeholder="minutes" 
+              name= { `sessions.${index}.value` } 
+              value = { sessions[ index ].value }
+              
+              error = { formikTouchedSessions?.value && Boolean( formikErrorsSessions?.value ) }
+              helperText={ formikTouchedSessions?.value && formikErrorsSessions?.value }
+            />
+        </>
+        )}
+      </Grid >
+        
+      </MuiPickersUtilsProvider>
+    </Grid>
   );
 }
  

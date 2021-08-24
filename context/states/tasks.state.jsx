@@ -84,6 +84,8 @@ const TasksWrapper =({ children }) =>{
   // ******************************************
   const editRequirement = async ( task, taskID ) => {
     try {
+      const token = localStorage.getItem('got-it-token');
+      setTokenAuth( token );
       const result = await scheduleApi.put( `/requirements/${ taskID }`, task );
       return dispatch({
         type: TASKS_EDIT_REQUERIMENT,
@@ -105,6 +107,8 @@ const TasksWrapper =({ children }) =>{
   // ****** Set Requirement As Active *********
   // ******************************************
   const setReqAsTask = async ( task, taskID ) => {
+    const token = localStorage.getItem('got-it-token');
+    setTokenAuth( token );
    try {
     const result = await scheduleApi.put ( `/requirements/set-time/${ taskID }`, task );
     console.log( { result } )
@@ -116,20 +120,23 @@ const TasksWrapper =({ children }) =>{
       },
     })
   } catch (error) {
-     console.log( { error } )
+    console.log( { error } )
     return dispatch({
       type: TASKS_ERROR,
       payload: error.response.data.message
     });
-   } 
+  } 
   
-  }
-  // ******************************************
-  // ***********  Edit Active task  ***********
-  // ******************************************
+}
+// ******************************************
+// ***********  Edit Active task  ***********
+// ******************************************
   const editActiveTask = async ( task, taskID ) => {
-   try {
+  const token = localStorage.getItem('got-it-token');
+      setTokenAuth( token );
+  try {
     const result = await scheduleApi.put ( `/tasks/update/${ taskID }`, task );
+    console.log( { result } )
       return dispatch({
         type : TASKS_EDIT_ACTIVE_TASK,
         payload : {
