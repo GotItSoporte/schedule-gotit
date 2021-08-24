@@ -12,6 +12,7 @@ import {
 import { useReducer } from 'react';
 // api calls
 import { scheduleApi } from '../../config/axios';
+import  setTokenAuth from '../../config/axios/auth';
 //context
 import TaskContext , { initialstate } from '../tasks.context';
 //reducer
@@ -61,6 +62,8 @@ const TasksWrapper =({ children }) =>{
   // ******************************************
   const createRequirement = async ( task ) => {
     try {
+      const token = localStorage.getItem('got-it-token');
+      setTokenAuth( token );
       const result = await scheduleApi.post( '/requirements', task );
       return dispatch({
         type: TASKS_CREATE_REQUERIMENT,
