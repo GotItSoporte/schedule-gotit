@@ -93,7 +93,9 @@ const Details = ({ editable, showForm, setShowForm }) => {
             
             { editable? 
                 <div  id={styles.btn}>
-                <button onClick = { handleClick } id={ styles.BotEditar }>Editar</button>
+                <button 
+                  onClick = { handleClick } id={ styles.BotEditar }
+                >{ user.role ? 'Gestionar' : 'Editar'}</button>
               </div>
               :
               null

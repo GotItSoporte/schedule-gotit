@@ -83,7 +83,7 @@ const Task = ({ task }) => {
   const setAsTask = async values => {
     values.time = parseInt( values.time )
     console.log( 'setAs', { values } )
-   // await setReqAsTask( values, currentTask._id );
+    await setReqAsTask( values, currentTask._id );
     setShowForm( false )
   }
 
