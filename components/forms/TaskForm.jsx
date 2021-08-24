@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // routing
 import { useRouter } from 'next/router';
 // components
@@ -22,22 +22,21 @@ import styles from '../../styles/forms.module.scss';
 
 
 const TaskForm = ({  submitFunction, edit, initialValues }) => {
- 
   // yup
   const taskSchema = edit ?
-    Yup.array({
-      time: Yup.number(),
-      sessions : Yup.array().of (
-        Yup.object({
+  Yup.array({
+    time: Yup.number(),
+    sessions : Yup.array().of (
+      Yup.object({
           startTime : Yup.date().nullable(),   
           finishTime : Yup.date().nullable(),    
         })
-      ),
+        ),
       finished: Yup.boolean(),
       success: Yup.boolean(),
       description: Yup.string(),
     })
-  :
+    :
     Yup.object({
       time: Yup.string().required('Debes especificar el tiempo empleado'),
       sessions : Yup.array().of (
@@ -45,25 +44,25 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
           startTime : Yup.date().nullable(),   
           finishTime : Yup.date().nullable(),    
         })
-      ),      
+        ),      
       finished: Yup.boolean(),
       success: Yup.boolean(),
       description: Yup.string().required( 'Es necesario escribir una breve descripción' ),
     });
-
-   //
-   const submit = async values =>{
+    
+    //
+    const submit = async values =>{
       submitFunction( values )
-     formik.resetForm();
-   }
- 
-   const formik = useFormik({
-     initialValues,
-     validationSchema : taskSchema,
-     onSubmit : values =>{submit( values )},
- 
-   });
-
+      formik.resetForm();
+    }
+    
+    const formik = useFormik({
+      initialValues,
+      validationSchema : taskSchema,
+      onSubmit : values =>{submit( values )},
+      
+    });
+    
    return ( 
      <>  
        <div className={ styles.Form }>
@@ -90,6 +89,7 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
               formikTouchedSessions = { formik.touched.sessions }
               formikErrorsSessions = { formik.errors.sessions }
             />
+
             <CheckBox
               id = 'finished'
               checked = { formik.values.finished }

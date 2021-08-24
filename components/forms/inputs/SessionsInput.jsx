@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // MaterialUi
-import { InputLabel, Grid } from '@material-ui/core';
+import { InputLabel, Grid, Button } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns';
 import MomentUtils from '@date-io/moment';
@@ -8,9 +8,27 @@ import MomentUtils from '@date-io/moment';
 // componets
 import TimeInput from './TimeInput';
 import TextInput from './TextInput';
+import CheckBox from './CheckBox';
 
-const SessionsInput = ({ sessions, formikSetFieldValue, onChange, formikTouchedSessions, formikErrorsSessions }) => {
-
+const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, formikErrorsSessions }) => {
+  // Add Session chekBox;
+  const handleAddSession = () => {
+    const newSessions =  sessions.map( e => e );
+    newSessions.push({
+      startTime : null,
+      finishTime : null,
+      values : 0,
+      valueWeight : 1,
+    })
+    formikSetFieldValue( 'sessions', newSessions )
+  }
+  // delete session 
+  const deleteSession = ( index ) => {
+    const newSessions =  sessions.map( e => e );
+    newSessions.splice( index, 1 );
+    formikSetFieldValue( 'sessions', newSessions )
+  }
+  // set dates
   const transformDate = date => {
     const dateOptions = { 
       weekday: 'short', 
@@ -33,18 +51,18 @@ const SessionsInput = ({ sessions, formikSetFieldValue, onChange, formikTouchedS
       'time', 
       sessions.reduce( ( acc, session ) => acc += session.value, 0 ) 
      );
-  }, [ sessions ])
+  }, [ sessions ]);
   return ( 
     <Grid 
       container
       direction =  'column'
     >
-      <MuiPickersUtilsProvider  utils = { DateFnsUtils }>
-      <Grid 
-        container
-      > 
+        <MuiPickersUtilsProvider  utils = { DateFnsUtils }  >
         {sessions?.map ( ( session, index ) => 
-        <>
+        <Grid 
+          key ={ index }
+          container
+        > 
           <Grid item xs = { 12 }>
             <InputLabel id = 'sessionsPickers'> Sesión del { transformDate (session.startTime) } </InputLabel>
           </Grid>
@@ -69,16 +87,21 @@ const SessionsInput = ({ sessions, formikSetFieldValue, onChange, formikTouchedS
                 label = 'minutos'
               placeholder="minutes" 
               name= { `sessions.${index}.value` } 
-              value = { sessions[ index ].value }
+              value = { sessions[ index ].value || 0}
               
               error = { formikTouchedSessions?.value && Boolean( formikErrorsSessions?.value ) }
               helperText={ formikTouchedSessions?.value && formikErrorsSessions?.value }
             />
-        </>
-        )}
+        <Button 
+          onClick = {() => deleteSession( index ) }
+        > quitar Sesión</Button>
       </Grid >
+        )}
+        </MuiPickersUtilsProvider>
         
-      </MuiPickersUtilsProvider>
+      <Button 
+        onClick = { handleAddSession }
+      > Agregr Sesión</Button>
     </Grid>
   );
 }
