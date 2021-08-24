@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // componets
 import { InputLabel } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/pickers'
@@ -25,10 +25,15 @@ const SessionsInput = ({ sessions, formikSetFieldValue, onChange, formikTouchedS
     // calculate minutes
     let minutes = new Date ( sessions[ index ].finishTime ) -  new Date ( sessions[ index ].startTime );
     minutes = Math.floor( minutes/60e3 );      
-    console.log( {  minutes, index, field } );
     formikSetFieldValue( field, minutes );
   }
-
+  // update Time everytime somo object at session value change 
+  useEffect(() => {
+    formikSetFieldValue( 
+      'time', 
+      sessions.reduce( ( acc, session ) => acc += session.value, 0 ) 
+     );
+  }, [ sessions ])
   return ( 
     <MuiPickersUtilsProvider  utils = { DateFnsUtils }>
       {sessions?.map ( ( session, index ) => 
@@ -54,7 +59,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, onChange, formikTouchedS
           />
           <TextInput
              type="text"
-
+              label = 'minutos'
              placeholder="minutes" 
              name= { `sessions.${index}.value` } 
              value = { sessions[ index ].value }

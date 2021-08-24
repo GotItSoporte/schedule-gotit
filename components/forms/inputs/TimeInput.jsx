@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import { KeyboardTimePicker } from '@material-ui/pickers'
 
 const TimeInput = ({id, label, value, formikSetFieldValue, onChange }) => {
-
+  // update session time everytime some date change
   useEffect(() => {
     onChange()
 
   }, [ value ])
   const handleChange = date => {
-    console.log("___", date);
     formikSetFieldValue(id, date)
   }
   return ( 
