@@ -20,27 +20,25 @@ const SyledHeader = styled(Grid)`
   display: flex;
 	background-color: #e2e2e2;
 	text-transform: uppercase;
+  height: 5rem !important;
 `;
 
 const StyledLogo = styled(Grid)`
-
+  height: 4rem;
 	margin-top: 20px;
 	margin-left: 20px;
 
-	& :hover{
-		cursor: pointer;
+  
+	:hover{
+    cursor: pointer;
 	} 
   div {
-		&:first-child {
-      width: 50% !important;
+    &:first-child {
+      max-height: 100%;
+      min-height : 4rem;
+      aspect-ratio: 688 / 283;
       min-width: 80px;
 		}
-    div {
-      &:first-child {
-        width: 100% !important;
-        height: 100% !important;
-      }
-    }
 	}
 `;
 
@@ -136,11 +134,13 @@ const Header = () => {
       alignItems = 'center'
     >
       <StyledLogo 
+        container
+        alignItems = 'center'
         item
-        xs = { 2 } sm ={ 3 } 
-        id= 'logo' 
-      >
+        xs = { 4 } sm ={ 3 } 
+        >
           <Image 
+            id= 'logo' 
             src={ logo } 
             onClick = { () => goToIndex() }
           />

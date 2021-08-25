@@ -42,7 +42,7 @@ const StyledTable = styled.table`
    width: 100%;
    margin-left: auto;
    margin-right: auto;
-   min-width: 600px;
+   min-width: 420px;
    & th {
      background: linear-gradient(#2e658b, #26495f);
      padding: 10px 7px;
@@ -56,13 +56,17 @@ const StyledTable = styled.table`
       text-align: left;
       vertical-align: middle;
       font-weight: 300;
-      font-size: 15px;
+      font-size: 10px;
       overflow:hidden;
       color: ${ props => props.theme['color-text'] };
       border-right: 1px solid ${ props => props.theme['color-text'] };
       border-left: 1px solid ${ props => props.theme['color-text'] };
       border-top: 1px solid ${ props => props.theme['color-text'] };
       border-bottom: 1px solid ${ props => props.theme['color-text'] };
+      @media ${ device.md }{
+        font-size: 15px;
+        
+      }
    }
    & .on-mobile{
     @media ${ device.md }{
