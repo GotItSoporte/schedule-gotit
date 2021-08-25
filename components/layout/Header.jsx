@@ -24,11 +24,6 @@ const SyledHeader = styled(Grid)`
 `;
 
 const StyledLogo = styled(Grid)`
-  height: 4rem;
-	margin-top: 20px;
-	margin-left: 20px;
-  
-  
 	:hover{
     cursor: pointer;
 	} 
