@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // next
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 //material ui 
-import { Grid } from '@material-ui/core';
+import { Grid, Menu, MenuItem, IconButton, Button } from '@material-ui/core';
+import { MoreVertOutlined, DeleteOutline } from '@material-ui/icons';
 //components
 import ProjectList from '../ProjectList';
 // context
@@ -13,15 +14,16 @@ import useUser from '../../context/hooks/useUser';
 import logo from '../../public/Gotit Horizontal.png'
 // styles
 import styled from 'styled-components';
+import device from '../../styles/styledBreakPoints';
 
-const SyledHeader = styled.header`
+const SyledHeader = styled(Grid)`
   display: flex;
 	background-color: #e2e2e2;
 	text-transform: uppercase;
 `;
 
-const StyledLogo = styled.div`
-  flex: 1;
+const StyledLogo = styled(Grid)`
+
 	margin-top: 20px;
 	margin-left: 20px;
 
@@ -42,11 +44,11 @@ const StyledLogo = styled.div`
 	}
 `;
 
-const StyledMenu = styled.ul`
-  flex: 3;
+const StyledDesktopMenu = styled(Grid)`
 	margin-top: 20px;
 	margin-right: 20px;
 	list-style: none;
+  display: none;
 	>li {
 		float: right;
 		position: relative;
@@ -71,6 +73,17 @@ const StyledMenu = styled.ul`
 		font-weight: 600;
 		font-size: 18px;
 	}
+
+  @media ${ device.md } {
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
+
+const StyledMonbileMenu = styled.div`
+  @media ${ device.md }{
+    display: none;
+  }
 `;
 
 const Header = () => {
@@ -101,49 +114,97 @@ const Header = () => {
     router.push({
       pathname : '/',
       query : { company : user.company }
-    })
+    });
   }
+  
+  /// Menu Mobile
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (  
-    <SyledHeader >
-      <StyledLogo id= 'logo' >
+    <SyledHeader 
+      container
+      justifyContent = 'space-between'
+      alignItems = 'center'
+    >
+      <StyledLogo 
+        item
+        xs = { 2 } sm ={ 3 } 
+        id= 'logo' 
+      >
           <Image 
             src={ logo } 
             onClick = { () => goToIndex() }
           />
       </StyledLogo>
-      
-      
-          <StyledMenu >
-            <li>
-              <a onClick ={ log_out } href="#">Cerrar Sesión</a>
-            </li>
-              { !user?.role ?
-                <li>
-                  <Link 
-                    href = {{
-                      pathname : '/new-req',
-                      query :{ company : user?.company }
-                    }}
-                    >
-                    <a>Nuevo requerimiento</a>
-                  </Link>
-                </li>
-                : null
-              }
-            <li>
-              <Link 
-                href = {{
-                  pathname : '/',
-                  query :{ company : user?.company }
-                }}
-              >
-                <a>Proyectos</a>
-              </Link>
-            </li>
-          </StyledMenu>
+        
+        <StyledDesktopMenu 
+          item 
+          xs = { 10 }  sm ={ 8}  lg ={ 6 }
+        >
+            <NavMenu 
+              user = { user }
+              log_out = { log_out }
+            />
+        </StyledDesktopMenu>
 
+        <StyledMonbileMenu >
+          <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+            <MoreVertOutlined/>
+          </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <NavMenu 
+              user = { user }
+              log_out = { log_out }
+            />
+          </Menu>
+      </StyledMonbileMenu>       
     </SyledHeader>
   );
 }
  
 export default Header;
+
+const NavMenu = ({ user, log_out }) =>
+  <>
+    <li>
+      <a onClick ={ log_out } href="#">Cerrar Sesión</a>
+    </li>
+      { !user?.role ?
+        <li>
+          <Link 
+            href = {{
+              pathname : '/new-req',
+              query :{ company : user?.company }
+            }}
+            >
+            <a>Nuevo requerimiento</a>
+          </Link>
+        </li>
+        : null
+      }
+    <li>
+      <Link 
+        href = {{
+          pathname : '/',
+          query :{ company : user?.company }
+        }}
+      >
+        <a>Proyectos</a>
+      </Link>
+    </li> 
+  </>
