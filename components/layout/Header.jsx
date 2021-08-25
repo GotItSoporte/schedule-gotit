@@ -27,17 +27,17 @@ const StyledLogo = styled(Grid)`
   height: 4rem;
 	margin-top: 20px;
 	margin-left: 20px;
-
+  
   
 	:hover{
     cursor: pointer;
 	} 
   div {
     &:first-child {
-      max-height: 100%;
-      min-height : 4rem;
-      aspect-ratio: 688 / 283;
-      min-width: 80px;
+      height: ${ 70 }px;
+      width: ${ 70*( 688/283 ) }px;
+      min-height: ${ 70 }px;
+      min-width: ${ 70*( 688/283 ) }px;
 		}
 	}
 `;
@@ -74,7 +74,6 @@ const StyledDesktopMenu = styled(Grid)`
 
   @media ${ device.md } {
     display: flex;
-    justify-content: flex-end;
   }
 `;
 
@@ -149,6 +148,7 @@ const Header = () => {
         <StyledDesktopMenu 
           item 
           xs = { 10 }  sm ={ 8}  lg ={ 6 }
+          direction = 'row-reverse'
         >
             <NavMenu 
               user = { user }
