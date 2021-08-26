@@ -4,15 +4,14 @@ import Header from '../../../components/layout/Header';
 import Details from '../../../components/Details';
 import TaskForm from '../../../components/forms/TaskForm';
 import ReqForm from '../../../components/forms/ReqForm';
-
 // context 
 import useUser from '../../../context/hooks/useUser';
 import useProjects from '../../../context/hooks/useProjects';
 import useTasks from '../../../context/hooks/useTasks';
-
-import styles from '../../../styles/pages.module.scss';
-
+//styles
+// fetch
 import { scheduleApi } from '../../../config/axios';
+import styled from 'styled-components';
 
 export async function getServerSideProps(context) {
   const { query } = context
@@ -34,8 +33,8 @@ const Task = ({ task }) => {
 
   // userContext
   const userContext = useUser();
-  const { state: userState, isAuthenticated } = userContext; 
-  const { isAuth, user } = userState;
+  const { state: userState } = userContext; 
+  const { user } = userState;
   // userContext
   const taskContext = useTasks();
   const { state: taskState, editRequirement, setReqAsTask, editActiveTask } = taskContext; 
@@ -96,7 +95,7 @@ const Task = ({ task }) => {
   return ( 
     <>
       <Header/>
-      <div id={ styles.Informacion }>
+      
             <Details
               editable = { !isTask || ( user?.role && !finished  )   }
               user ={ user }
@@ -125,10 +124,7 @@ const Task = ({ task }) => {
             />
           :null
         }
-
-    </div>
-
-
+    
     </>
    );
 }

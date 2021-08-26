@@ -3,6 +3,54 @@ import useUser from '../context/hooks/useUser';
 import useTasks from '../context/hooks/useTasks';
 //componetes
 
+//styles
+import styled from 'styled-components';
+
+const StyledDetails = styled.div`
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  display: grid;
+  place-content: center;
+  max-width: 95%;
+  span {
+    color: ${ props => props.theme.secondary };
+    font-weight: bold;
+  }
+  #informacion{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    padding: 30px 60px 60px 60px;
+    background-color: #2E4054;
+    border-radius: 10px;
+    
+    #infoRequerimiento {
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(218, 218, 218, 0.5);
+      
+      #titulo {
+        color: ${ props => props.theme.primary };
+        border-bottom: 1px solid rgba(218, 218, 218, 0.5);
+        text-align: center;
+      
+        h1 {
+          margin-bottom: 5px;
+        }
+      }
+
+    }
+    #infosolucion {
+
+    }
+  }
+`;
+
+const styledInfo = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);    
+  grid-gap: 10px;
+`;
+
 import styles from '../styles/pages.module.scss';
 
 const Details = ({ editable, showForm, setShowForm }) => {
@@ -22,13 +70,13 @@ const Details = ({ editable, showForm, setShowForm }) => {
   const reqDate = new Date( currentTask?.requirmentDate ).toLocaleDateString( 'es-ES', dateOptions)
   
   return ( 
-    <div id = { styles.Informacion }>
-          <div id={ styles.Informacion2 }>
-            <div id={ styles.InfoRequerimiento }>
-              <div id={ styles.Titulo }>
+    <StyledDetails >
+          <div id= 'informacion'>
+            <div id= 'infoRequerimiento'>
+              <div id= 'titulo'>
                 <h1>{ currentTask?.name }</h1>
               </div>
-              <div className={ styles.InfoContacto }>
+              <styledInfo >
                 <div className={ styles.Campos }>
                   <span>USUARIO</span><br />
                   <a>{ user?.name }</a>
@@ -57,17 +105,17 @@ const Details = ({ editable, showForm, setShowForm }) => {
                   <span>FECHA DE FINALIZACIÓN</span><br />
                   <a>{ currentTask?.finishDate || 'En curso' }</a>
                 </div>
-              </div>
+              </styledInfo>
               <div className={ styles.Descripcion }>
                 <span>Descripción del requerimiento</span>
                 <p>{ currentTask?.requirement }</p>
               </div>
             </div>
             {/* Si el caso ya fue tomado */}
-            <div id={ styles.InfoSolucion }>
+            <div >
               { currentTask?.isTask ?
                 <>
-                  <div className={ styles.InfoContacto }>
+                  <styledInfo >
                     <div className={ styles.Campos }>
                       <span>Propietario del caso</span><br />
                       <a>{ currentTask?.member?.name || '-----' }</a>
@@ -80,7 +128,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
                       <span>Tiempo de solución</span><br />
                       <a>{ currentTask.time } Minutos</a>
                     </div>
-                  </div>
+                  </styledInfo>
                   <div className={ styles.Descripcion }>
                     <span>Descripcion de la solución</span>
                     <p>{ currentTask?.description || '' }</p>
@@ -101,7 +149,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
               null
             }
           </div>
-    </div>
+    </StyledDetails>
    );
 }
  
