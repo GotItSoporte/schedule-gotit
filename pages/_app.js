@@ -4,8 +4,23 @@ import ProjectsWrapper from '../context/states/projects.state';
 import TasksWrapper from '../context/states/tasks.state';
 import AlertWrapper from '../context/states/alerts.state';
 //styles
-import { ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import '../styles/globals.scss'
+
+
+const GlobalStyle = createGlobalStyle`
+html{
+
+  padding: 0;
+}
+
+body{
+  min-height:100vh;
+  padding: 1rem;
+  margin-top:0;
+ 
+}
+`;
 
 const theme = {
   'primary'       : "#0D9AFF",
@@ -31,15 +46,12 @@ const theme = {
 };
 
 function MyApp({ Component, pageProps }) {
-  const projectData = {
-    projectsList : '',
-    currentProject : '',
-  }
   return (
     <UserWrapper>
       <ProjectsWrapper >
         <TasksWrapper>
           <AlertWrapper>
+            <GlobalStyle/>
             <ThemeProvider theme = { theme }>
               <Component {...pageProps} />
             </ThemeProvider>
