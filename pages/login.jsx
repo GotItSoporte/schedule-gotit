@@ -12,7 +12,6 @@ import * as Yup from 'yup';
 // Material 
 import { Grid } from '@material-ui/core';
 //styles
-import styles from '../styles/forms.module.scss'
 import styled from 'styled-components';
 
 const StyledLogin = styled( Grid )`

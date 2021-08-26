@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 // components
 import TextInput from './inputs/TextInput';
+import TextAreaIput from './inputs/TextAreaInput';
 import CheckBox from './inputs/CheckBox';
 import TimeInput from './inputs/TimeInput';
 import SessionsInput from './inputs/SessionsInput';
@@ -18,7 +19,6 @@ import * as Yup from 'yup';
 //
 import { TextField, Grid } from '@material-ui/core';
 // styles
-import styles from '../../styles/forms.module.scss';
 import { StyledForm } from '../../styles/StyledForm';
 
 const TaskForm = ({  submitFunction, edit, initialValues }) => {
@@ -80,7 +80,6 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
           <h1>EDITAR TAREA</h1>
           <form onSubmit={formik.handleSubmit} >
             <TextInput 
-              styles = { styles.FormId }
               type="text"
               placeholder="Título" 
               name="time" 
@@ -119,10 +118,7 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
                 label="Se Ha dado solución al requerimiento"
               />
             </Grid>
-            <TextField 
-              className={ styles.textArea } 
-              type="textarea" 
-              multiline
+            <TextAreaIput 
               name="description" 
               placeholder="Por favor escriba suna breve descripción de la solución" 
               fullWidth
@@ -133,7 +129,7 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
               helperText={formik.touched.description && formik.errors.description}
   
             />
-            <SubmitButton styles={ styles.btn } textButton = { 'ENviar'} />
+            <SubmitButton textButton = { 'ENviar'} />
           </form>
 
         </Grid>

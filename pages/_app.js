@@ -15,9 +15,6 @@ html{
 }
 
 body{
-  min-height:100vh;
-  padding: 1rem;
-  margin-top:0;
  
 }
 `;

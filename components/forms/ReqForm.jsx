@@ -3,16 +3,17 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 // components
 import TextInput from './inputs/TextInput';
+import TextAreaIput from './inputs/TextAreaInput';
+import SelectInput from './inputs/SelectInput';
 // MAterial UI
 import SubmitButton from './SubmitButton';
-import { Select, MenuItem, Grid } from '@material-ui/core';
+import { MenuItem, Grid } from '@material-ui/core';
 // forms validation
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 //
 import { TextField, InputLabel } from '@material-ui/core';
 // styles
-import styles from '../../styles/forms.module.scss';
 import styled from 'styled-components';
 import { StyledForm } from '../../styles/StyledForm';
 // 
@@ -127,18 +128,18 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
             />
   
             {/* SELECT */}
+           
             { !edit?
               <>
-                <InputLabel id = 'selectProject'> Proyecto </InputLabel>
-                <Select
+                <SelectInput
                   labelId = 'selectProject'
-                  className = { styles.select }
                   label = 'Proyeto'
+                  fullWidth
+                  
+                  options = { projects }
                   inputProps={{
                     name : 'project'
                   }}
-                  fullWidth
-      
                   value = { formik.values.project }
                   onChange = { formik.handleChange }
                   error = { formik.touched.project && Boolean( formik.errors.project ) }
@@ -146,24 +147,22 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
                 >
                   { projects?.map(( project, index) => 
                     <MenuItem
-                      classes = { styles.option }
                       key = { index }
                       value ={ project._id }
                     >
                       { project.name }
                     </MenuItem> 
                   ) }
-                </Select>
+                </SelectInput>
               </>
               :
               null
             }
-            <TextField 
-              className={ styles.textArea } 
-              type="textarea" 
-              multiline
+            <TextAreaIput 
+              type="" 
+
               name="requirement" 
-              placeholder="Por favor describa su requerimiento" 
+              label="Por favor describa su requerimiento" 
               fullWidth
   
               value = { formik.values.requirement }
@@ -172,7 +171,11 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
               helperText={formik.touched.requirement && formik.errors.requirement}
   
             />
-            <SubmitButton styles={ styles.btn } textButton = { 'ENviar'} />
+           <SubmitButton 
+              fullWidth
+              type="submit" 
+              textButton = 'Enviar'
+            />
           </form>
 
         </Grid>

@@ -3,7 +3,7 @@ import React from 'react';
 import { TextField } from '@material-ui/core';
 import styled from 'styled-components';
 
-const StyledTextInput = styled( TextField )`
+const StyledTextArea = styled( TextField )`
   width: 100%;
   margin-bottom: 1rem !important;
  
@@ -11,7 +11,8 @@ const StyledTextInput = styled( TextField )`
     color : ${ props => props.theme['secondary'] } !important;
     z-index: 1;
     padding-left: 0.5rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    height: 10rem;
   }
 
 	div{
@@ -19,7 +20,7 @@ const StyledTextInput = styled( TextField )`
     color: ${ props => props.theme['color-input-text'] };
     box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);    
     width: 100%; 
-    height: 2.3rem;  
+    height: 5rem;  
     outline: none;
     padding: 10px;
     font-size: 13px;
@@ -35,20 +36,20 @@ const StyledTextInput = styled( TextField )`
       border-color: ${ props => props.theme['primary'] };
       margin : 1rem 0.5rem 0.5rem 0.5rem;
     }
-		input{
+		textarea{
 			&::placeholder{
 				position:absolute;
 				color:${ props => props.theme['color-text'] };
 			}
 		}
-    
+    input:-webkit-autofill {
+      color: rgb(0,0,0,0) !important;
+    }
   }
 `;
 
-const TextInput = ({ 
+const TextAreaIput = ({ 
   label,
-  styles,
-  type,
   name, 
   fullWidth, 
   value,
@@ -58,10 +59,9 @@ const TextInput = ({
 }) => {
   //const classes = useStyles();
   return ( 
-    <StyledTextInput 
+    <StyledTextArea 
       label = { label }
-      className = { styles }
-      type= { type }
+      multiline 
       name= { name } 
       fullWidth = { fullWidth }
       value = { value }
@@ -72,4 +72,4 @@ const TextInput = ({
    );
 }
  
-export default TextInput;
+export default TextAreaIput;
