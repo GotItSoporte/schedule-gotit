@@ -6,14 +6,30 @@ import useUser from '../context/hooks/useUser';
 // componets
 import TextInput from '../components/forms/inputs/TextInput';
 import SubmitButton from '../components/forms/SubmitButton';
-//styles
-import styles from '../styles/forms.module.scss'
 // form validation
 import { useFormik} from 'formik';
 import * as Yup from 'yup';
 // Material 
-import { TextField } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+//styles
+import styles from '../styles/forms.module.scss'
+import styled from 'styled-components';
 
+const StyledLogin = styled( Grid )`
+  height: 100vh;
+  .login-container {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    padding: 30px 60px 60px 60px;
+    background-color: #2E4054;
+    border-radius: 10px;
+      
+    h1 {
+      color: ${ props => props.theme.primary } ;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+  }
+`;
 
 const Login = () => {
   // User context
@@ -52,27 +68,29 @@ const Login = () => {
   }, [ isAuth ])
   return ( 
 
-        <div className={ styles.login }>
-          <div className={ styles.login2 }>
+        <StyledLogin 
+          container
+          justifyContent = 'center'
+          alignItems = 'center'
+
+        >
+          <div className = 'login-container' >
             <h1>INICIAR SESIÓN</h1>
-              <form onSubmit= {formik.handleSubmit } >
-                <TextInput 
-                  styles= { styles.FormId }
+              <form onSubmit= {formik.handleSubmit } autoComplete="off" >
+                <TextInput  
                   type="text" 
                   name="userName" 
-                  placeholder="Usuario" 
+                  label="Usuario" 
                  
-
                   value = { formik.values.userName }
                   onChange = { formik.handleChange }
                    error = { formik.touched.userName && Boolean( formik.errors.userName ) }
                   helperText={formik.touched.userName && formik.errors.userName}
                 />
                 <TextInput 
-                  styles ={ styles.FormId } 
                   type="password" 
                   name="password" 
-                  placeholder="Contraseña" 
+                  label="Contraseña" 
 
                   value = { formik.values.password }
                   onChange = { formik.handleChange }
@@ -80,13 +98,12 @@ const Login = () => {
                   helperText={formik.touched.password && formik.errors.password}
                 />
                 <SubmitButton
-                  styles = {  styles.btn }
-                  textButton = 'INCIAR SESIÓN'
+                  textButton = 'INCIAR seSIÓN'
                 /> 
                
               </form>
           </div>
-        </div>
+        </StyledLogin>
   );
 }
  

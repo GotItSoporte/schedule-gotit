@@ -13,7 +13,10 @@ import * as Yup from 'yup';
 import { TextField, InputLabel } from '@material-ui/core';
 // styles
 import styles from '../../styles/forms.module.scss';
+import styled from 'styled-components';
 import { StyledForm } from '../../styles/StyledForm';
+// 
+
 
 const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {  
   // yup
@@ -68,6 +71,10 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
 
         <Grid 
           className = 'form-container'
+          container
+          direction = 'column'
+          justifyContent = 'center'
+          alignItems = 'center'
           item
           xs = { 12 }
           md = { 8 }
@@ -75,9 +82,8 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
           <h1>{ edit? 'EDITAR REQUERIMIENTO' : 'NUEVO REQUERIMIENTO'}</h1>
           <form onSubmit={formik.handleSubmit} >
             <TextInput 
-              styles = { styles.FormId }
               type="text"
-              placeholder="Título" 
+              label="Título" 
               name="name" 
               fullWidth
   
@@ -87,10 +93,9 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
               helperText={formik.touched.name && formik.errors.name}
             />
             <TextInput 
-              styles= { styles.FormId }  
               type="text" 
               name="contact.name" 
-              placeholder="Nombre de contacto" 
+              label="Nombre de contacto" 
               fullWidth
   
               value = { formik.values.contact?.name  }
@@ -99,10 +104,9 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
               helperText={formik.touched.contact?.name  && formik.errors.contact?.name  }
             />
             <TextInput 
-              styles= { styles.FormId }  
               type="text" 
               name="contact.email" 
-              placeholder="Correo de Contacto" 
+              label="Correo de Contacto" 
               fullWidth
   
               value = { formik.values.contact?.email }
@@ -110,11 +114,10 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
               error = { formik.touched.contact?.email && Boolean( formik.errors.contact?.email ) }
               helperText={formik.touched.contact?.email && formik.errors.contact?.email }
             />
-            <TextField 
-              className= { styles.FormId }  
+            <TextInput 
               type="text" 
               name="contact.cellphone" 
-              placeholder="Numero telefonico de contacto" 
+              label="Numero telefonico de contacto" 
               fullWidth
   
               value = { formik.values.contact?.cellphone }
