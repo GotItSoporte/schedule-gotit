@@ -52,7 +52,6 @@ const SelectInput = ({
           labelId     = { idLabel }
           fullWidth   = { fullWidth }
           inputProps  = { inputProps }
-          inputProps  = { inputProps}
           value       = { value }
           onChange    = { onChange }
           error       = { error }
