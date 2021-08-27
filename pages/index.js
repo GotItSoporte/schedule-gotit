@@ -13,8 +13,6 @@ import { scheduleApi } from '../config/axios';
 // material ui
 import { Grid } from '@material-ui/core';
 // styles
-import styles from '../styles/pages.module.scss';
-
 
 // page
 export default function Home() {

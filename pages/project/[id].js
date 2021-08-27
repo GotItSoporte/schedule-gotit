@@ -14,7 +14,6 @@ import { Grid, Button } from '@material-ui/core';
 // components 
 import TasksList from '../../components/tasks/TasksList';
 // styles 
-import styles from '../../styles/pages.module.scss';
 import styled from 'styled-components';
 import device from '../../styles/styledBreakPoints';
 
@@ -111,8 +110,10 @@ const StyledTable = styled.table`
    }
 `;
 
-const styledButton = styled( Button )`
-
+const StyledButton = styled(Button)`
+  background-color: ${ props=> props.theme.secondary } !important;
+  color : ${ props=> props.theme['color-input-text'] } !important;
+  font-weight: 900 !important;
 `;
 
 const Project = ({ project, tasks }) => {
@@ -159,7 +160,7 @@ const Project = ({ project, tasks }) => {
           <section className = 'container'>
               { user?.role? <h1>{ user?.company }</h1> : null }
               <h1>{ project?.name || 'No Encontrado' }</h1>
-              <div className={ styles.tbl_header }>
+              <div>
                   <StyledTable >
                   <thead>
                       <tr>
@@ -189,18 +190,17 @@ const Project = ({ project, tasks }) => {
             
             { tasksState? <TasksList /> : <h2>No hay tareas para mostrar</h2>}
             { !user?.role?
-              <styledButton 
+              <StyledButton 
                 type="button" 
-                className={ styles.NuevoRequerimiento }
                 onClick = { () => router.push( {
                   pathname : '/new-req',
                   query :{ company : user?.company }
                 } )}
-              >Agregar Requerimiento </styledButton>
+              >Agregar Requerimiento </StyledButton>
               : null
             }
           </section>
-           <div id={ styles.Proyecto }>
+           <div >
         </div>
       </StyledPage>
   </>

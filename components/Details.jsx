@@ -80,8 +80,6 @@ const StyledInfo = styled( Grid )`
   }
 `;
 
-import styles from '../styles/pages.module.scss';
-
 const Details = ({ editable, showForm, setShowForm }) => {
   // userContext
   const userContext = useUser();
