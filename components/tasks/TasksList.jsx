@@ -1,15 +1,72 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 //next router
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 // components
 import BtnsContainer from '../layout/BtnsContainer';
 // contexts
 import useTasks from '../../context/hooks/useTasks';
 import useProjects from '../../context/hooks/useProjects';
-// icons
 // styles
-import styles from '../../styles/pages.module.scss';
+import styled from 'styled-components';
+import device from '../../styles/styledBreakPoints';
+
+const StyledTable = styled.table`
+   table-layout: fixed;
+   width: 100%;
+   margin-left: auto;
+   margin-right: auto;
+   min-width: 420px;
+   & th {
+     background: linear-gradient(#2e658b, #26495f);
+     padding: 10px 7px;
+     text-align: left;
+     font-weight: 500;
+     color: ${ props => props.theme['color-input-text'] };
+     text-transform: uppercase;
+    }
+    & td {
+      padding: 15px;
+      text-align: left;
+      vertical-align: middle;
+      font-weight: 300;
+      font-size: 10px;
+      overflow:hidden;
+      color: ${ props => props.theme['color-text'] };
+      border-right: 1px solid ${ props => props.theme['color-text'] };
+      border-left: 1px solid ${ props => props.theme['color-text'] };
+      border-top: 1px solid ${ props => props.theme['color-text'] };
+      border-bottom: 1px solid ${ props => props.theme['color-text'] };
+      @media ${ device.md }{
+        font-size: 15px;
+        
+      }
+   }
+   & .on-mobile{
+    @media ${ device.md }{
+      display: none;
+    }
+   }
+   & .on-desktop{
+     display: none;
+    @media ${ device.md }{
+      display: table-cell;
+    }
+   }
+   & a {
+     font-family: 'Open Sans', Arial, sans-serif;
+     padding: 5;
+     border-radius: 3px;
+     background-color: ${ props => props.theme['secondary'] }; 
+     color: ${ props => props.theme['color-text'] };
+     font-weight: bold;
+     text-transform: uppercase;
+     text-decoration: none;
+  
+     & &:hover {
+       background-color: ${ props => props.theme[ 'secondary-light' ] };
+     }
+   }
+`;
 
 const TasksList = () => {
  // Router
@@ -24,10 +81,8 @@ const TasksList = () => {
 
   return ( 
      
-    <section className ={ styles.section }>
-     <h4>REQUERIMIENTOS</h4>
-     <div className={ styles.tbl_header }>
-         <table >
+    <section>
+         <StyledTable >
          <thead>
              <tr>
                  <th>NOMBRE</th>
@@ -39,10 +94,10 @@ const TasksList = () => {
                  <th></th>                   
              </tr>
          </thead>
-         </table>
-     </div>
-     <div className ={ styles.tbl_content }>
-         <table >
+         </StyledTable>
+
+     <div >
+         <StyledTable >
          <tbody>
              { tasksList.map( (task, index) => 
                 (<Task
@@ -53,7 +108,7 @@ const TasksList = () => {
                 />)
              ) }
          </tbody>
-         </table>
+         </StyledTable>
      </div>
   </section>
    );
@@ -98,7 +153,7 @@ const Task = ({ task, router , currentProject }) => {
       <td>{ contact.name || 'no especificado' }</td>
       <td>{ state }</td>
       <td>{ showedDate}</td>
-      <td className = { styles.btns_container }>
+      <td>
         <BtnsContainer
           itemID ={ task._id }
           seeFunc = {linkTask}  

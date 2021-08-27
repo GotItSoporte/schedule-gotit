@@ -1,19 +1,24 @@
 import React from 'react';
 import useUser from '../context/hooks/useUser';
 import useTasks from '../context/hooks/useTasks';
-//componetes
-
+//MAterial UI
+import { Grid } from '@material-ui/core';
+// Components
+import SessionInfo from './SessionInfo';
 //styles
 import styled from 'styled-components';
+import device  from '../styles/styledBreakPoints';
 
 const StyledDetails = styled.div`
-  margin-left: 5px;
-  margin-right: 5px;
   margin-top: 30px;
   margin-bottom: 20px;
-  display: grid;
-  place-content: center;
-  max-width: 95%;
+  display: flex;
+  justify-content: center;
+  @media ${ device.md }{
+    max-width: 95%;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
   span {
     color: ${ props => props.theme.secondary };
     font-weight: bold;
@@ -23,7 +28,7 @@ const StyledDetails = styled.div`
     padding: 30px 60px 60px 60px;
     background-color: #2E4054;
     border-radius: 10px;
-    
+    max-width: 50rem;
     #infoRequerimiento {
       padding-bottom: 10px;
       border-bottom: 1px solid rgba(218, 218, 218, 0.5);
@@ -39,16 +44,40 @@ const StyledDetails = styled.div`
       }
 
     }
-    #infosolucion {
+    .descripcion {
+      margin-top: 40px;
+      span {
+        font-size: 15px;
+      }
 
-    }
+      p {
+        font-size: 14px;
+        color: #ffffff;
+      }
+          }
   }
 `;
 
-const styledInfo = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);    
-  grid-gap: 10px;
+const StyledInfo = styled( Grid )`
+
+  .campo {
+    text-align: left;
+    margin-top: 40px;
+    margin-right: 20px;
+    border-bottom: 1px solid rgba(138, 138, 138, 0.5);
+    border-left: 1px solid rgba(112, 112, 112, 0.5);
+
+    span {
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    a {
+      font-size: 14px;
+      margin-left: 8px;
+      color: #ffffff;
+    }
+  }
 `;
 
 import styles from '../styles/pages.module.scss';
@@ -76,60 +105,74 @@ const Details = ({ editable, showForm, setShowForm }) => {
               <div id= 'titulo'>
                 <h1>{ currentTask?.name }</h1>
               </div>
-              <styledInfo >
-                <div className={ styles.Campos }>
+              <StyledInfo container  >
+                <div className= 'campo'>
                   <span>USUARIO</span><br />
                   <a>{ user?.name }</a>
                 </div>
-                <div className={ styles.Campos }>
+                <div className= 'campo'>
                   <span>ESTADO</span><br />
                   <a>{ currentTask?.state}</a>
                 </div>
-                <div className={ styles.Campos }>
+                <div className= 'campo'>
                   <span>NOMBRE DE CONTACTO</span><br />
                   <a>{ currentTask?.contact.name }</a>
                 </div>
-                <div className={ styles.Campos }>
+                <div className= 'campo'>
                   <span>EMAIL DE CONTACTO</span><br />
                   <a>{ currentTask?.contact.email }</a>
                 </div>
-                <div className={ styles.Campos }>
+                <div className= 'campo'>
                   <span>ECHA DE CREACIÓN</span><br />
                   <a>{ reqDate }</a>
                 </div>
-                <div className={ styles.Campos }>
+                <div className= 'campo'>
                   <span>CÓDIGO DE REFERENCIA</span><br />
                   <a>{ currentTask?.ref }</a>
                 </div>
-                <div className={ styles.Campos }>
+                <div className= 'campo'>
                   <span>FECHA DE FINALIZACIÓN</span><br />
                   <a>{ currentTask?.finishDate || 'En curso' }</a>
                 </div>
-              </styledInfo>
-              <div className={ styles.Descripcion }>
+              </StyledInfo>
+              <div className= 'descripcion'>
                 <span>Descripción del requerimiento</span>
                 <p>{ currentTask?.requirement }</p>
+              </div>
+              {
+                currentTask? 
+                  currentTask.sessions?.map( (session, index) => 
+                    <SessionInfo
+                      key = { index }
+                      index = { index }
+                      session = { session }
+                    /> 
+                  )
+                : null
+              }
+              <div>
+
               </div>
             </div>
             {/* Si el caso ya fue tomado */}
             <div >
               { currentTask?.isTask ?
                 <>
-                  <styledInfo >
-                    <div className={ styles.Campos }>
+                  <StyledInfo container >
+                    <div className= 'campo'>
                       <span>Propietario del caso</span><br />
                       <a>{ currentTask?.member?.name || '-----' }</a>
                     </div>
-                    <div className={ styles.Campos }>
+                    <div className= 'campo'>
                       <span>Email de contacto</span><br />
                       <a>juanse@got-it.tv</a>
                     </div>
-                    <div className={ styles.Campos }>
+                    <div className= 'campo'>
                       <span>Tiempo de solución</span><br />
                       <a>{ currentTask.time } Minutos</a>
                     </div>
-                  </styledInfo>
-                  <div className={ styles.Descripcion }>
+                  </StyledInfo>
+                  <div className='descripcion'>
                     <span>Descripcion de la solución</span>
                     <p>{ currentTask?.description || '' }</p>
                   </div>
