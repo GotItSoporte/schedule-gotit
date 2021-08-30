@@ -213,14 +213,14 @@ export default Project;
 export async function getServerSideProps(context) {
   const { id } = context.params;
     let project =  null;
-    let tasks =  null;
+    let tasks =  [];
     let message = null;
     let notFound= true; 
   try {
     let result = await scheduleApi.get( `/projects/${id}` );
     project = result.data.project
     result = await scheduleApi.get( `/projects/${id}/tasks` );
-    tasks = result.data.tasks;
+    tasks = result?.data?.tasks;
     message = 'llamado a api exitoso';
     notFound = false
   } catch (error) {

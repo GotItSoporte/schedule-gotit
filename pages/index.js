@@ -8,8 +8,6 @@ import useUser from '../context/hooks/useUser';
 import Header from '../components/layout/Header';
 import ProjectList from '../components/ProjectList';
 import Spinner from '../components/Spinner';
-// api
-import { scheduleApi } from '../config/axios';
 // material ui
 import { Grid } from '@material-ui/core';
 // styles
@@ -19,10 +17,10 @@ export default function Home() {
   // userContext
   const userContext = useUser();
   const { state: userState, isAuthenticated } = userContext; 
-  const { isAuth, token, user } = userState;
+  const { isAuth, user } = userState;
   // Projects Contexts
   const projectContext = useProjects();
-  const { getProjectsList, currentProject } = projectContext;
+  const { getProjectsList } = projectContext;
 
   // userContext
   const router = useRouter();
