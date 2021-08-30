@@ -18,10 +18,12 @@ import styled from 'styled-components';
 import device from '../../styles/styledBreakPoints';
 
 const StyledPage = styled(Grid)`
-  max-width: 95%;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 50px;
+  margin: 50px auto 0 auto ;
+  @media ${ device.md }{
+    width: 100%;
+    margin: 0 0 0 0 ;
+  }
   & .container{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     padding: 2rem 0.5rem 4rem 0.5rem;
@@ -58,7 +60,7 @@ const StyledTable = styled.table`
    margin-left: auto;
    margin-right: auto;
    min-width: 420px;
-   & th {
+   th {
      background: linear-gradient(#2e658b, #26495f);
      padding: 10px 7px;
      text-align: left;
@@ -66,7 +68,7 @@ const StyledTable = styled.table`
      color: ${ props => props.theme['color-input-text'] };
      text-transform: uppercase;
     }
-    & td {
+    td {
       padding: 15px;
       text-align: left;
       vertical-align: middle;
@@ -83,18 +85,18 @@ const StyledTable = styled.table`
         
       }
    }
-   & .on-mobile{
+   .on-mobile{
     @media ${ device.md }{
       display: none;
     }
    }
-   & .on-desktop{
+   .on-desktop{
      display: none;
     @media ${ device.md }{
       display: table-cell;
     }
    }
-   & a {
+   a {
      font-family: 'Open Sans', Arial, sans-serif;
      padding: 5;
      border-radius: 3px;
@@ -104,7 +106,7 @@ const StyledTable = styled.table`
      text-transform: uppercase;
      text-decoration: none;
   
-     & &:hover {
+     &:hover {
        background-color: ${ props => props.theme[ 'secondary-light' ] };
      }
    }
@@ -165,9 +167,10 @@ const Project = ({ project, tasks }) => {
                   <thead>
                       <tr>
                           <th>MESES</th>
-                          <th>HORAS RESTANTES</th>
-                          <th>HORAS USADAS</th>
-                          <th>HORAS TOTALES</th>
+                          <th className ='on-desktop'>HORAS RESTANTES</th>
+                          <th className ='on-desktop'>HORAS USADAS</th>
+                          <th className ='on-desktop'>HORAS TOTALES</th>
+                          <th className ='on-desktop'>HORAS USADAS</th>
                           <th>FECHA DE INICIO</th>
                           <th>FECHA DE Finalizacion</th>
                       </tr>
@@ -178,9 +181,10 @@ const Project = ({ project, tasks }) => {
               <tbody>
                   <tr>
                       <td>{ project.months }</td>
-                      <td>{ Math.floor(timeLeft)  }</td>
-                      <td>{ timeUsed }</td>
-                      <td>{ timeTotal }</td>
+                      <td className ='on-desktop' >{ Math.floor(timeLeft)  }</td>
+                      <td className ='on-desktop' >{ timeUsed }</td>
+                      <td className ='on-desktop' >{ timeTotal }</td>
+                      <td className ='on-mobile' >{ timeUsed } / { timeTotal }</td>
                       <td>{ startDate }</td>
                       <td>{ finishDate }</td>
                   </tr>

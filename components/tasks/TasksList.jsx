@@ -15,8 +15,8 @@ const StyledTable = styled.table`
    width: 100%;
    margin-left: auto;
    margin-right: auto;
-   min-width: 420px;
-   & th {
+   min-width: 400px;
+   th {
      background: linear-gradient(#2e658b, #26495f);
      padding: 10px 7px;
      text-align: left;
@@ -24,7 +24,7 @@ const StyledTable = styled.table`
      color: ${ props => props.theme['color-input-text'] };
      text-transform: uppercase;
     }
-    & td {
+    td {
       padding: 15px;
       text-align: left;
       vertical-align: middle;
@@ -41,18 +41,18 @@ const StyledTable = styled.table`
         
       }
    }
-   & .on-mobile{
+   .on-mobile{
     @media ${ device.md }{
       display: none;
     }
    }
-   & .on-desktop{
+   .on-desktop{
      display: none;
     @media ${ device.md }{
       display: table-cell;
     }
    }
-   & a {
+   a {
      font-family: 'Open Sans', Arial, sans-serif;
      padding: 5;
      border-radius: 3px;
@@ -62,7 +62,7 @@ const StyledTable = styled.table`
      text-transform: uppercase;
      text-decoration: none;
   
-     & &:hover {
+     :hover {
        background-color: ${ props => props.theme[ 'secondary-light' ] };
      }
    }
@@ -86,11 +86,11 @@ const TasksList = () => {
          <thead>
              <tr>
                  <th>NOMBRE</th>
-                 <th>REF</th>
-                 <th>REQUERIDO POR :</th>
-                 <th>CONTACTO</th>  
+                 <th className ='on-desktop'>REF</th>
+                 <th className ='on-desktop'>REQUERIDO POR :</th>
+                 <th className ='on-desktop'>CONTACTO</th>  
                  <th>ESTADO</th>  
-                 <th>REQUERIDO El :</th> 
+                 <th className ='on-desktop'>REQUERIDO El :</th> 
                  <th></th>                   
              </tr>
          </thead>
@@ -148,12 +148,12 @@ const Task = ({ task, router , currentProject }) => {
   return(
     <tr>
       <td>{ name }</td>
-      <td>{ ref }</td>
-      <td>{ requieredUser.name || 'no especificado' }</td>
-      <td>{ contact.name || 'no especificado' }</td>
-      <td>{ state }</td>
-      <td>{ showedDate}</td>
-      <td>
+      <td className ='on-desktop' >{ ref }</td>
+      <td className ='on-desktop' >{ requieredUser.name || 'no especificado' }</td>
+      <td className ='on-desktop' >{ contact.name || 'no especificado' }</td>
+      <td >{ state }</td>
+      <td className ='on-desktop' >{ showedDate}</td>
+      <td >
         <BtnsContainer
           itemID ={ task._id }
           seeFunc = {linkTask}  
