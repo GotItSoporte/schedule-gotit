@@ -8,8 +8,9 @@ import MomentUtils from '@date-io/moment';
 // componets
 import TimeInput from './TimeInput';
 import TextInput from './TextInput';
-import CheckBox from './CheckBox';
 
+//hooks
+import useDateDay from '../../../hooks/useDateDay';
 // styles
 import styled from 'styled-components';
 

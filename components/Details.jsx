@@ -4,7 +4,8 @@ import useTasks from '../context/hooks/useTasks';
 //MAterial UI
 import { Grid } from '@material-ui/core';
 // Components
-import SessionInfo from './SessionInfo';
+import SessionInfo from './SessionInfo'; 
+import Button from '../components/Button'
 //styles
 import styled from 'styled-components';
 import device  from '../styles/styledBreakPoints';
@@ -130,7 +131,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
                 </div>
                 <div className= 'campo'>
                   <span>FECHA DE FINALIZACIÓN</span><br />
-                  <a>{ currentTask?.finishDate || 'En curso' }</a>
+                  <a>{ currentTask?.finishDate ||'----'}</a>
                 </div>
               </StyledInfo>
               <div className= 'descripcion'>
@@ -138,8 +139,8 @@ const Details = ({ editable, showForm, setShowForm }) => {
                 <p>{ currentTask?.requirement }</p>
               </div>
               {
-                currentTask? 
-                  currentTask.sessions?.map( (session, index) => 
+                currentTask?.isTask? 
+                  currentTask?.sessions?.map( (session, index) => 
                     <SessionInfo
                       key = { index }
                       index = { index }
@@ -182,9 +183,10 @@ const Details = ({ editable, showForm, setShowForm }) => {
             
             { editable? 
                 <div>
-                <button 
+                <Button 
                   onClick = { handleClick } 
-                >{ user?.role ? 'Gestionar' : 'Editar'}</button>
+                  textButton = { user?.role ? 'Gestionar' : 'Editar'}
+                />
               </div>
               :
               null

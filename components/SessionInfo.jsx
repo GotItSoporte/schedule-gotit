@@ -1,8 +1,9 @@
 import React from 'react';
 // styles
 import styled from 'styled-components';
+import useDateDay from '../hooks/useDateDay';
 
-const styledSession = styled.div`
+const StyledSession = styled.div`
     text-align: left;
     margin-top: 40px;
     margin-right: 20px;
@@ -23,11 +24,12 @@ const styledSession = styled.div`
 
 const SessionInfo = ({ session, index }) => {
   //const [ value, stasrtTime, finishTime ] = session;
+  const day = useDateDay( session?.startTime )
   return ( 
-    <styledSession>
-      <span>Sesión { index }</span><br />
-      <a>{ session.value }</a>
-    </styledSession>
+    <StyledSession>
+      <span>{ day }</span><br />
+      <a>{ session.value } minutos</a>
+    </StyledSession>
   );
 }
  
