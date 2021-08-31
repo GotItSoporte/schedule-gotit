@@ -59,9 +59,9 @@ const BtnsContainer = ({ seeFunc, editFunc, deleteFunc, itemID, showEdit, showDe
     >Ver</StyledButton>
 
     { showEdit?  
-      <a 
+      <StyledButton 
         onClick = { () => editFunc0( itemID ) } 
-      > Editar <EditRounded/></a> 
+      > Editar</StyledButton> 
     : null } 
 
     { showDelete ?
