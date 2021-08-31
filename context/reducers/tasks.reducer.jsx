@@ -6,7 +6,8 @@ import {
   TASKS_EDIT_REQUERIMENT,
   TASKS_SET_TASK_ACTIVE,
   TASKS_EDIT_ACTIVE_TASK,
-  TASKS_ERROR
+  TASKS_ERROR,
+  TASKS_GET_TASKS_SUCCESS
 } from '../types';
 // Sweet Aert
 import { FireToast } from '../../config/alerts';
@@ -14,11 +15,19 @@ import { FireToast } from '../../config/alerts';
 const tasksReducer = ( state, action ) => {
   const { type, payload } = action;
   switch ( type ) {
-    case TASKS_SET_TASKS:
     case TASKS_GET_TASKS:
+      console.log('get Tasks', { payload })
       return({
         ...state,
-        tasksList : payload,
+        loading : payload.loading
+      });
+      case TASKS_SET_TASKS:
+      case TASKS_GET_TASKS_SUCCESS:
+      console.log('Get tasks success', { payload })
+      return({
+        ...state,
+        tasksList : payload.tasks,
+        loading : payload.loading
       });
     case TASKS_SET_CURRENT_TASK:
       return({
@@ -41,7 +50,8 @@ const tasksReducer = ( state, action ) => {
       FireToast( 'error', payload )
       return ({
         ...state,
-        error : payload
+        error : payload.error, 
+        loading : payload.loading,
       })
     default:
       return state;

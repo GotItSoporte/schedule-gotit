@@ -99,7 +99,7 @@ const TasksList = () => {
      <div >
          <StyledTable >
          <tbody>
-             { tasksList.map( (task, index) => 
+             { tasksList?.map( (task, index) => 
                 (<Task
                   key= { index }
                   task ={ task }

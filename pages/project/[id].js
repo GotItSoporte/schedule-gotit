@@ -125,7 +125,7 @@ const Project = ({ project, tasks }) => {
   const projectContext = useProjects();
   // Tasks Context
   const tasksContext = useTasks();
-  const { state :tasksState , setTasksList } = tasksContext;
+  const { state :tasksState } = tasksContext;
   // Users Contexts
   const userContext = useUser();
   const { state :userState  } = userContext;
@@ -135,8 +135,6 @@ const Project = ({ project, tasks }) => {
     if( !isAuth ){
       authentication();
     }
-     await setTasksList( tasks );
-
   }, [ tasks ]);
   
   //

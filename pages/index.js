@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router'; 
 // context 
 import useProjects from '../context/hooks/useProjects';
+import useTasks from '../context/hooks/useTasks'
 import useUser from '../context/hooks/useUser';
 //components 
 import Header from '../components/layout/Header';
@@ -21,7 +22,11 @@ export default function Home() {
   // Projects Contexts
   const projectContext = useProjects();
   const { getProjectsList } = projectContext;
-
+  
+  // Task  Contexts
+  const taskContext = useTasks();
+  const { state : taskState } = taskContext;
+  const { loading : taskLoading} = taskState;
   // userContext
   const router = useRouter();
 
@@ -32,6 +37,10 @@ export default function Home() {
     }
     getProjects( user );
   }, [ ])
+  
+  useEffect(() => {
+    console.log({ taskLoading });
+  }, [ taskLoading ])
   
   const authentication = async () => {
     await isAuthenticated();
@@ -57,7 +66,8 @@ export default function Home() {
     { isAuth? 
       <>
         <Header/>
-        { user?.company? <ProjectList userRole = { user?.role } /> : <Spinner/> } 
+        { taskLoading? <Spinner/> : null } 
+        <ProjectList userRole = { user?.role } />
       </>
       : <Spinner/>
     }

@@ -6,6 +6,7 @@ export const PROJECTS_SUCCES              = 'PROJECTS_SUCCES';
 // tasks
 export const TASKS_SET_TASK           = 'TASKS_SET_TASK';
 export const TASKS_GET_TASKS          = 'TASKS_GET_TASKS';
+export const TASKS_GET_TASKS_SUCCESS  = 'TASKS_GET_TASKS_SUCCESS';
 export const TASKS_SET_TASKS          = 'TASKS_SET_TASKS';
 export const TASKS_SET_CURRENT_TASK   = 'TASKS_SET_CURRENT_TASK';
 export const TASKS_SET_TASK_ACTIVE    = 'TASKS_SET_TASK_ACTIVE';

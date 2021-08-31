@@ -140,6 +140,7 @@ const Header = () => {
       </StyledLogo>
         
         <StyledDesktopMenu 
+          container
           item 
           xs = { 10 }  sm ={ 8}  lg ={ 6 }
           direction = 'row-reverse'

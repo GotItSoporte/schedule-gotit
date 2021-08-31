@@ -52,6 +52,7 @@ const ProjectsWrapper =({ children }) =>{
     <ProjectContext.Provider value = { { 
         projectsList    : state.projectsList,
         currentProject  : state.currentProject,
+        loading : state.loading,
         getProjectsList : getProjectsList,
         setCurrentProject: setCurrentProject,
     }}>

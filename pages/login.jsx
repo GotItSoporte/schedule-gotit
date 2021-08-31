@@ -6,6 +6,7 @@ import useUser from '../context/hooks/useUser';
 // componets
 import TextInput from '../components/forms/inputs/TextInput';
 import SubmitButton from '../components/forms/SubmitButton';
+import Spinner from '../components/Spinner'
 // form validation
 import { useFormik} from 'formik';
 import * as Yup from 'yup';
@@ -34,7 +35,7 @@ const Login = () => {
   // User context
   const userContext = useUser();
   const { userLogin, state : userState, isAuthenticated } = userContext; 
-  const { isAuth, user, message } = userState;
+  const { isAuth, user, message, loading } = userState;
   
   // next Router
   const router = useRouter();
@@ -65,6 +66,7 @@ const Login = () => {
       isAuthenticated();
     }
   }, [ isAuth ])
+
   return ( 
 
         <StyledLogin 
@@ -72,7 +74,8 @@ const Login = () => {
           justifyContent = 'center'
           alignItems = 'center'
 
-        >
+        > 
+        { loading? <Spinner /> : null }
           <div className = 'login-container' >
             <h1>INICIAR SESIÓN</h1>
               <form onSubmit= {formik.handleSubmit } autoComplete="off" >

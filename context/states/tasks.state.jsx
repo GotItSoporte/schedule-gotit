@@ -6,7 +6,8 @@ import {
   TASKS_EDIT_REQUERIMENT,
   TASKS_SET_TASK_ACTIVE,
   TASKS_EDIT_ACTIVE_TASK,
-  TASKS_ERROR
+  TASKS_ERROR,
+  TASKS_GET_TASKS_SUCCESS
 } from '../types';
 // react hook
 import { useReducer } from 'react';
@@ -26,30 +27,33 @@ const TasksWrapper =({ children }) =>{
   // ******************************************
   const getTasksProject = async ( id ) => {
     try {
-        //call the api
-        const result = await scheduleApi.get(`/projects/${ id }/tasks`);
+      //call the api
+      dispatch({
+        type : TASKS_GET_TASKS,
+        payload : {
+          loading : true
+        }
+      })
+      const result = await scheduleApi.get(`/projects/${ id }/tasks`);
         return dispatch( {
-          type: TASKS_GET_TASKS,
-          payload: result.data.tasks
+          type: TASKS_GET_TASKS_SUCCESS,
+          payload: {
+            tasks : result.data.tasks,
+            loading : false
+          }
         } );
       } catch (error) {
         return dispatch({
           type: TASKS_ERROR,
-          payload: error.response.data
+          payload: {
+            error : error.response.data,
+            loading : false
+          }
         });
       }
   }
   // ******************************************
-  // ********* Set Tasks to state **********
-  // ******************************************
-  const setTasksList = async ( tasks ) => {
-    return dispatch( {
-      type: TASKS_SET_TASKS,
-      payload: tasks
-    } );
-  }
-  // ******************************************
-  // ****** Set Current ptoject to state ******
+  // ****** Set Current task to state ******
   // ******************************************
   const setCurrentTask = async ( task ) => {
     return dispatch( {
@@ -156,7 +160,6 @@ const TasksWrapper =({ children }) =>{
     <TaskContext.Provider value = { { 
         state : state,
         getTasksProject : getTasksProject,
-        setTasksList : setTasksList,
         setCurrentTask : setCurrentTask,
         createRequirement : createRequirement,
         editRequirement : editRequirement,

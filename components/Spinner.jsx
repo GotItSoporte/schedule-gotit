@@ -24,8 +24,11 @@ const StyledSpinner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
   height: 100vh;
   background-color: #000000ac;
+  z-index: 1;
+  width: 100%;
   div {
     display: inline-block;
     left: 8px;
