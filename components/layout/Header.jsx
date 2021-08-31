@@ -6,8 +6,7 @@ import { useRouter } from 'next/router';
 //material ui 
 import { Grid, Menu, MenuItem, IconButton, Button } from '@material-ui/core';
 import { MoreVertOutlined, DeleteOutline } from '@material-ui/icons';
-//components
-import ProjectList from '../ProjectList';
+
 // context
 import useUser from '../../context/hooks/useUser';
 // images

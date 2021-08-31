@@ -10,12 +10,12 @@ import '../styles/globals.scss'
 
 const GlobalStyle = createGlobalStyle`
 html{
-
+  min-width: 500px;
   padding: 0;
 }
 
 body{
- 
+ width: 100%;
 }
 `;
 
