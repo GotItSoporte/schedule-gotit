@@ -1,31 +1,29 @@
 import React, { useEffect, useState } from 'react';
 // MaterialUi
-import { InputLabel, Grid, Button } from '@material-ui/core';
+import { InputLabel, Grid } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardTimePicker } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns';
 import MomentUtils from '@date-io/moment';
-
+import { IconButton } from '@material-ui/core';
+import { DeleteOutline } from '@material-ui/icons';
 // componets
 import TimeInput from './TimeInput';
 import TextInput from './TextInput';
-
+import Button from '../../Button';
 //hooks
 import useDateDay from '../../../hooks/useDateDay';
 // styles
 import styled from 'styled-components';
+import device from '../../../styles/styledBreakPoints';
 
 const StyledSessions = styled(Grid)`
-  margin: 0 0 1rem 0;
+   
 `;
 
 const StyledContainer = styled(Grid)`
 padding: 0 0 0.5rem 0;
 & div{
     padding: 0 0 0.5rem 0;
-    color : ${ props => props.theme[ 'color-input-text' ]  };
-    & label {
-      color : ${ props => props.theme[ 'color-text' ] };
-    }
   }
 `;
 const StyledLabel = styled(InputLabel)`
@@ -33,13 +31,10 @@ const StyledLabel = styled(InputLabel)`
    color : ${ props => props.theme[ 'secondary' ] } !important;
 `;
 
-const StyledAddButton = styled(Button)`
-  max-width: 12rem;
-   border-color : ${ props => props.theme[ 'secondary' ] } ;
-`;
 
-const StyledDeleteButton = styled(Button)`
-   border-color : ${ props => props.theme[ 'secondary' ] } !important;
+const StyledDeleteButton = styled(IconButton)`
+  border-color : ${ props => props.theme[ 'secondary' ] } !important;
+  color : ${ props => props.theme[ 'secondary' ] } !important;
 `;
 
 const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, formikErrorsSessions }) => {
@@ -133,19 +128,22 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
             />
           </Grid>
           <Grid item xs = { 4 } md = { 2 }>
-            <StyledDeleteButton 
-              variant="outlined"
-              onClick = {() => deleteSession( index ) }
-            > X</StyledDeleteButton>
+          <StyledDeleteButton aria-label="delete" size="small">
+            <DeleteOutline
+             onClick = {() => deleteSession( index ) }
+            />
+          </StyledDeleteButton>
+            
           </Grid>
       </StyledContainer >
-        )}
+      )}
         </MuiPickersUtilsProvider>
         
-      <StyledAddButton 
+      <Button 
         variant = 'outlined'
         onClick = { handleAddSession }
-      > Agregr Sesión</StyledAddButton>
+        textButton = 'Agregr Sesión'
+      />
     </StyledSessions>
   );
 }

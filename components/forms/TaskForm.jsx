@@ -62,9 +62,13 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
         container
         justifyContent = 'center'
         alignItems = 'center'
+        fullWidth
        >
 
         <Grid 
+          container
+          direction = 'column'
+          alignItems = 'center'
           className = 'form-container'
           item
           xs = { 12 }
