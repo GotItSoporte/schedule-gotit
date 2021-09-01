@@ -84,15 +84,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
       container
       direction =  'column'
     >
-        <MuiPickersUtilsProvider  utils = { DateFnsUtils }  >
-        
-        </MuiPickersUtilsProvider>
-        
-      <Button 
-        variant = 'outlined'
-        onClick = { handleAddSession }
-        textButton = 'Agregr Sesión'
-      />
+      
     </StyledSessions>
   );
 }
