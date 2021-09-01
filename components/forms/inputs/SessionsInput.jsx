@@ -80,12 +80,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
      );
   }, [ sessions ]);
   return ( 
-    <StyledSessions 
-      container
-      direction =  'column'
-    >
-      
-    </StyledSessions>
+    <div>Sessions</div>
   );
 }
  
