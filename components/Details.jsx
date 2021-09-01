@@ -5,7 +5,9 @@ import useTasks from '../context/hooks/useTasks';
 import { Grid } from '@material-ui/core';
 // Components
 import SessionInfo from './SessionInfo'; 
-import Button from '../components/Button'
+import Button from '../components/Button';
+import DetailText from './DetailText';
+import DetailDescription from './DetailDescription';
 //styles
 import styled from 'styled-components';
 import device  from '../styles/styledBreakPoints';
@@ -46,38 +48,7 @@ const StyledDetails = styled.div`
 
     }
     .descripcion {
-      margin-top: 40px;
-      span {
-        font-size: 15px;
-      }
-
-      p {
-        font-size: 14px;
-        color: #ffffff;
-        white-space: pre-wrap;
-      }
-          }
-  }
-`;
-
-const StyledInfo = styled( Grid )`
-
-  .campo {
-    text-align: left;
-    margin-top: 40px;
-    margin-right: 20px;
-    border-bottom: 1px solid rgba(138, 138, 138, 0.5);
-    border-left: 1px solid rgba(112, 112, 112, 0.5);
-
-    span {
-      font-size: 12px;
-      margin-left: 5px;
-    }
-
-    a {
-      font-size: 14px;
-      margin-left: 8px;
-      color: #ffffff;
+      
     }
   }
 `;
@@ -105,40 +76,15 @@ const Details = ({ editable, showForm, setShowForm }) => {
               <div id= 'titulo'>
                 <h1>{ currentTask?.name }</h1>
               </div>
-              <StyledInfo container  >
-                <div className= 'campo'>
-                  <span>USUARIO</span><br />
-                  <a>{ user?.name }</a>
-                </div>
-                <div className= 'campo'>
-                  <span>ESTADO</span><br />
-                  <a>{ currentTask?.state}</a>
-                </div>
-                <div className= 'campo'>
-                  <span>NOMBRE DE CONTACTO</span><br />
-                  <a>{ currentTask?.contact.name }</a>
-                </div>
-                <div className= 'campo'>
-                  <span>EMAIL DE CONTACTO</span><br />
-                  <a>{ currentTask?.contact.email }</a>
-                </div>
-                <div className= 'campo'>
-                  <span>ECHA DE CREACIÓN</span><br />
-                  <a>{ reqDate }</a>
-                </div>
-                <div className= 'campo'>
-                  <span>CÓDIGO DE REFERENCIA</span><br />
-                  <a>{ currentTask?.ref }</a>
-                </div>
-                <div className= 'campo'>
-                  <span>FECHA DE FINALIZACIÓN</span><br />
-                  <a>{ currentTask?.finishDate ||'----'}</a>
-                </div>
-              </StyledInfo>
-              <div className= 'descripcion'>
-                <span>Descripción del requerimiento</span>
-                <p>{ currentTask?.requirement }</p>
-              </div>
+              <Grid container  >
+                <DetailText  title = 'Usuario' info = { user?.name } />
+                <DetailText  title = 'estado' info = { user?.state } />
+                <DetailText  title = 'nombre de contacto' info = { currentTask?.contact.name } />
+                <DetailText  title = 'fecha de creación' info = { reqDate } />
+                <DetailText  title = 'CÓDIGO DE REFERENCIA' info = { currentTask?.ref } />
+                <DetailText  title = 'FECHA DE FINALIZACIÓN' info = { currentTask?.finishDate ||'----' } />
+              </Grid>
+              <DetailDescription  title = 'Descripción del requerimiento' info = { currentTask?.requirement } />
               {
                 currentTask?.isTask? 
                   currentTask?.sessions?.map( (session, index) => 
@@ -150,33 +96,18 @@ const Details = ({ editable, showForm, setShowForm }) => {
                   )
                 : null
               }
-              <div>
 
-              </div>
             </div>
             {/* Si el caso ya fue tomado */}
             <div >
               { currentTask?.isTask ?
                 <>
-                  <StyledInfo container >
-                    <div className= 'campo'>
-                      <span>Propietario del caso</span><br />
-                      <a>{ currentTask?.member?.name || '-----' }</a>
-                    </div>
-                    <div className= 'campo'>
-                      <span>Email de contacto</span><br />
-                      <a>juanse@got-it.tv</a>
-                    </div>
-                    <div className= 'campo'>
-                      <span>Tiempo de solución</span><br />
-                      <a>{ currentTask.time } Minutos</a>
-                    </div>
-                  </StyledInfo>
-                  <div className='descripcion'>
-                    <span>Descripcion de la solución</span>
-                    <p>{ currentTask?.description || '' }</p>
-                  </div>
-                  
+                  <Grid container >
+                    <DetailText  title = 'Propietario del caso' info = { currentTask?.member?.name || '-----'} />
+                    <DetailText  title = 'Email de contacto' info = {  currentTask?.member?.email || '-----' } />
+                    <DetailText  title = 'Tiempo de solución' info = { currentTask.time } />
+                  </Grid>
+                  <DetailDescription  title = 'Descripcion de la solución' info = { currentTask?.description || '' } />                  
                 </>
                 : null
               }
