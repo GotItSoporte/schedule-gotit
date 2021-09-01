@@ -54,6 +54,7 @@ const StyledDetails = styled.div`
       p {
         font-size: 14px;
         color: #ffffff;
+        white-space: pre-wrap;
       }
           }
   }

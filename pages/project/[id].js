@@ -168,7 +168,7 @@ const Project = ({ project, tasks }) => {
                           <th className ='on-desktop'>HORAS RESTANTES</th>
                           <th className ='on-desktop'>HORAS USADAS</th>
                           <th className ='on-desktop'>HORAS TOTALES</th>
-                          <th className ='on-desktop'>HORAS USADAS</th>
+                          <th className ='on-mobile'>HORAS USADAS</th>
                           <th>FECHA DE INICIO</th>
                           <th>FECHA DE Finalizacion</th>
                       </tr>
