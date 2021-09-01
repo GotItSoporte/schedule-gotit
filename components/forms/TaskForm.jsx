@@ -10,7 +10,7 @@ import SubmitButton from './SubmitButton';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 //
-import { TextField, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 // styles
 import { StyledForm } from '../../styles/StyledForm';
 
@@ -62,7 +62,6 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
         container
         justifyContent = 'center'
         alignItems = 'center'
-        fullWidth
        >
 
         <Grid 
@@ -80,7 +79,6 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
               type="text"
               placeholder="Título" 
               name="time" 
-              fullWidth
   
               value = { formik.values.time }
               onChange = { formik.handleChange }
@@ -118,7 +116,6 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
             <TextAreaIput 
               name="description" 
               placeholder="Por favor escriba suna breve descripción de la solución" 
-              fullWidth
   
               value = { formik.values.description }
               onChange = { formik.handleChange }

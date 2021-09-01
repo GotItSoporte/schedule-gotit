@@ -97,7 +97,6 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
           </Grid>
           <Grid item xs = { 6 } md = { 3 }>
             <TimeInput
-              fullWidth
               id = { `sessions.${index}.startTime` }
               value = { sessions[ index ].startTime }
               label = 'Hora de inicio'
@@ -107,7 +106,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
           </Grid>
           <Grid item xs = { 6 } md = { 3 }>
             <TimeInput
-              fullWidth
+    
               id = { `sessions.${index}.finishTime` }
               value = { sessions[ index ].finishTime }
               label = 'Hora de finalizacion'
@@ -128,9 +127,12 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
             />
           </Grid>
           <Grid item xs = { 4 } md = { 2 }>
-          <StyledDeleteButton aria-label="delete" size="small">
+          <StyledDeleteButton 
+            aria-label="delete" 
+            size="small"
+            onClick = {() => deleteSession( index ) }
+          >
             <DeleteOutline
-             onClick = {() => deleteSession( index ) }
             />
           </StyledDeleteButton>
             
