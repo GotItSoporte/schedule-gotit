@@ -7,7 +7,7 @@ const StyledDescription = styled.div`
   span {
     font-size: 15px;
   }
-  a {
+  p {
     font-size: 14px;
     color: #ffffff;
     white-space: pre-wrap;
@@ -18,7 +18,7 @@ const DetailDescription = ({ title, info }) => {
   return ( 
     <StyledDescription >
       <span>{ title }</span><br />
-      <a>{ info }</a>
+      <p>{ info }</p>
     </StyledDescription>
   );
 }

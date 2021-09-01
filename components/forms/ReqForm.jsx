@@ -140,9 +140,9 @@ const ReqForm = ({ projects, submitFunction, edit, initialValues }) => {
                   error = { formik.touched.project && Boolean( formik.errors.project ) }
                   helperText={formik.touched.project && formik.errors.project}
                 >
-                  { projects?.map(( project, index) => 
+                  { projects?.map(( project) => 
                     <MenuItem
-                      key = { index }
+                      key = { project._id }
                       value ={ project._id }
                     >
                       { project.name }

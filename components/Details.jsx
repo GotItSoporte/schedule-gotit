@@ -78,7 +78,7 @@ const Details = ({ editable, showForm, setShowForm }) => {
               </div>
               <Grid container  >
                 <DetailText  title = 'Usuario' info = { user?.name } />
-                <DetailText  title = 'estado' info = { user?.state } />
+                <DetailText  title = 'estado' info = { currentTask?.state } />
                 <DetailText  title = 'nombre de contacto' info = { currentTask?.contact.name } />
                 <DetailText  title = 'fecha de creación' info = { reqDate } />
                 <DetailText  title = 'CÓDIGO DE REFERENCIA' info = { currentTask?.ref } />

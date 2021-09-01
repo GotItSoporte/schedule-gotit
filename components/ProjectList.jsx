@@ -132,16 +132,14 @@ const ProjectList = ({ userRole }) => {
               <div >
                   <StyledTable >
                     <tbody>
-                      {projectsList?.map( (project , index)=> 
-                      <>
+                      {projectsList?.map( (project)=> 
                           <Project 
-                            key = { index }
+                            key = { project._id }
                             project = { project }
                             setCurrentProject = { setCurrentProject }
                             getTasksProject = { getTasksProject }
                             userRole = { userRole }
                           />
-                      </>
                       )}
                     
                     </tbody>

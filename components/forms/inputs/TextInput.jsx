@@ -50,6 +50,7 @@ const TextInput = ({
   styles,
   type,
   name, 
+  fullWidth, 
   value,
   onChange, 
   error, 
@@ -62,6 +63,7 @@ const TextInput = ({
       className = { styles }
       type= { type }
       name= { name } 
+      fullWidth = { fullWidth }
       value = { value }
       onChange = { onChange }
       error = { error }
