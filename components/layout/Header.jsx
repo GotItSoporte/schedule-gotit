@@ -40,7 +40,7 @@ const StyledDesktopMenu = styled(Grid)`
 	margin-top: 20px;
 	margin-right: 20px;
 	list-style: none;
-  display: none;
+  display: none !important;
 	>li {
 		float: right;
 		position: relative;
