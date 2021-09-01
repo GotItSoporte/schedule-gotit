@@ -20,6 +20,12 @@ const StyledSession = styled.div`
       margin-left: 8px;
       color: #ffffff;
     }
+
+    p{
+      font-size: 14px;
+      color: #ffffff;
+      white-space: pre-wrap;
+    }
 `;
 
 const SessionInfo = ({ session, index }) => {
@@ -29,6 +35,7 @@ const SessionInfo = ({ session, index }) => {
     <StyledSession>
       <span>{ day }</span><br />
       <a>{ session.value } minutos</a>
+      <p>{ session.description || '----' }</p>
     </StyledSession>
   );
 }
