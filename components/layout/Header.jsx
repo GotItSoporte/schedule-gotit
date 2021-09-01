@@ -41,6 +41,9 @@ const StyledDesktopMenu = styled(Grid)`
 	margin-right: 20px;
 	list-style: none;
   display: none !important;
+  @media ${ device.md } {
+    display: flex !important;
+  }
 	>li {
 		float: right;
 		position: relative;
@@ -66,9 +69,6 @@ const StyledDesktopMenu = styled(Grid)`
 		font-size: 18px;
 	}
 
-  @media ${ device.md } {
-    display: flex;
-  }
 `;
 
 const StyledMonbileMenu = styled.div`
