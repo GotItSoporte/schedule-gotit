@@ -8,8 +8,9 @@ import { IconButton } from '@material-ui/core';
 import { DeleteOutline } from '@material-ui/icons';
 // componets
 import TimeInput from './TimeInput';
-import TextInput from './TextInput';
+import TextAreaIput from './TextAreaInput';
 import Button from '../../Button';
+import DetailText from '../../DetailText'
 //hooks
 import useDateDay from '../../../hooks/useDateDay';
 // styles
@@ -37,7 +38,7 @@ const StyledDeleteButton = styled(IconButton)`
   color : ${ props => props.theme[ 'secondary' ] } !important;
 `;
 
-const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, formikErrorsSessions }) => {
+const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, formikErrorsSessions, onChange }) => {
   // Add Session chekBox;
   const handleAddSession = () => {
     const newSessions =  sessions.map( e => e );
@@ -97,7 +98,6 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
           </Grid>
           <Grid item xs = { 6 } md = { 3 }>
             <TimeInput
-              fullWidth
               id = { `sessions.${index}.startTime` }
               value = { sessions[ index ].startTime }
               label = 'Hora de inicio'
@@ -107,7 +107,6 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
           </Grid>
           <Grid item xs = { 6 } md = { 3 }>
             <TimeInput
-              fullWidth
               id = { `sessions.${index}.finishTime` }
               value = { sessions[ index ].finishTime }
               label = 'Hora de finalizacion'
@@ -116,24 +115,23 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
             />
           </Grid>
           <Grid item xs = { 4 } md = { 1 }>
-            <TextInput
-              type="text"
-                label = 'minutos'
-              placeholder="minutes" 
-              name= { `sessions.${index}.value` } 
-              value = { sessions[ index ].value || 0}
-              
-              error = { formikTouchedSessions?.value && Boolean( formikErrorsSessions?.value ) }
-              helperText={ formikTouchedSessions?.value && formikErrorsSessions?.value }
-            />
+            <DetailText title = 'minutos' info ={ session.value || 0 } />
           </Grid>
+          <TextAreaIput
+              label = 'Descripción de la sesión.'
+              name = { `sessions.${ index }.description` }
+              fullWidth
+              value = { session.description }
+              onChange = { onChange }
+
+          />
+
           <Grid item xs = { 4 } md = { 2 }>
-          <StyledDeleteButton aria-label="delete" size="small">
-            <DeleteOutline
-             onClick = {() => deleteSession( index ) }
-            />
-          </StyledDeleteButton>
-            
+            <StyledDeleteButton aria-label="delete" size="small">
+              <DeleteOutline
+              onClick = {() => deleteSession( index ) }
+              />
+            </StyledDeleteButton>
           </Grid>
       </StyledContainer >
       )}

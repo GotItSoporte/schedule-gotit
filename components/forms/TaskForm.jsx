@@ -23,6 +23,7 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
       Yup.object({
           startTime : Yup.date().nullable(),   
           finishTime : Yup.date().nullable(),    
+          description : Yup.string(),    
         })
         ),
       finished: Yup.boolean(),
@@ -35,7 +36,8 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
       sessions : Yup.array().of (
         Yup.object({
           startTime : Yup.date().nullable(),   
-          finishTime : Yup.date().nullable(),    
+          finishTime : Yup.date().nullable(), 
+          description: Yup.string().required('Debes desccribir lo que se ha hecho en la sesión.')   
         })
         ),      
       finished: Yup.boolean(),
@@ -91,6 +93,8 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
               
               formikTouchedSessions = { formik.touched.sessions }
               formikErrorsSessions = { formik.errors.sessions }
+
+              onChange = { formik.handleChange }
             />
             <Grid
               container

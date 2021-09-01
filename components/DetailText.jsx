@@ -13,6 +13,7 @@ const StyledInfoField = styled.div`
       font-size: 12px;
       margin-left: 5px;
       text-transform: uppercase;
+      color : ${ props => props.theme['secondary'] };
     }
 
     a {
