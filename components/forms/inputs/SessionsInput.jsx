@@ -127,14 +127,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
             />
           </Grid>
           <Grid item xs = { 4 } md = { 2 }>
-          <StyledDeleteButton 
-            aria-label="delete" 
-            size="small"
-            onClick = {() => deleteSession( index ) }
-          >
-            <DeleteOutline
-            />
-          </StyledDeleteButton>
+         
             
           </Grid>
       </StyledContainer >

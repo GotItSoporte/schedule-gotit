@@ -85,7 +85,13 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
               error = { formik.touched.time && Boolean( formik.errors.time ) }
               helperText={formik.touched.time && formik.errors.time}
               />
-            
+            <SessionsInput  
+              sessions = { formik.values.sessions } 
+              formikSetFieldValue = {  formik.setFieldValue  }
+              
+              formikTouchedSessions = { formik.touched.sessions }
+              formikErrorsSessions = { formik.errors.sessions }
+            />
             <Grid
               container
               direction = 'column'
