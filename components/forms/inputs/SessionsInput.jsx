@@ -85,44 +85,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
       direction =  'column'
     >
         <MuiPickersUtilsProvider  utils = { DateFnsUtils }  >
-        {sessions?.map ( ( session, index ) => 
-        <StyledContainer 
-          key ={ index }
-          container
-          justifyContent = 'space-between'
-          alignItems = 'center'
-        > 
-          <Grid item xs = { 12 }>
-            <StyledLabel id = 'sessionsPickers'> Sesión del { transformDate (session.startTime) } </StyledLabel>
-          </Grid>
-          
-
-          <Grid item xs = { 4 } md = { 1 }>
-            <TextInput
-              type="text"
-                label = 'minutos'
-              placeholder="minutes" 
-              name= { `sessions.${index}.value` } 
-              value = { sessions[ index ].value || 0}
-              
-              error = { formikTouchedSessions?.value && Boolean( formikErrorsSessions?.value ) }
-              helperText={ formikTouchedSessions?.value && formikErrorsSessions?.value }
-            />
-          </Grid>
-
-          <Grid item xs = { 4 } md = { 2 }>
-          <StyledDeleteButton 
-            aria-label="delete" 
-            size="small"
-            onClick = {() => deleteSession( index ) }
-          >
-            <DeleteOutline
-            />
-          </StyledDeleteButton>
-            
-          </Grid>
-      </StyledContainer >
-      )}
+        
         </MuiPickersUtilsProvider>
         
       <Button 
