@@ -95,25 +95,8 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
           <Grid item xs = { 12 }>
             <StyledLabel id = 'sessionsPickers'> Sesión del { transformDate (session.startTime) } </StyledLabel>
           </Grid>
-          <Grid item xs = { 6 } md = { 3 }>
-            <TimeInput
-              id = { `sessions.${index}.startTime` }
-              value = { sessions[ index ].startTime }
-              label = 'Hora de inicio'
-              formikSetFieldValue= { formikSetFieldValue }
-              onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
-              />
-          </Grid>
-          <Grid item xs = { 6 } md = { 3 }>
-            <TimeInput
-    
-              id = { `sessions.${index}.finishTime` }
-              value = { sessions[ index ].finishTime }
-              label = 'Hora de finalizacion'
-              formikSetFieldValue= { formikSetFieldValue }
-              onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
-            />
-          </Grid>
+          
+
           <Grid item xs = { 4 } md = { 1 }>
             <TextInput
               type="text"
@@ -126,8 +109,16 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
               helperText={ formikTouchedSessions?.value && formikErrorsSessions?.value }
             />
           </Grid>
+
           <Grid item xs = { 4 } md = { 2 }>
-         
+          <StyledDeleteButton 
+            aria-label="delete" 
+            size="small"
+            onClick = {() => deleteSession( index ) }
+          >
+            <DeleteOutline
+            />
+          </StyledDeleteButton>
             
           </Grid>
       </StyledContainer >
