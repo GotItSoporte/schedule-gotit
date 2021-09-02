@@ -151,8 +151,8 @@ const Project = ({ project, tasks }) => {
   // calculate hours
   const startDate =  useDateDay( project?.startDate );
   const finishDate = useDateDay( project?.finishDate ) || 'No asignada';
-  const times = project? useDateHours( project.time[ project?.currentMonth - 1 ].minutes, 
-    project.time[ project?.currentMonth - 1 ].minutesUsed) : [];
+  const times = useDateHours( project.time[ project?.currentMonth - 1 ].minutes, 
+    project.time[ project?.currentMonth - 1 ].minutesUsed);
 
   return ( 
     <>
