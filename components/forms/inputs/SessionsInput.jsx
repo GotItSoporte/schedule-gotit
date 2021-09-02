@@ -42,6 +42,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
   // Add Session chekBox;
   const handleAddSession = () => {
     const newSessions =  sessions.map( e => e );
+    console.log({ sessions })
     newSessions.push({
       startTime : null,
       finishTime : null,
@@ -49,6 +50,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
       valueWeight : 1,
     })
     formikSetFieldValue( 'sessions', newSessions )
+    console.log({ sessions })
   }
   // delete session 
   const deleteSession = ( index ) => {
