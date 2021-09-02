@@ -45,10 +45,6 @@ const StyledDetails = styled.div`
           margin-bottom: 5px;
         }
       }
-
-    }
-    .descripcion {
-      
     }
   }
 `;

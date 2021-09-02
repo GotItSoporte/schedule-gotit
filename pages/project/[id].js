@@ -13,13 +13,17 @@ import { scheduleApi } from '../../config/axios';
 import { Grid, Button } from '@material-ui/core';
 // components 
 import TasksList from '../../components/tasks/TasksList';
+import DetailText from '../../components/DetailText';
+// hooks
+import useDateDay from '../../hooks/useDateDay';
+import useDateHours from '../../hooks/useDateHours';
 // styles 
 import styled from 'styled-components';
 import device from '../../styles/styledBreakPoints';
 
 const StyledPage = styled(Grid)`
   margin-top: 50px;
-  margin: 50px auto 0 auto ;
+  padding: 2rem 0.5rem 4rem 0.5rem;
   @media ${ device.md }{
     width: 100%;
     margin: 0 0 0 0 ;
@@ -29,9 +33,10 @@ const StyledPage = styled(Grid)`
     padding: 2rem 0.5rem 4rem 0.5rem;
     background-color: #2E4054;
     border-radius: 10px; 
+
     @media ${device.md} { 
       padding: 2rem 4rem 4rem 4rem;
-    background-color: #2E4054;
+      background-color: #2E4054;
     }
   }
    h1 {
@@ -144,14 +149,10 @@ const Project = ({ project, tasks }) => {
   }
 
   // calculate hours
-  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const startDate = new Date( project?.startDate ).toLocaleDateString( 'es-ES', dateOptions)
-  const finishDate = project?.finishDate? new Date( project?.finishDate ).toLocaleDateString( 'es-ES', dateOptions)
-         : 'No asignada';
-  let timeTotal = project?.time[ project?.currentMonth - 1 ].minutes;
-  let timeUsed = project?.time[ project?.currentMonth - 1 ].minutesUsed;
-  let timeLeft = (timeTotal - timeUsed) / 60 ;
-  timeTotal = timeTotal / 60;
+  const startDate =  useDateDay( project?.startDate );
+  const finishDate = useDateDay( project?.finishDate ) || 'No asignada';
+  const times = project? useDateHours( project.time[ project?.currentMonth - 1 ].minutes, 
+    project.time[ project?.currentMonth - 1 ].minutesUsed) : [];
 
   return ( 
     <>
@@ -161,6 +162,23 @@ const Project = ({ project, tasks }) => {
               { user?.role? <h1>{ user?.company }</h1> : null }
               <h1>{ project?.name || 'No Encontrado' }</h1>
               <div>
+              {/* <Grid 
+                container  
+                justifyContent = 'space-between'
+              >
+                <DetailText  title = 'meses' info = { project.months } />
+                <DetailText  title = 'Horas' info = { `${times[1]} / ${times[0]}` } />
+                <DetailText  title = 'No Tareas' info = { project.tasks.length } />
+              </Grid>
+              <Grid 
+                container  
+                justifyContent = 'space-between'
+              >
+                <DetailText  title = 'fecha de inicio' info = { startDate} />
+                <DetailText  title = 'fecha de finalización' info = { finishDate } />
+                <DetailText  title = 'Tipo' info = { project.type } />
+                <DetailText  title = 'Cliente' info = { project.company ||'----' } />
+              </Grid> */}
                   <StyledTable >
                   <thead>
                       <tr>
@@ -179,10 +197,10 @@ const Project = ({ project, tasks }) => {
               <tbody>
                   <tr>
                       <td>{ project.months }</td>
-                      <td className ='on-desktop' >{ Math.floor(timeLeft)  }</td>
-                      <td className ='on-desktop' >{ timeUsed }</td>
-                      <td className ='on-desktop' >{ timeTotal }</td>
-                      <td className ='on-mobile' >{ timeUsed } / { timeTotal }</td>
+                      <td className ='on-desktop' >{ times[3]  }</td>
+                      <td className ='on-desktop' >{ times[1] }</td>
+                      <td className ='on-desktop' >{ times[0] }</td>
+                      <td className ='on-mobile' >{ times[0] } / { times[1] }</td>
                       <td>{ startDate }</td>
                       <td>{ finishDate }</td>
                   </tr>
