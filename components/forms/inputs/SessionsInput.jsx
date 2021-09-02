@@ -41,8 +41,8 @@ const StyledDeleteButton = styled(IconButton)`
 const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, formikErrorsSessions, onChange }) => {
   // Add Session chekBox;
   const handleAddSession = () => {
-    const newSessions =  sessions.map( e => e );
     console.log({ sessions })
+    const newSessions = sessions? Array.of( ...sessions ) : [];
     newSessions.push({
       startTime : null,
       finishTime : null,
