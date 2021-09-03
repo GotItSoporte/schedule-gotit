@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import { Grid } from '@material-ui/core';
 // styles
 import { StyledForm } from '../../styles/StyledForm';
+import DetailText from '../DetailText';
 
 const TaskForm = ({  submitFunction, edit, initialValues }) => {
   // yup
@@ -54,7 +55,9 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
     const formik = useFormik({
       initialValues,
       validationSchema : taskSchema,
-      onSubmit : values =>{submit( values )},
+      onSubmit : values =>{
+        submit( values )
+      },
       
     });
     
@@ -77,16 +80,8 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
         >
           <h1>EDITAR TAREA</h1>
           <form onSubmit={formik.handleSubmit} >
-            <TextInput 
-              type="text"
-              placeholder="Título" 
-              name="time" 
-  
-              value = { formik.values.time }
-              onChange = { formik.handleChange }
-              error = { formik.touched.time && Boolean( formik.errors.time ) }
-              helperText={formik.touched.time && formik.errors.time}
-              />
+            <DetailText title = 'Tiempo total invertido' info ={formik.values.time} />
+            
             <SessionsInput  
               sessions = { formik.values.sessions } 
               formikSetFieldValue = {  formik.setFieldValue  }

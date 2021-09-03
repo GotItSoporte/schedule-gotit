@@ -38,6 +38,7 @@ const StyledTextArea = styled( TextField )`
     }
 		textarea{
       padding: 1rem 0.5rem 0.5rem 1rem;
+      height: 100%;
 			&::placeholder{
 				position:absolute;
 				color:${ props => props.theme['color-text'] };

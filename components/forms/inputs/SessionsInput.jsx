@@ -54,10 +54,9 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
   }
   // delete session 
   const deleteSession = ( index ) => {
-    // const newSessions =  sessions.map( e => e );
-    // newSessions.splice( index, 1 );
-    // formikSetFieldValue( 'sessions', newSessions )
-    console.log("Hello!");
+    const newSessions =  sessions.map( e => e );
+    newSessions.splice( index, 1 );
+    formikSetFieldValue( 'sessions', newSessions )
   }
   // set dates
   const transformDate = date => {
