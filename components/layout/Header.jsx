@@ -179,7 +179,7 @@ const NavMenu = ({ user, log_out }) =>
     <li>
       <a onClick ={ log_out } href="#">Cerrar Sesión</a>
     </li>
-      { !user?.role ?
+      { !user?.role || user.role === 'admin'?
         <li>
           <Link 
             href = {{
