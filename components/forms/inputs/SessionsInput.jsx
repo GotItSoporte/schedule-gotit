@@ -146,7 +146,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
       <Button 
         variant = 'outlined'
         onClick = { handleAddSession }
-        textButton = 'Agregr Sesión'
+        textButton = 'Agregar Sesión'
       />
     </StyledSessions>
   );

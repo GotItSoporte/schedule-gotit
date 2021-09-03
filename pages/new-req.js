@@ -69,7 +69,6 @@ const NewReq = () => {
         <Header/>
     { isAuth? 
         <ReqForm
-          isrequeriment = {true}
           projects = { projectsList }
           submitFunction = { setNewTask }
           edit = { false }
