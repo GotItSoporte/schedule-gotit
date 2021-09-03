@@ -20,9 +20,9 @@ const StyledTextArea = styled( TextField )`
     color: ${ props => props.theme['color-input-text'] };
     box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);    
     width: 100%; 
-    height: 5rem;  
+    min-height: 5rem;  
     outline: none;
-    padding: 10px;
+    
     font-size: 13px;
     border: 1px solid rgba(0,0,0,0.3);
     border-radius: 4px;
@@ -37,9 +37,11 @@ const StyledTextArea = styled( TextField )`
       margin : 1rem 0.5rem 0.5rem 0.5rem;
     }
 		textarea{
+      padding: 1rem 0.5rem 0.5rem 1rem;
 			&::placeholder{
 				position:absolute;
 				color:${ props => props.theme['color-text'] };
+        min-height: 10rem;
 			}
 		}
     input:-webkit-autofill {

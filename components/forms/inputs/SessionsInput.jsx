@@ -54,9 +54,10 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
   }
   // delete session 
   const deleteSession = ( index ) => {
-    const newSessions =  sessions.map( e => e );
-    newSessions.splice( index, 1 );
-    formikSetFieldValue( 'sessions', newSessions )
+    // const newSessions =  sessions.map( e => e );
+    // newSessions.splice( index, 1 );
+    // formikSetFieldValue( 'sessions', newSessions )
+    console.log("Hello!");
   }
   // set dates
   const transformDate = date => {
@@ -129,11 +130,14 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
           />
 
           <Grid item xs = { 4 } md = { 2 }>
-            <StyledDeleteButton aria-label="delete" size="small">
-              <DeleteOutline
+            <IconButton 
+              aria-label="delete" 
+              size="small"
               onClick = {() => deleteSession( index ) }
+            >
+              <DeleteOutline
               />
-            </StyledDeleteButton>
+            </IconButton>
           </Grid>
       </StyledContainer >
       )}
