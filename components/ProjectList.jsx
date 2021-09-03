@@ -7,7 +7,9 @@ import BtnsContainer from './layout/BtnsContainer';
 // contexts
 import useProjects from '../context/hooks/useProjects';
 import useTasks from '../context/hooks/useTasks';
-//
+//hooks
+import useDateHours from '../hooks/useDateHours'
+//maeriañ
 import { Grid } from '@material-ui/core';
 //styles
 import styled from 'styled-components';
@@ -154,8 +156,9 @@ const ProjectList = ({ userRole }) => {
 
 const Project = ({ project, setCurrentProject, getTasksProject, userRole })  =>{
     // Router
-    const router = useRouter();
-
+  const times = useDateHours( project.time[ project?.currentMonth - 1 ].minutes, 
+      project.time[ project?.currentMonth - 1 ].minutesUsed);
+  const router = useRouter();
   let name =project.name;
   // calculate hours
   const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -167,25 +170,20 @@ const Project = ({ project, setCurrentProject, getTasksProject, userRole })  =>{
     router.push( `/project/${ id }` )
   }
 
-  let timeTotal = project?.time[ project?.currentMonth - 1 ].minutes;
-  let timeUsed = project?.time[ project?.currentMonth - 1 ].minutesUsed;
-  let timeLeft = (timeTotal - timeUsed) / 60 ;
-  timeTotal = parseFloat( (timeTotal / 60). toFixed(1));
-  timeUsed = parseFloat( (timeUsed / 60). toFixed(1));
   return  (
     <tr>
       <td> { name }</td>
         { userRole? <td>{  project.company}</td> : null}
-        <td className = 'on-desktop' >{ Math.floor(timeLeft)  }</td>
-        <td className = 'on-desktop' >{ timeUsed }</td>
-        <td className = 'on-desktop' >{ timeTotal }</td>
-        <td className = 'on-mobile' >{ timeUsed } / { timeTotal }</td>
+        <td className = 'on-desktop' >{ times[2]  }</td>
+        <td className = 'on-desktop' >{ times[1] }</td>
+        <td className = 'on-desktop' >{ times[0] }</td>
+        <td className = 'on-mobile' >{ times[1] } / { times[0] }</td>
         <td >{ showSstartDate.toLocaleDateString( 'es-Es', dateOptions) }</td>
         <td>
           <BtnsContainer
             itemID = { project._id }
             seeFunc ={ linkProject }
-            showEdit = { userRole === 'admin' }
+            showEdit = { false }
             showDelete = { false }
           />
         </td>
