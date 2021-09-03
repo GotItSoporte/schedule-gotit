@@ -22,14 +22,18 @@ const StyledSessions = styled(Grid)`
 `;
 
 const StyledContainer = styled(Grid)`
-padding: 0 0 0.5rem 0;
+  border-style: solid;
+  border-width: thin 0 thin 0;
+  border-color: ${ props => props.theme[ 'color-text' ] };
+  margin: 1.5rem 0 0  0;
+  padding: 1rem 0 0.5rem 0;
 & div{
     padding: 0 0 0.5rem 0;
   }
 `;
 const StyledLabel = styled(InputLabel)`
   padding: 0.5rem 0  0.5rem 0 !important;
-   color : ${ props => props.theme[ 'secondary' ] } !important;
+   color : ${ props => props.theme[ 'primary' ] } !important;
 `;
 
 
@@ -95,10 +99,21 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
           justifyContent = 'space-between'
           alignItems = 'center'
         > 
-          <Grid item xs = { 12 }>
+          <Grid container justifyContent = 'space-between' item xs = { 12 }>
             <StyledLabel id = 'sessionsPickers'> Sesión del { transformDate (session.startTime) } </StyledLabel>
+            <StyledDeleteButton 
+              aria-label="delete" 
+              size="small"
+              onClick = {() => deleteSession( index ) }
+            >
+              <DeleteOutline
+              />
+            </StyledDeleteButton>
           </Grid>
-          <Grid item xs = { 6 } md = { 3 }>
+          <Grid item xs = { 12 } md = { 1 }>
+            <DetailText title = 'minutos' info ={ session.value || 0 } />
+          </Grid>
+          <Grid item xs = { 4 } md = { 3 }>
             <TimeInput
               id = { `sessions.${index}.startTime` }
               value = { sessions[ index ].startTime }
@@ -107,7 +122,7 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
               onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
               />
           </Grid>
-          <Grid item xs = { 6 } md = { 3 }>
+          <Grid item xs = { 4 } md = { 3 }>
             <TimeInput
               id = { `sessions.${index}.finishTime` }
               value = { sessions[ index ].finishTime }
@@ -115,9 +130,6 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
               formikSetFieldValue= { formikSetFieldValue }
               onChange = { () => handleTimeChange( `sessions.${index}.value`, index ) }
             />
-          </Grid>
-          <Grid item xs = { 4 } md = { 1 }>
-            <DetailText title = 'minutos' info ={ session.value || 0 } />
           </Grid>
           <TextAreaIput
               label = 'Descripción de la sesión.'
@@ -127,17 +139,6 @@ const SessionsInput = ({ sessions, formikSetFieldValue, formikTouchedSessions, f
               onChange = { onChange }
 
           />
-
-          <Grid item xs = { 4 } md = { 2 }>
-            <IconButton 
-              aria-label="delete" 
-              size="small"
-              onClick = {() => deleteSession( index ) }
-            >
-              <DeleteOutline
-              />
-            </IconButton>
-          </Grid>
       </StyledContainer >
       )}
         </MuiPickersUtilsProvider>

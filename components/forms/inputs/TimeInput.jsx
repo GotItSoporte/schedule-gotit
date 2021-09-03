@@ -3,9 +3,19 @@ import { KeyboardTimePicker } from '@material-ui/pickers'
 import styled from 'styled-components';
 /**  */
 const StyledTimePicker = styled(KeyboardTimePicker)`
-  color : ${ props => props.theme[ 'color-text' ] };
+border-radius: 1rem;
+border-color :${ props => props.theme[ 'color-input-text' ] };
+    label {
+      color : ${ props => props.theme[ 'secondary' ] };
+      width: 10rem;
+    }
+  input{
+    color : ${ props => props.theme[ 'color-text' ] };
+  }
   div{
-
+    button{
+      color : ${ props => props.theme[ 'secondary' ] };
+    }
     :before{
         display: none !important;
       }
@@ -26,7 +36,7 @@ const TimeInput = ({id, label, value, formikSetFieldValue, onChange }) => {
     formikSetFieldValue(id, date)
   }
   return ( 
-    <KeyboardTimePicker
+    <StyledTimePicker
           margin="normal"
           id= { id }
           label= { label }
