@@ -197,7 +197,7 @@ const Project = ({ project, tasks }) => {
               <tbody>
                   <tr>
                       <td>{ project.months }</td>
-                      <td className ='on-desktop' >{ times[3]  }</td>
+                      <td className ='on-desktop' >{ times[2]  }</td>
                       <td className ='on-desktop' >{ times[1] }</td>
                       <td className ='on-desktop' >{ times[0] }</td>
                       <td className ='on-mobile' >{ times[0] } / { times[1] }</td>
