@@ -79,6 +79,11 @@ const TasksList = () => {
   const projectsContext = useProjects();
   const { currentProject } = projectsContext;
 
+  //
+  const finishedList = tasksList.filter( t => t.finished );
+  const openList = tasksList.filter( t => !t.finished );
+  const showList = openList.concat( finishedList );
+  console.log( { showList } )
   return ( 
      
     <section>
@@ -99,7 +104,7 @@ const TasksList = () => {
      <div >
          <StyledTable >
          <tbody>
-             { tasksList?.map( (task, index) => 
+             { showList?.map( (task, index) => 
                 (<Task
                   key= { index }
                   task ={ task }
