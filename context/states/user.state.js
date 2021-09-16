@@ -50,6 +50,7 @@ const UserWrapper = ({ children }) =>{
         }
       });
     } catch (error) {
+      console.log( 'error', error )
       console.log( 'error', error.response.data.message )
       return dispatch({
         type : USER_LOGIN_ERROR,

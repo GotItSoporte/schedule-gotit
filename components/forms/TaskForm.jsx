@@ -114,7 +114,7 @@ const TaskForm = ({  submitFunction, edit, initialValues }) => {
             </Grid>
             <TextAreaIput 
               name="description" 
-              placeholder="Por favor escriba suna breve descripción de la solución" 
+              label="Por favor escriba suna breve descripción de la solución" 
   
               value = { formik.values.description }
               onChange = { formik.handleChange }

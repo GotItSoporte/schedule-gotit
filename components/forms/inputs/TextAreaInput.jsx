@@ -12,7 +12,7 @@ const StyledTextArea = styled( TextField )`
     z-index: 1;
     padding-left: 0.5rem;
     font-size: 1rem;
-    height: 10rem;
+    height: 0rem;
   }
 
 	div{
@@ -38,7 +38,7 @@ const StyledTextArea = styled( TextField )`
     }
 		textarea{
       padding: 1rem 0.5rem 0.5rem 1rem;
-      height: 100%;
+      height: 100% !important;
 			&::placeholder{
 				position:absolute;
 				color:${ props => props.theme['color-text'] };

@@ -124,10 +124,13 @@ const TasksWrapper =({ children }) =>{
       },
     })
   } catch (error) {
-    console.log( { error } )
+    const errorMessagge = error.response.data.errores?.
+      reduce( ( acc, err )=> acc + `, ${ err.msg }` , 'Errores : ' ) 
+      || error.response.data.message 
+    console.log( { error : error.response.data.errores || error.response.data.message } )
     return dispatch({
       type: TASKS_ERROR,
-      payload: error.response.data.message
+      payload: errorMessagge,
     });
   } 
   
