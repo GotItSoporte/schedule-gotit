@@ -23,6 +23,7 @@ const SyledHeader = styled(Grid)`
 `;
 
 const StyledLogo = styled(Grid)`
+  display: flex;
 	:hover{
     cursor: pointer;
 	} 
@@ -34,6 +35,10 @@ const StyledLogo = styled(Grid)`
       min-width: ${ 70*( 688/283 ) }px;
 		}
 	}
+  h1{
+    padding-left: 0;
+    background-color: red;
+  }
 `;
 
 const StyledDesktopMenu = styled(Grid)`
@@ -71,7 +76,7 @@ const StyledDesktopMenu = styled(Grid)`
 
 `;
 
-const StyledMonbileMenu = styled.div`
+const StyledMobileMenu = styled.div`
   @media ${ device.md }{
     display: none;
   }
@@ -137,6 +142,7 @@ const Header = () => {
             src={ logo } 
             onClick = { () => goToIndex() }
           />
+          <h1>Soporte</h1>
       </StyledLogo>
         
         <StyledDesktopMenu 
@@ -151,7 +157,7 @@ const Header = () => {
             />
         </StyledDesktopMenu>
 
-        <StyledMonbileMenu >
+        <StyledMobileMenu >
           <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             <MoreVertOutlined/>
           </IconButton>
@@ -167,7 +173,7 @@ const Header = () => {
               log_out = { log_out }
             />
           </Menu>
-      </StyledMonbileMenu>       
+      </StyledMobileMenu>       
     </SyledHeader>
   );
 }
