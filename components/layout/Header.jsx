@@ -36,9 +36,17 @@ const StyledLogo = styled(Grid)`
 		}
 	}
   h1{
-    padding-left: 0;
-    background-color: red;
+    padding-left: 1rem;
+    //font-family: Arial, Helvetica, sans-serif;
+    
+    width: 2rem;
   }
+`;
+
+const StyledTitle = styled(Grid)`
+  padding-left: 1rem;
+    //font-family: Arial, Helvetica, sans-serif;
+    transform: scaleX(0.3);
 `;
 
 const StyledDesktopMenu = styled(Grid)`
@@ -76,7 +84,7 @@ const StyledDesktopMenu = styled(Grid)`
 
 `;
 
-const StyledMobileMenu = styled.div`
+const StyledMobileMenu = styled(Grid)`
   @media ${ device.md }{
     display: none;
   }
@@ -135,20 +143,19 @@ const Header = () => {
         container
         alignItems = 'center'
         item
-        xs = { 4 } sm ={ 3 } 
-        >
+        xs = { 9 } sm ={ 7 } md = { 3 }
+      >
           <Image 
             id= 'logo' 
             src={ logo } 
             onClick = { () => goToIndex() }
           />
-          <h1>Soporte</h1>
+        <h1>Soporte</h1>
       </StyledLogo>
-        
         <StyledDesktopMenu 
           container
           item 
-          xs = { 10 }  sm ={ 8}  lg ={ 6 }
+          md ={ 8 }  
           direction = 'row-reverse'
         >
             <NavMenu 
@@ -157,7 +164,7 @@ const Header = () => {
             />
         </StyledDesktopMenu>
 
-        <StyledMobileMenu >
+        <StyledMobileMenu   xs = { 2 } sm = { 1 }>
           <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             <MoreVertOutlined/>
           </IconButton>
