@@ -36,17 +36,13 @@ const StyledLogo = styled(Grid)`
 		}
 	}
   h1{
-    padding-left: 1rem;
+    padding-left: 2rem;
     //font-family: Arial, Helvetica, sans-serif;
-    
+    transform: scaleX(0.55) scaleY(1.8);
+    font-weight: bolder;
+    transform-origin: left;
     width: 2rem;
   }
-`;
-
-const StyledTitle = styled(Grid)`
-  padding-left: 1rem;
-    //font-family: Arial, Helvetica, sans-serif;
-    transform: scaleX(0.3);
 `;
 
 const StyledDesktopMenu = styled(Grid)`
@@ -164,7 +160,7 @@ const Header = () => {
             />
         </StyledDesktopMenu>
 
-        <StyledMobileMenu   xs = { 2 } sm = { 1 }>
+        <StyledMobileMenu item  xs = { 2 } sm = { 1 }>
           <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             <MoreVertOutlined/>
           </IconButton>
