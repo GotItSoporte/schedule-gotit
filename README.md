@@ -20,7 +20,7 @@ Esta Aplicación
  - en la consola de comandos en la ruta del proyecto ejecutar los siguientes comandos:
  
 ```bash
-# instala las dependencias del back-end y corre el servicio
+# instala las dependencias del front-end y corre el servicio
 npm install
 npm run dev
 
@@ -28,5 +28,6 @@ npm run dev
 
 ### Tecnologias Usadas
 
- - NodeJS: Versión 14.15.1
+ - next: Versión 11.0.1
+ - react: Versión 17.0.2
  
