@@ -7,9 +7,9 @@ Esta Aplicación
  - Fue creada usando NextJS
 
 
-## Configuracion
+## Configuración
 
-##### Configuracion Local
+##### Configuración Local
 
  - Se deben tener encuenta la variables de entorno de next.config.js
 
@@ -25,7 +25,7 @@ npm run dev
 
 ```
 
-### Tecnologias Usadas
+### Tecnologías Usadas
 
  - next: Versión 11.0.1
  - react: Versión 17.0.2
