@@ -11,8 +11,7 @@ Esta Aplicación
 
 ##### Configuracion Local
 
- - Se deben tener encuenta la variables de entorno que se encuentran en config/db.js y config/index.js
- - En la ruta Postman Collection se encuentran los request de la API
+ - Se deben tener encuenta la variables de entorno de next.config.js
 
 ##### Correr la Aplicación
 
