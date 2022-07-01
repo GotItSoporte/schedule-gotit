@@ -2,7 +2,7 @@
 
 Esta Aplicación
 
- - Es el Fron'ent de la aplicación de [Soporte](https://soporte-gotit.vercel.app/login) de GOT IT MOVING IDEAS SAS
+ - Es el Front-end de la aplicación de [Soporte](https://soporte-gotit.vercel.app/login) de GOT IT MOVING IDEAS SAS
  - Esta desplegada funcionando en [VERCEL](https://vercel.com/login) (Preguntar por credenciales)
  - Fue creada usando NextJS
 
